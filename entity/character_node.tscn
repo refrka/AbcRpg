@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cxifm1i14plat"]
+
+[ext_resource type="Script" uid="uid://bs4o860d6immp" path="res://entity/character_node.gd" id="1_ufg3e"]
+
+[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269]
+script = ExtResource("1_ufg3e")
+
+[node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=4360643]
+
+[node name="ComponentRoot" type="Node" parent="." unique_id=977928894]
+unique_name_in_owner = true
