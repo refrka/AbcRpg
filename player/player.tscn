@@ -1,5 +1,18 @@
 [gd_scene format=3 uid="uid://bcm53htxb38iq"]
 
 [ext_resource type="PackedScene" uid="uid://cxifm1i14plat" path="res://entity/character_node.tscn" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://dwugknpkaxs2l" path="res://player/player.gd" id="2_g1dw6"]
+[ext_resource type="Script" uid="uid://c0s3d38vd56k5" path="res://system/physics/sensor.gd" id="2_rkbax"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g1dw6"]
+radius = 58.034473
 
 [node name="Player" unique_id=1691891269 instance=ExtResource("1_oul6g")]
+script = ExtResource("2_g1dw6")
+
+[node name="VisionSensor" type="Area2D" parent="." index="1" unique_id=1267354173]
+script = ExtResource("2_rkbax")
+metadata/_custom_type_script = "uid://c0s3d38vd56k5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionSensor" index="0" unique_id=794653870]
+shape = SubResource("CircleShape2D_g1dw6")

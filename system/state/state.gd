@@ -5,6 +5,8 @@ class_name State extends Node
 
 var active:= false
 
+var initialized:= false
+
 var entity: EntityNode
 
 var state_machine: StateMachine
@@ -30,11 +32,31 @@ func get_state_script() -> Script:
 
 
 
-func _initialize(_entity: EntityNode, _state_machine: StateMachine) -> void:
+func _initialize(_entity: EntityNode, _state_machine: StateMachine) -> bool:
+
+	if initialized: return false
+
+	initialized = true
 
 	entity = _entity
 
 	state_machine = _state_machine
+
+	return true
+
+
+
+func _reset() -> bool:
+
+	if !initialized: return false
+
+	_deactivate()
+
+	initialized = false
+
+	entity = null
+
+	return true
 
 
 
@@ -67,15 +89,33 @@ func _tick(_delta: float) -> void:
 
 
 
+
+func _connect_signals() -> void:
+
+	pass
+
+
+
+func _disconnect_signals() -> void:
+
+	pass
+
+
+
+
 func _activate() -> void:
 
 	active = true
+
+	_connect_signals()
 
 
 
 func _deactivate() -> void:
 
 	active = false
+
+	_disconnect_signals()
 
 
 

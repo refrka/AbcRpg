@@ -1,11 +1,27 @@
 [gd_scene format=3 uid="uid://cxifm1i14plat"]
 
 [ext_resource type="Script" uid="uid://bs4o860d6immp" path="res://entity/character_node.gd" id="1_ufg3e"]
+[ext_resource type="Script" uid="uid://cd402iei3g0hg" path="res://system/component/input_component.gd" id="2_cxnu7"]
+[ext_resource type="Script" uid="uid://bpmhno771vhh3" path="res://system/component/movement_component.gd" id="3_0rdkl"]
 
 [node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269]
 script = ExtResource("1_ufg3e")
 
 [node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=4360643]
+unique_name_in_owner = true
 
 [node name="ComponentRoot" type="Node" parent="." unique_id=977928894]
+unique_name_in_owner = true
+
+[node name="InputComponent" type="Node" parent="ComponentRoot" unique_id=1552196437]
+script = ExtResource("2_cxnu7")
+metadata/_custom_type_script = "uid://cd402iei3g0hg"
+
+[node name="MovementComponent" type="Node" parent="ComponentRoot" unique_id=1647659771]
+script = ExtResource("3_0rdkl")
+metadata/_custom_type_script = "uid://bpmhno771vhh3"
+
+[node name="VisualRoot" type="Node2D" parent="." unique_id=1685553084]
+
+[node name="BodySprite" type="Sprite2D" parent="VisualRoot" unique_id=260544106]
 unique_name_in_owner = true

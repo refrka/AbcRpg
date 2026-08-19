@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://ben0epy3fpbqf"]
+
+[ext_resource type="Script" uid="uid://ylm7q7btvjue" path="res://ui/debug_main.gd" id="1_t1sn1"]
+[ext_resource type="Script" uid="uid://d0lb1umbaq7xn" path="res://ui/input_overlay.gd" id="2_h1aee"]
+[ext_resource type="Script" uid="uid://cpcp8nqok3rg2" path="res://ui/ui_element.gd" id="3_h1aee"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_04f7v"]
+bg_color = Color(0.26583356, 0.26583368, 0.26583362, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.43685517, 0.43685517, 0.43685514, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h1aee"]
+bg_color = Color(0.1615533, 0.16155335, 0.16155326, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.33555695, 0.33555716, 0.335557, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0u5tj"]
+bg_color = Color(0.37734655, 0.37734672, 0.3773467, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.6086809, 0.6086809, 0.60868084, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7p3h"]
+bg_color = Color(0.37734655, 0.37734672, 0.3773467, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8889561, 0.8889561, 0.888956, 1)
+
+[node name="DebugMain" type="Control" unique_id=2076110897 node_paths=PackedStringArray("input_overlay")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_t1sn1")
+input_overlay = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DebugInputOverlay")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2100422984]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1425828486]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=582542053]
+layout_mode = 2
+text = "Debug Main"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=403139873]
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1779529443]
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=637637473]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ActivateInputOverlayButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=129880473]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Activate"
+
+[node name="DeactivateInputOverlayButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=250228980]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Deactivate"
+
+[node name="DebugInputOverlay" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=982917335 node_paths=PackedStringArray("linked_panel")]
+layout_mode = 2
+script = ExtResource("2_h1aee")
+linked_panel = NodePath("PanelContainer")
+select_enabled = true
+default_stylebox = SubResource("StyleBoxFlat_04f7v")
+inactive_stylebox = SubResource("StyleBoxFlat_h1aee")
+hovered_stylebox = SubResource("StyleBoxFlat_0u5tj")
+selected_stylebox = SubResource("StyleBoxFlat_y7p3h")
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DebugInputOverlay" unique_id=804503870]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("3_h1aee")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DebugInputOverlay/PanelContainer" unique_id=537281689]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer" unique_id=619747297]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer" unique_id=1144070822]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=7178383]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "InputOverlay active:"
+
+[node name="InputOverlayStateLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1375132297]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "false"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer" unique_id=408178811]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=976191674]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Hover state:"
+
+[node name="HoverStateLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=819630422]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "false"

@@ -3,7 +3,9 @@ class_name EntityNode extends PhysicsBody2D
 
 
 
+@onready var body_sprite:= %BodySprite
 
+@onready var body_collision:= %BodyCollision
 
 @onready var component_root:= %ComponentRoot
 
@@ -12,6 +14,9 @@ class_name EntityNode extends PhysicsBody2D
 
 
 
+var active:= false
+
+var initialized:= false
 
 
 
@@ -20,8 +25,17 @@ class_name EntityNode extends PhysicsBody2D
 
 
 
+func _initialize() -> bool:
 
+	if initialized: return false
 
+	initialized = true
+
+	for component in component_root.get_children():
+
+		component._initialize(self)
+
+	return true
 
 
 
@@ -40,3 +54,55 @@ func get_component(component_script: Script) -> Component:
 			return component
 
 	return null
+
+
+
+
+
+
+
+
+func _connect_signals() -> void:
+
+	pass
+
+
+
+func _disconnect_signals() -> void:
+
+	pass
+
+
+
+
+
+
+func _activate() -> bool:
+
+	if active: return false
+
+	_connect_signals()
+
+	active = true
+
+	for component in component_root.get_children():
+
+		component._activate()
+
+	return true
+
+
+
+func _deactivate() -> bool:
+
+	if !active: return false
+
+	_disconnect_signals()
+
+	active = false
+
+	for component in component_root.get_children():
+
+		component._deactivate()
+
+	return true

@@ -30,6 +30,11 @@ func _ready() -> void:
 
 	debug_root.hide()
 
+	for child in debug_root.get_children():
+
+		if child is UIElement:
+
+			child._initialize()
 
 
 
