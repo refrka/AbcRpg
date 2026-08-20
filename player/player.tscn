@@ -3,16 +3,114 @@
 [ext_resource type="PackedScene" uid="uid://cxifm1i14plat" path="res://entity/character_node.tscn" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://dwugknpkaxs2l" path="res://player/player.gd" id="2_g1dw6"]
 [ext_resource type="Script" uid="uid://c0s3d38vd56k5" path="res://system/physics/sensor.gd" id="2_rkbax"]
+[ext_resource type="Texture2D" uid="uid://do7we2soafq6v" path="res://player/player_sprite_sheet.png" id="3_yw30f"]
+
+[sub_resource type="Animation" id="Animation_yw30f"]
+length = 0.19999999999999998
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%BodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjkh3"]
+_data = {
+&"walk": SubResource("Animation_yw30f")
+}
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_yw30f"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g6k8r"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hg6s5"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t03j"]
+states/RESET/node = SubResource("AnimationNodeAnimation_g6k8r")
+states/RESET/position = Vector2(462.8889, 99.7778)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_hg6s5")]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2ieo8"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qjkh3"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yw30f"]
+animation = &"player/walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g6k8r"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_boad6"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rgyib"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_g6k8r"]
+states/End/position = Vector2(1181.1111, 211.35802)
+states/FlinchState/node = SubResource("AnimationNodeStateMachine_yw30f")
+states/FlinchState/position = Vector2(871.7778, 371.87656)
+states/IdleState/node = SubResource("AnimationNodeStateMachine_8t03j")
+states/IdleState/position = Vector2(667.3333, 195.33336)
+states/MovingState/node = SubResource("AnimationNodeStateMachine_2ieo8")
+states/MovingState/position = Vector2(619.55554, 372.00003)
+states/RESET/node = SubResource("AnimationNodeAnimation_qjkh3")
+states/RESET/position = Vector2(500.66663, 173.1111)
+states/Start/position = Vector2(364.44446, 217.77777)
+states/walk/node = SubResource("AnimationNodeAnimation_yw30f")
+states/walk/position = Vector2(500.5432, 278.9151)
+transitions = ["walk", "RESET", SubResource("AnimationNodeStateMachineTransition_g6k8r"), "RESET", "walk", SubResource("AnimationNodeStateMachineTransition_boad6"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_rgyib")]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g1dw6"]
 radius = 58.034473
 
 [node name="Player" unique_id=1691891269 instance=ExtResource("1_oul6g")]
+y_sort_enabled = true
 script = ExtResource("2_g1dw6")
 
+[node name="VisualRoot" parent="." index="0" unique_id=1685553084]
+y_sort_enabled = true
+
+[node name="BodyVisualRoot" parent="VisualRoot" index="0" unique_id=831679319]
+y_sort_enabled = true
+
+[node name="BodySprite" parent="VisualRoot/BodyVisualRoot" index="0" unique_id=260544106]
+position = Vector2(0, -24)
+texture = ExtResource("3_yw30f")
+hframes = 8
+vframes = 8
+
+[node name="AnimationPlayer" parent="VisualRoot/BodyVisualRoot" index="1" unique_id=1737235003]
+libraries/player = SubResource("AnimationLibrary_qjkh3")
+
+[node name="BodyAnimationTree" parent="VisualRoot/BodyVisualRoot" index="2" unique_id=1676941284]
+tree_root = SubResource("AnimationNodeStateMachine_g6k8r")
+
+[node name="CombatVisualRoot" parent="VisualRoot" index="1" unique_id=2053548299]
+y_sort_enabled = true
+
+[node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" index="0" unique_id=1921775663]
+position = Vector2(0, -16)
+
 [node name="VisionSensor" type="Area2D" parent="." index="1" unique_id=1267354173]
+position = Vector2(0, -16)
 script = ExtResource("2_rkbax")
 metadata/_custom_type_script = "uid://c0s3d38vd56k5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionSensor" index="0" unique_id=794653870]
 shape = SubResource("CircleShape2D_g1dw6")
+
+[node name="CombatOrigin" parent="Center" parent_id_path=PackedInt32Array(893569566) index="0" unique_id=90271966]
+position = Vector2(0, -16)
+
+[node name="AnimationComponent" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="2" unique_id=819465093 node_paths=PackedStringArray("body_anim_tree", "combat_anim_tree")]
+body_anim_tree = NodePath("../../VisualRoot/BodyVisualRoot/BodyAnimationTree")
+combat_anim_tree = NodePath("../../VisualRoot/CombatVisualRoot/AnimationTree")
