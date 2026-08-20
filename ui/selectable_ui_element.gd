@@ -10,6 +10,10 @@ signal selected_state_changed(state: bool)
 
 @export var allow_deselect:= true
 
+@export var single_select_enabled:= true
+
+@export var selection_locked:= false
+
 @export var selected_stylebox: StyleBoxFlat
 
 var selected:= false
@@ -64,21 +68,27 @@ func _handle_input_event(event: InputEvent) -> bool:
 
 	if !super(event) or !select_enabled: return false
 
-	if selected and allow_deselect:
+	if selected and allow_deselect and !selection_locked:
 
 		deselect()
 
 		return true
 
-	var element_group = get_element_group()
+	if single_select_enabled:
 
-	if !element_group.is_empty():
+		var element_group = get_element_group()
 
-		for element in element_group:
+		if !element_group.is_empty():
 
-			if element is SelectableUIElement and element.selected:
+			for element in element_group:
 
-				element.deselect()
+				if element is SelectableUIElement and element.selected and element.single_select_enabled:
+
+					if element.selection_locked:
+
+						return false
+
+					element.deselect()
 
 	select()
 
