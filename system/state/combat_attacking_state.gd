@@ -1,1 +1,1 @@
-class_name CombatAttackingState extends State
+class_name CombatAttackingState extends CombatState

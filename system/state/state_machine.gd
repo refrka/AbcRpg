@@ -2,8 +2,21 @@ class_name StateMachine extends Node
 
 
 
-signal state_changed(new_state: State)
+signal body_state_changed(new_state: BodyState)
 
+signal combat_state_changed(combat_state: CombatState)
+
+
+
+@export var initial_body_state: BodyState
+
+@export var initial_combat_state: CombatState
+
+
+
+var body_state: BodyState
+
+var combat_state: CombatState
 
 
 
@@ -24,6 +37,14 @@ func _initialize(_entity: EntityNode) -> void:
 
 	entity = _entity
 
+	if initial_body_state:
+
+		body_state = initial_body_state
+
+	if initial_combat_state:
+
+		combat_state = initial_combat_state
+
 	current_state = get_child(0) as State
 
 	for state in get_children():
@@ -33,9 +54,16 @@ func _initialize(_entity: EntityNode) -> void:
 
 
 
-func get_current_state() -> State:
 
-	return current_state
+func get_body_state() -> BodyState:
+
+	return body_state
+
+
+
+func get_combat_state() -> CombatState:
+
+	return combat_state
 
 
 
@@ -46,23 +74,44 @@ func request_state(state_script: Script) -> void:
 
 		if state.get_state_script() == state_script:
 
-			_change_state(state)
+			if state is BodyState:
+
+				_change_body_state(state)
+
+			elif state is CombatState:
+
+				_change_combat_state(state)
 
 
 
 
+func _change_body_state(state: BodyState) -> void:
 
-func _change_state(state: State) -> void:
+	if body_state:
 
-	if current_state:
+		_deactivate_state(body_state)
 
-		_deactivate_state(current_state)
+	body_state = state
 
-	current_state = state
+	_activate_state(body_state)
 
-	_activate_state(current_state)
+	body_state_changed.emit(body_state)
 
-	state_changed.emit(current_state)
+
+
+
+func _change_combat_state(state: CombatState) -> void:
+
+	if combat_state:
+
+		_deactivate_state(combat_state)
+
+	combat_state = state
+
+	_activate_state(combat_state)
+
+	combat_state_changed.emit(combat_state)
+
 
 
 
@@ -91,9 +140,13 @@ func _activate() -> void:
 
 	active = true
 
-	if current_state:
+	if body_state:
 
-		_activate_state(current_state)
+		_activate_state(body_state)
+
+	if combat_state:
+
+		_activate_state(combat_state)
 
 
 
@@ -103,9 +156,14 @@ func _deactivate() -> void:
 
 	active = false
 
-	if current_state:
+	if body_state:
 
-		current_state._deactivate()
+		_deactivate_state(body_state)
+
+	if combat_state:
+
+		_deactivate_state(combat_state)
+
 
 
 

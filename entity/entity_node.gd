@@ -72,6 +72,19 @@ func is_moving() -> bool:
 
 
 
+func is_in_combat() -> bool:
+
+	var combat_component = get_component(CombatComponent)
+
+	if !combat_component: return false
+
+	return combat_component.is_in_combat()
+
+
+
+
+
+
 func _connect_signals() -> void:
 
 	pass

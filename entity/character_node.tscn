@@ -4,9 +4,13 @@
 [ext_resource type="Script" uid="uid://cd402iei3g0hg" path="res://system/component/input_component.gd" id="2_cxnu7"]
 [ext_resource type="Script" uid="uid://bpmhno771vhh3" path="res://system/component/movement_component.gd" id="3_0rdkl"]
 [ext_resource type="Script" uid="uid://cvcq2asqkdmv5" path="res://system/component/animation_component.gd" id="4_0rdkl"]
+[ext_resource type="Script" uid="uid://bw7n4553g41yu" path="res://system/component/combat_component.gd" id="5_0hq70"]
 [ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="5_jg2qq"]
 [ext_resource type="Script" uid="uid://bfv08t87rs26c" path="res://system/state/idle_state.gd" id="6_pgotb"]
 [ext_resource type="Script" uid="uid://bttua67v7jdv6" path="res://system/state/moving_state.gd" id="7_0hq70"]
+[ext_resource type="Script" uid="uid://ptxf5ubnyci4" path="res://system/state/combat_ready_state.gd" id="9_gqgbn"]
+[ext_resource type="Script" uid="uid://djb5h2fsvc4au" path="res://system/state/combat_attacking_state.gd" id="10_22lai"]
+[ext_resource type="Script" uid="uid://bfqel43kpuxfk" path="res://system/state/combat_idle_state.gd" id="11_22lai"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yw30f"]
 
@@ -62,10 +66,18 @@ metadata/_custom_type_script = "uid://bpmhno771vhh3"
 script = ExtResource("4_0rdkl")
 metadata/_custom_type_script = "uid://cvcq2asqkdmv5"
 
+[node name="CombatComponent" type="Node" parent="ComponentRoot" unique_id=2066181832]
+script = ExtResource("5_0hq70")
+metadata/_custom_type_script = "uid://bw7n4553g41yu"
+
 [node name="StateMachine" type="Node" parent="." unique_id=438854359]
 unique_name_in_owner = true
 script = ExtResource("5_jg2qq")
 metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
+
+[node name="CombatReadyState" type="Node" parent="StateMachine" unique_id=2111150120]
+script = ExtResource("9_gqgbn")
+metadata/_custom_type_script = "uid://ptxf5ubnyci4"
 
 [node name="IdleState" type="Node" parent="StateMachine" unique_id=107597940]
 script = ExtResource("6_pgotb")
@@ -74,3 +86,11 @@ metadata/_custom_type_script = "uid://bfv08t87rs26c"
 [node name="MovingState" type="Node" parent="StateMachine" unique_id=818508662]
 script = ExtResource("7_0hq70")
 metadata/_custom_type_script = "uid://bttua67v7jdv6"
+
+[node name="CombatAttackingState" type="Node" parent="StateMachine" unique_id=1041191584]
+script = ExtResource("10_22lai")
+metadata/_custom_type_script = "uid://djb5h2fsvc4au"
+
+[node name="CombatIdleState" type="Node" parent="StateMachine" unique_id=288554042]
+script = ExtResource("11_22lai")
+metadata/_custom_type_script = "uid://bfqel43kpuxfk"

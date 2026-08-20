@@ -5,12 +5,38 @@ class_name CombatComponent extends Component
 
 
 
+var animation_component: AnimationComponent
+
+
+
+
+
+
+var current_attack_index:= 0
+
+
+
+
+
+
+
+
+
+func _initialize(_entity: EntityNode) -> bool:
+
+	if !super(_entity): return false
+
+	return true
+
+
 
 
 
 func _handle_attack_input(pressed: bool) -> void:
 
-	pass
+	if pressed:
+
+		pass
 
 
 
@@ -28,6 +54,42 @@ func _handle_attack_input(pressed: bool) -> void:
 
 
 
+
+func _enter_combat() -> void:
+
+	entity.state_machine.request_state(CombatReadyState)
+
+
+
+
+
+func _exit_combat() -> void:
+
+	entity.state_machine.request_state(IdleState)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+func is_in_combat() -> bool:
+
+	return not entity.state_machine.get_combat_state() is CombatIdleState
+
+
+
+func is_attacking() -> bool:
+
+	return entity.state_machine.get_combat_state() is CombatAttackingState
 
 
 

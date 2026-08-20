@@ -3,48 +3,15 @@ class_name UIElement extends Control
 
 signal active_state_changed(state: bool)
 
-signal selected_state_changed(state: bool)
-
-
-@export var select_enabled:= false
-
-@export var allow_deselect:= true
-
-@export var element_group: String
-
-@export var default_stylebox: StyleBoxFlat
-
-@export var inactive_stylebox: StyleBoxFlat
-
-@export var hovered_stylebox: StyleBoxFlat
-
-@export var selected_stylebox: StyleBoxFlat
-
-
-
-var active:= false
-
-var selected:= false
-
-var locked:= false
-
-var initialized:= false
-
-
-
-var element_groups: Array[UIElementGroup]
 
 
 
 
+@export var element_group_name: String
 
+@export var active:= false
 
-func _ready() -> void:
-
-	add_to_group("ui_element")
-
-
-
+@export var initialized:= false
 
 
 
@@ -58,30 +25,11 @@ func _initialize() -> bool:
 
 	_update_visuals()
 
+	if element_group_name != "":
+
+		add_to_group(element_group_name)
+
 	return true
-
-
-
-
-
-func select() -> void:
-
-	if !active or !select_enabled or selected or locked:
-		
-		return
-
-	_set_selected_state(true)
-
-
-
-
-func deselect() -> void:
-
-	if !active or !select_enabled or !selected:
-
-		return
-
-	_set_selected_state(false)
 
 
 
@@ -89,36 +37,17 @@ func deselect() -> void:
 
 func get_element_group() -> Array[UIElement]:
 
-	if element_group == "": return [] as Array[UIElement]
+	if element_group_name == "": return []
 
 	var group: Array[UIElement] = []
 
-	group.assign(get_tree().get_nodes_in_group(element_group))
+	group.assign(get_tree().get_nodes_in_group(element_group_name))
 
 	return group
 
 
 
-
-func _connect_signals() -> void:
-
-	pass
-
-
-
-func _disconnect_signals() -> void:
-
-	pass
-
-
-
-
-
-
-
-
-
-
+	
 func _activate() -> bool:
 
 	if active: return false
@@ -146,8 +75,6 @@ func _deactivate() -> bool:
 
 	_update_visuals()
 
-	_set_selected_state(false)
-
 	active_state_changed.emit(false)
 
 	return true
@@ -157,13 +84,19 @@ func _deactivate() -> bool:
 
 
 
-func _set_selected_state(state: bool) -> void:
 
-	selected = state
 
-	_update_visuals()
+func _connect_signals() -> void:
 
-	selected_state_changed.emit(state)
+	pass
+
+
+
+func _disconnect_signals() -> void:
+
+	pass
+
+
 
 
 

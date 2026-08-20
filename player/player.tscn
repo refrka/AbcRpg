@@ -87,7 +87,7 @@ y_sort_enabled = true
 [node name="BodySprite" parent="VisualRoot/BodyVisualRoot" index="0" unique_id=16791793]
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_yw30f")
-animation = &"moving_up"
+animation = &"idle_down"
 
 [node name="CombatVisualRoot" parent="VisualRoot" index="1" unique_id=2053548299]
 y_sort_enabled = true
@@ -105,3 +105,7 @@ shape = SubResource("CircleShape2D_g1dw6")
 
 [node name="CombatOrigin" parent="Center" parent_id_path=PackedInt32Array(893569566) index="0" unique_id=90271966]
 position = Vector2(0, -16)
+
+[node name="StateMachine" parent="." index="5" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
+initial_body_state = NodePath("IdleState")
+initial_combat_state = NodePath("CombatIdleState")

@@ -2,9 +2,9 @@ class_name DebugMain extends UIElement
 
 
 
-@export var input_overlay: UIElementRedo
+@export var input_overlay: UIElement
 
-@export var player_info_panel: UIElementRedo
+@export var player_info_panel: UIElement
 
 @export var input_overlay_state_label: Label
 
@@ -51,11 +51,11 @@ func _ready() -> void:
 
 
 
-func _update_player_state() -> void:
+func _update_player_body_state() -> void:
 
 	var player = Game.get_player()
 
-	match player.state_machine.get_current_state().get_state_script():
+	match player.state_machine.get_body_state().get_state_script():
 
 		IdleState:
 
@@ -68,6 +68,12 @@ func _update_player_state() -> void:
 			idle_state_row.deselect()
 
 			moving_state_row.select()
+
+
+
+func _update_player_combat_state() -> void:
+
+	pass
 
 
 
@@ -126,14 +132,27 @@ func _on_player_activated_event(_event: Event) -> void:
 
 	var player = Game.get_player()
 
-	player.state_machine.state_changed.connect(_on_player_state_changed)
+	player.state_machine.body_state_changed.connect(_on_player_body_state_changed)
 
-	_update_player_state()
+	player.state_machine.combat_state_changed.connect(_on_player_combat_state_changed)
+
+	_update_player_body_state()
+
+	_update_player_combat_state()
+
+
+
 
 
 
 
 func _on_player_deactivated_event(_event: Event) -> void:
+
+	var player = Game.get_player()
+	
+	player.state_machine.body_state_changed.disconnect(_on_player_body_state_changed)
+
+	player.state_machine.combat_state_changed.disconnect(_on_player_combat_state_changed)
 
 	idle_state_row.deselect()
 
@@ -141,6 +160,12 @@ func _on_player_deactivated_event(_event: Event) -> void:
 
 
 
-func _on_player_state_changed(_new_state: State) -> void:
+func _on_player_body_state_changed(_new_state: State) -> void:
 
-	_update_player_state()
+	_update_player_body_state()
+
+
+
+func _on_player_combat_state_changed(_new_state: State) -> void:
+
+	_update_player_combat_state()

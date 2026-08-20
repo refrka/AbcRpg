@@ -1,4 +1,4 @@
-class_name InputUIElement extends UIElementRedo
+class_name InputUIElement extends UIElement
 
 
 signal hover_state_changed(state: bool)

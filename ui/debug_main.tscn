@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ylm7q7btvjue" path="res://ui/debug_main.gd" id="1_t1sn1"]
 [ext_resource type="Script" uid="uid://nffr6agdpias" path="res://ui/selectable_ui_element.gd" id="2_0u5tj"]
+[ext_resource type="Script" uid="uid://bfwugn1lcunwn" path="res://ui/ui_element.gd" id="3_h1aee"]
 [ext_resource type="Script" uid="uid://d2fg3v6sacuoe" path="res://ui/debug_player_state_row.gd" id="4_0u5tj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0u5tj"]
@@ -172,16 +173,11 @@ layout_mode = 2
 layout_mode = 2
 text = "Player Info"
 
-[node name="PlayerInfoPanel" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1395177558 node_paths=PackedStringArray("linked_panel")]
+[node name="PlayerInfoPanel" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1395177558]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 mouse_filter = 0
-script = ExtResource("2_0u5tj")
-selected_stylebox = SubResource("StyleBoxFlat_0u5tj")
-linked_panel = NodePath("PanelContainer")
-default_stylebox = SubResource("StyleBoxFlat_y7p3h")
-hovered_stylebox = SubResource("StyleBoxFlat_h1aee")
-element_group_name = "shit"
+script = ExtResource("3_h1aee")
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel" unique_id=2037818574]
 layout_mode = 2
@@ -205,16 +201,6 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1511250156]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "State"
-
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1333364736]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "State"
-
-[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=562964915]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "State"
@@ -279,13 +265,3 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
 text = "Moving"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1706131806]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=455920609]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2

@@ -71,6 +71,10 @@ func set_move_dir(dir: Vector2) -> void:
 
 	move_dir = dir
 
+	if face_dir != move_dir:
+
+		set_face_dir(move_dir)
+
 	move_dir_updated.emit(dir)
 
 
@@ -107,7 +111,7 @@ func _physics_process(delta: float) -> void:
 
 	if move_dir == Vector2.ZERO:
 
-		move_velocity = current_move_velocity.move_toward(Vector2.ZERO, 1400.0 * delta)
+		move_velocity = current_move_velocity.move_toward(Vector2.ZERO, 1800.0 * delta)
 
 	else:
 
@@ -115,7 +119,7 @@ func _physics_process(delta: float) -> void:
 
 			set_face_dir(move_dir)
 
-		move_velocity = current_move_velocity.move_toward(move_dir * 350.0, 2400.0 * delta)
+		move_velocity = current_move_velocity.move_toward(move_dir * 350.0, 2800.0 * delta)
 
 	entity.velocity = move_velocity
 
