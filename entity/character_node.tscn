@@ -4,53 +4,32 @@
 [ext_resource type="Script" uid="uid://cd402iei3g0hg" path="res://system/component/input_component.gd" id="2_cxnu7"]
 [ext_resource type="Script" uid="uid://bpmhno771vhh3" path="res://system/component/movement_component.gd" id="3_0rdkl"]
 [ext_resource type="Script" uid="uid://cvcq2asqkdmv5" path="res://system/component/animation_component.gd" id="4_0rdkl"]
+[ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="5_jg2qq"]
+[ext_resource type="Script" uid="uid://bfv08t87rs26c" path="res://system/state/idle_state.gd" id="6_pgotb"]
+[ext_resource type="Script" uid="uid://bttua67v7jdv6" path="res://system/state/moving_state.gd" id="7_0hq70"]
 
-[sub_resource type="Animation" id="Animation_cxnu7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%BodySprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
+[sub_resource type="SpriteFrames" id="SpriteFrames_yw30f"]
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cxnu7"]
-_data = {
-&"RESET": SubResource("Animation_cxnu7")
-}
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pgotb"]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0rdkl"]
-
-[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269]
+[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("body_sprite")]
 script = ExtResource("1_ufg3e")
+body_sprite = NodePath("VisualRoot/BodyVisualRoot/BodySprite")
 
 [node name="VisualRoot" type="Node2D" parent="." unique_id=1685553084]
 
 [node name="BodyVisualRoot" type="Node2D" parent="VisualRoot" unique_id=831679319]
 
-[node name="BodySprite" type="Sprite2D" parent="VisualRoot/BodyVisualRoot" unique_id=260544106]
+[node name="BodySprite" type="AnimatedSprite2D" parent="VisualRoot/BodyVisualRoot" unique_id=16791793]
 unique_name_in_owner = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualRoot/BodyVisualRoot" unique_id=1737235003]
-libraries/ = SubResource("AnimationLibrary_cxnu7")
-
-[node name="BodyAnimationTree" type="AnimationTree" parent="VisualRoot/BodyVisualRoot" unique_id=1676941284]
-unique_name_in_owner = true
-root_node = NodePath("%BodyAnimationTree/..")
-tree_root = SubResource("AnimationNodeStateMachine_0rdkl")
-anim_player = NodePath("../AnimationPlayer")
+sprite_frames = SubResource("SpriteFrames_yw30f")
 
 [node name="CombatVisualRoot" type="Node2D" parent="VisualRoot" unique_id=2053548299]
 
 [node name="CombatSprite" type="Sprite2D" parent="VisualRoot/CombatVisualRoot" unique_id=1921775663]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VisualRoot/CombatVisualRoot" unique_id=256507589]
+libraries/ = SubResource("AnimationLibrary_pgotb")
 
 [node name="AnimationTree" type="AnimationTree" parent="VisualRoot/CombatVisualRoot" unique_id=965799373]
 anim_player = NodePath("../AnimationPlayer")
@@ -76,5 +55,19 @@ metadata/_custom_type_script = "uid://cd402iei3g0hg"
 script = ExtResource("3_0rdkl")
 metadata/_custom_type_script = "uid://bpmhno771vhh3"
 
-[node name="AnimationComponent" type="Node" parent="ComponentRoot" unique_id=819465093]
+[node name="AnimationComponent" type="Node" parent="ComponentRoot" unique_id=223820024]
 script = ExtResource("4_0rdkl")
+metadata/_custom_type_script = "uid://cvcq2asqkdmv5"
+
+[node name="StateMachine" type="Node" parent="." unique_id=438854359]
+unique_name_in_owner = true
+script = ExtResource("5_jg2qq")
+metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
+
+[node name="IdleState" type="Node" parent="StateMachine" unique_id=107597940]
+script = ExtResource("6_pgotb")
+metadata/_custom_type_script = "uid://bfv08t87rs26c"
+
+[node name="MovingState" type="Node" parent="StateMachine" unique_id=818508662]
+script = ExtResource("7_0hq70")
+metadata/_custom_type_script = "uid://bttua67v7jdv6"

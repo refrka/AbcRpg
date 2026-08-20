@@ -2,13 +2,13 @@ class_name EntityNode extends PhysicsBody2D
 
 
 
-
-@onready var body_sprite:= %BodySprite
+@export var body_sprite: AnimatedSprite2D
 
 @onready var body_collision:= %BodyCollision
 
 @onready var component_root:= %ComponentRoot
 
+@onready var state_machine:= %StateMachine
 
 
 
@@ -17,6 +17,7 @@ class_name EntityNode extends PhysicsBody2D
 var active:= false
 
 var initialized:= false
+
 
 
 
@@ -34,6 +35,8 @@ func _initialize() -> bool:
 	for component in component_root.get_children():
 
 		component._initialize(self)
+
+	state_machine._initialize(self)
 
 	return true
 
@@ -56,6 +59,13 @@ func get_component(component_script: Script) -> Component:
 	return null
 
 
+
+
+
+
+func is_moving() -> bool:
+
+	return state_machine.current_state is MovingState
 
 
 
@@ -89,6 +99,8 @@ func _activate() -> bool:
 
 		component._activate()
 
+	state_machine._activate()
+
 	return true
 
 
@@ -104,5 +116,7 @@ func _deactivate() -> bool:
 	for component in component_root.get_children():
 
 		component._deactivate()
+
+	state_machine._activate()
 
 	return true

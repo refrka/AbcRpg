@@ -1,10 +1,15 @@
 class_name AnimationComponent extends Component
 
 
-@export var body_anim_tree: AnimationTree
 
-@export var combat_anim_tree: AnimationTree
 
+
+
+var blendspace_paths:= {
+
+	"moving": "parameters/MovingState/MovingBlend/blend_position"
+
+}
 
 
 
@@ -17,32 +22,6 @@ var combat_state_playback: AnimationNodeStateMachinePlayback
 
 
 
-func _initialize(_entity: EntityNode) -> bool:
-
-	if !super(_entity): return false
-
-	body_state_playback = body_anim_tree.get("parameters/playback")
-
-	combat_state_playback = combat_anim_tree.get("parameters/playback")
-
-	return true
-
-
-
-
-
-
-func travel_playback(playback_name: String, node_name: String) -> void:
-
-	match playback_name:
-
-		"body":
-
-			body_state_playback.travel(node_name)
-
-		"combat":
-
-			combat_state_playback.travel(node_name)
 
 
 
@@ -50,60 +29,20 @@ func travel_playback(playback_name: String, node_name: String) -> void:
 
 
 
-func _activate() -> bool:
 
-	if !super(): return false
+func set_body_dir(dir: Vector2, moving: bool) -> void:
 
-	body_anim_tree.active = true
+	entity.body_sprite.flip_h = dir.x < 0.0
 
-	combat_anim_tree.active = true
+	var animation = "idle_" if !moving else "moving_"
 
-	return true
+	if dir.y >= 0.0:
 
+		animation += "down"
 
+	else:
 
+		animation += "up"
 
-func _deactivate() -> bool:
+	entity.body_sprite.play(animation)
 
-	if !super(): return false
-
-	body_anim_tree.active = false
-
-	combat_anim_tree.active = false
-
-	return true
-
-
-
-
-
-
-
-func _connect_signals() -> void:
-
-	body_anim_tree.animation_finished.connect(_on_body_animation_finished)
-
-	combat_anim_tree.animation_finished.connect(_on_combat_animation_finished)
-
-
-
-
-func _disconnect_signals() -> void:
-
-	body_anim_tree.animation_finished.disconnect(_on_body_animation_finished)
-
-	combat_anim_tree.animation_finished.disconnect(_on_combat_animation_finished)
-
-
-
-
-
-func _on_body_animation_finished(anim_namE: StringName) -> void:
-
-	pass
-
-
-
-func _on_combat_animation_finished(anim_namE: StringName) -> void:
-
-	pass

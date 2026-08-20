@@ -12,6 +12,10 @@ var entity: EntityNode
 var state_machine: StateMachine
 
 
+var movement_component: MovementComponent
+
+var animation_component: AnimationComponent
+
 
 
 func get_state_name() -> StringName:
@@ -26,6 +30,9 @@ func get_state_script() -> Script:
 
 
 
+func transition_to(state_script: Script) -> void:
+
+	state_machine.request_state(state_script)
 
 
 
@@ -42,7 +49,12 @@ func _initialize(_entity: EntityNode, _state_machine: StateMachine) -> bool:
 
 	state_machine = _state_machine
 
+	movement_component = entity.get_component(MovementComponent)
+
+	animation_component = entity.get_component(AnimationComponent)
+
 	return true
+
 
 
 
@@ -63,7 +75,7 @@ func _reset() -> bool:
 
 func _enter() -> void:
 
-	_update_visuals()
+	pass
 
 
 
@@ -72,12 +84,6 @@ func _exit() -> void:
 
 	pass
 
-
-
-
-func _update_visuals() -> void:
-
-	pass
 
 
 
@@ -116,8 +122,5 @@ func _deactivate() -> void:
 	active = false
 
 	_disconnect_signals()
-
-
-
 
 
