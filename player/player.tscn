@@ -74,7 +74,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_g1dw6"]
 radius = 58.034473
 
-[node name="Player" unique_id=1691891269 instance=ExtResource("1_oul6g")]
+[node name="Player" unique_id=1691891269 groups=["player"] instance=ExtResource("1_oul6g")]
 y_sort_enabled = true
 script = ExtResource("2_g1dw6")
 

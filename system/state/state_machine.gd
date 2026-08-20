@@ -2,6 +2,9 @@ class_name StateMachine extends Node
 
 
 
+signal state_changed(new_state: State)
+
+
 
 
 
@@ -30,6 +33,11 @@ func _initialize(_entity: EntityNode) -> void:
 
 
 
+func get_current_state() -> State:
+
+	return current_state
+
+
 
 
 func request_state(state_script: Script) -> void:
@@ -53,6 +61,8 @@ func _change_state(state: State) -> void:
 	current_state = state
 
 	_activate_state(current_state)
+
+	state_changed.emit(current_state)
 
 
 

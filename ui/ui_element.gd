@@ -10,6 +10,8 @@ signal selected_state_changed(state: bool)
 
 @export var allow_deselect:= true
 
+@export var element_group: String
+
 @export var default_stylebox: StyleBoxFlat
 
 @export var inactive_stylebox: StyleBoxFlat
@@ -24,7 +26,22 @@ var active:= false
 
 var selected:= false
 
+var locked:= false
+
 var initialized:= false
+
+
+
+var element_groups: Array[UIElementGroup]
+
+
+
+
+
+
+func _ready() -> void:
+
+	add_to_group("ui_element")
 
 
 
@@ -49,7 +66,7 @@ func _initialize() -> bool:
 
 func select() -> void:
 
-	if !active or !select_enabled or selected:
+	if !active or !select_enabled or selected or locked:
 		
 		return
 
@@ -66,6 +83,19 @@ func deselect() -> void:
 
 	_set_selected_state(false)
 
+
+
+
+
+func get_element_group() -> Array[UIElement]:
+
+	if element_group == "": return [] as Array[UIElement]
+
+	var group: Array[UIElement] = []
+
+	group.assign(get_tree().get_nodes_in_group(element_group))
+
+	return group
 
 
 
@@ -128,8 +158,6 @@ func _deactivate() -> bool:
 
 
 func _set_selected_state(state: bool) -> void:
-
-	print("selecting")
 
 	selected = state
 

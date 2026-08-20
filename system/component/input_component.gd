@@ -3,12 +3,36 @@ class_name InputComponent extends Component
 
 signal input_dir_updated(dir: Vector2)
 
+signal attack_input_pressed
+
+signal attack_input_released
+
+
 
 
 
 var input_dir: Vector2
 
 
+
+
+
+
+
+
+
+
+func _unhandled_input(event: InputEvent) -> void:
+
+	if !active: return
+
+	if event.is_action_pressed("attack"):
+
+		attack_input_pressed.emit()
+
+	if event.is_action_released("attack"):
+
+		attack_input_released.emit()
 
 
 

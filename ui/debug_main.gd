@@ -2,19 +2,33 @@ class_name DebugMain extends UIElement
 
 
 
-@export var input_overlay: InputOverlay
+@export var input_overlay: UIElementRedo
 
-@onready var input_overlay_state_label:= %InputOverlayStateLabel
+@export var player_info_panel: UIElementRedo
 
-@onready var hover_state_label:= %HoverStateLabel
+@export var input_overlay_state_label: Label
 
-@onready var selected_state_label:= %SelectedStateLabel
+@export var hover_state_label: Label
 
-@onready var activated_check_box:= %ActivatedCheckBox
+@export var selected_state_label: Label
+
+@export var activated_check_box: CheckBox
+
+
+
+@export var idle_state_row: DebugPlayerStateRow
+
+@export var moving_state_row: DebugPlayerStateRow
 
 
 
 func _ready() -> void:
+
+	Events.subscribe(PlayerActivatedEvent, _on_player_activated_event)
+
+	Events.subscribe(PlayerDeactivatedEvent, _on_player_deactivated_event)
+
+	activated_check_box.toggled.connect(_on_activated_check_box_toggled)
 
 	input_overlay.active_state_changed.connect(_on_input_overlay_active_state_changed)
 
@@ -22,16 +36,38 @@ func _ready() -> void:
 
 	input_overlay.selected_state_changed.connect(_on_input_overlay_selected_state_changed)
 
-	input_overlay.input_received.connect(_on_input_overlay_input_received)
-
-	activated_check_box.toggled.connect(_on_activated_check_box_toggled)
-
 	input_overlay._initialize()
 
+	input_overlay._deactivate()
+
+	player_info_panel._initialize()
+
+	player_info_panel._activate()
 
 
 
 
+
+
+
+
+func _update_player_state() -> void:
+
+	var player = Game.get_player()
+
+	match player.state_machine.get_current_state().get_state_script():
+
+		IdleState:
+
+			idle_state_row.select()
+
+			moving_state_row.deselect()
+
+		MovingState:
+
+			idle_state_row.deselect()
+
+			moving_state_row.select()
 
 
 
@@ -82,3 +118,29 @@ func _on_activated_check_box_toggled(state: bool) -> void:
 	else:
 
 		input_overlay._deactivate()
+
+
+
+
+func _on_player_activated_event(_event: Event) -> void:
+
+	var player = Game.get_player()
+
+	player.state_machine.state_changed.connect(_on_player_state_changed)
+
+	_update_player_state()
+
+
+
+
+func _on_player_deactivated_event(_event: Event) -> void:
+
+	idle_state_row.deselect()
+
+	moving_state_row.deselect()
+
+
+
+func _on_player_state_changed(_new_state: State) -> void:
+
+	_update_player_state()

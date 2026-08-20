@@ -24,7 +24,7 @@ layout_mode = 1
 
 [node name="WorldCanvas" type="CanvasLayer" parent="." unique_id=254509576]
 
-[node name="WorldRoot" type="Node2D" parent="WorldCanvas" unique_id=210974550]
+[node name="WorldRoot" type="Node2D" parent="WorldCanvas" unique_id=210974550 groups=["world_root"]]
 
 [node name="Player" parent="WorldCanvas/WorldRoot" unique_id=1691891269 instance=ExtResource("3_bxsma")]
 position = Vector2(225, 77)

@@ -4,11 +4,11 @@ class_name EntityNode extends PhysicsBody2D
 
 @export var body_sprite: AnimatedSprite2D
 
-@onready var body_collision:= %BodyCollision
+@export var body_collision: CollisionShape2D
 
-@onready var component_root:= %ComponentRoot
+@export var component_root: Node
 
-@onready var state_machine:= %StateMachine
+@export var state_machine: StateMachine
 
 
 

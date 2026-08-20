@@ -6,13 +6,15 @@ extends Node
 
 var last_save_dict:= {}
 
-
+var player: Player
 
 
 
 
 
 func _ready() -> void:
+
+	player = get_tree().get_first_node_in_group("player")
 
 	_load()
 
@@ -37,6 +39,21 @@ func reset() -> void:
 
 
 
+
+
+
+
+
+
+func get_player() -> Player:
+
+	if !player:
+
+		player = load("res://player/player.tscn").instantiate()
+
+		Scenes.world_root.add_child(player)
+
+	return player
 
 
 

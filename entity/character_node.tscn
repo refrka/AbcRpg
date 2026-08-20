@@ -12,9 +12,12 @@
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pgotb"]
 
-[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("body_sprite")]
+[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine")]
 script = ExtResource("1_ufg3e")
 body_sprite = NodePath("VisualRoot/BodyVisualRoot/BodySprite")
+body_collision = NodePath("BodyCollision")
+component_root = NodePath("ComponentRoot")
+state_machine = NodePath("StateMachine")
 
 [node name="VisualRoot" type="Node2D" parent="." unique_id=1685553084]
 

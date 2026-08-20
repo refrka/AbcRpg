@@ -102,6 +102,10 @@ func _set_hover_state(state: bool) -> void:
 
 
 
+
+
+
+
 func _update_visuals() -> void:
 
 	if !active and inactive_stylebox:
