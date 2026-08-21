@@ -31,7 +31,6 @@ entity_def = ExtResource("2_8n1b5")
 [node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_6e3ql")
-animation = &"idle_down"
 
 [node name="CollisionShape2D" parent="BodyHurtbox" parent_id_path=PackedInt32Array(511458273) index="0" unique_id=2017378462]
 position = Vector2(0, -18)

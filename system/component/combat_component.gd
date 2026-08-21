@@ -28,6 +28,8 @@ var buffered:= false
 
 var charge_complete:= false
 
+var attack_stored:= false
+
 
 
 
@@ -66,6 +68,8 @@ func _handle_attack_input(pressed: bool) -> void:
 
 	else:
 
+		attack_stored = false
+
 		if is_charging():
 
 			if charge_complete:
@@ -100,9 +104,15 @@ func _try_attack() -> void:
 
 	if !_is_attack_index_valid(current_attack_index): return
 
-	if entity.state_machine.get_body_state() is DodgeState:
+	if !attack_stored:
 
-		return
+		if entity.state_machine.get_body_state() is DodgeState:
+
+			attack_stored = true
+
+			return
+
+	attack_stored = false
 
 	var attack_entry = get_attack_entry()
 
@@ -160,6 +170,8 @@ func _finish_attack() -> void:
 		return
 
 	current_attack_index = 0
+	
+	current_attack_dir = Vector2.ZERO
 
 	entity.state_machine.request_state(CombatReadyState)
 
@@ -436,3 +448,4 @@ func _on_combat_hit_detected(hit_entity: EntityNode) -> void:
 	var damage_package = _get_damage_package()
 
 	hit_entity.receive_damage_package(damage_package)
+

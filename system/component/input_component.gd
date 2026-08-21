@@ -44,6 +44,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 
+func is_input_pressed(input_name: String) -> bool:
+
+	return Input.is_action_pressed(input_name)
+
+
+
 
 
 

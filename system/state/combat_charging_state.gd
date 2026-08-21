@@ -17,6 +17,10 @@ func _enter() -> void:
 
 	combat_component.set_attack_dir(Game.get_mouse_direction())
 
+	print("setting face dir: ", combat_component.current_attack_dir)
+
+	movement_component.set_face_dir(combat_component.current_attack_dir)
+
 	current_attack_entry = combat_component.get_attack_entry()
 
 	if current_attack_entry.movement_penalty > 0.0:
@@ -48,6 +52,8 @@ func _exit() -> void:
 	animation_component.combat_anim_player.animation_finished.disconnect(_on_combat_animation_finished)
 
 	animation_component.combat_anim_player.play("RESET")
+
+	animation_component.set_body_dir(movement_component.move_dir, movement_component.is_moving())
 
 
 

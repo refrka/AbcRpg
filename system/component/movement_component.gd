@@ -73,8 +73,6 @@ func remove_modifier(modifier: VelocityModifier) -> void:
 
 	if modifiers.has(modifier):
 
-		print("removing")
-
 		modifiers.erase(modifier)
 	
 
@@ -241,10 +239,6 @@ func _physics_process(delta: float) -> void:
 		move_velocity = current_move_velocity.move_toward(Vector2.ZERO, 1800.0 * delta)
 
 	else:
-
-		if move_dir != face_dir:
-
-			set_face_dir(move_dir)
 
 		move_velocity = current_move_velocity.move_toward(move_dir * get_move_speed(), 2800.0 * delta)
 
