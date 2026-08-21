@@ -25,6 +25,7 @@ animations = [{
 script = ExtResource("1_e1vvn")
 hitbox_collision_shape = SubResource("RectangleShape2D_1pv8h")
 hitbox_collision_position = Vector2(3.5, 0)
+projectile_speed = 500.0
 equipment_type = 3
 item_id = &"wood_arrow"
 display_name = &"Wood arrow"

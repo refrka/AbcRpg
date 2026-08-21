@@ -3,6 +3,18 @@
 [ext_resource type="PackedScene" uid="uid://cxifm1i14plat" path="res://entity/character_node.tscn" id="1_byjqj"]
 [ext_resource type="Resource" uid="uid://casgduexd0ueg" path="res://entity/characters/test_dummy_def.tres" id="2_8n1b5"]
 [ext_resource type="Texture2D" uid="uid://dtnj4dnlbcn87" path="res://entity/characters/test_dummy_sprite.png" id="3_i135f"]
+[ext_resource type="Script" uid="uid://dxpsfyvmkctq" path="res://system/component/turret_component.gd" id="4_taeh0"]
+[ext_resource type="Script" uid="uid://bfv08t87rs26c" path="res://system/state/idle_state.gd" id="5_3eh5n"]
+[ext_resource type="Script" uid="uid://pxshxl6sug7v" path="res://item/equipment/ammunition_def.gd" id="5_ugsij"]
+[ext_resource type="Script" uid="uid://djb5h2fsvc4au" path="res://system/state/combat_attacking_state.gd" id="6_8ig6n"]
+[ext_resource type="Resource" uid="uid://ds1pe2xiao16c" path="res://item/equipment/ammunition/wood_arrow_def.tres" id="6_nfgpu"]
+[ext_resource type="Script" uid="uid://bfcrp7d10cskf" path="res://system/turret_config.gd" id="7_ajbx4"]
+[ext_resource type="Script" uid="uid://bfqel43kpuxfk" path="res://system/state/combat_idle_state.gd" id="7_f8cdq"]
+[ext_resource type="Script" uid="uid://dji7pch2e6jjt" path="res://item/equipment_data.gd" id="8_cjd5d"]
+[ext_resource type="Script" uid="uid://ptxf5ubnyci4" path="res://system/state/combat_ready_state.gd" id="8_xdqbh"]
+[ext_resource type="Script" uid="uid://d4gj3xyu3q7q3" path="res://system/state/combat_charging_state.gd" id="9_6br6m"]
+[ext_resource type="Script" uid="uid://dg3op23rm8phy" path="res://item/equipment_slot.gd" id="9_sfdkq"]
+[ext_resource type="Script" uid="uid://3is2qc8lprj1" path="res://system/combat/attack_entry.gd" id="10_20wr5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_taeh0"]
 atlas = ExtResource("3_i135f")
@@ -25,12 +37,39 @@ size = Vector2(12, 36)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aajxx"]
 size = Vector2(24, 4)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ugsij"]
+radius = 500.16898
+
+[sub_resource type="Resource" id="Resource_t1wp5"]
+script = ExtResource("7_ajbx4")
+allowed_ammunition = Array[ExtResource("5_ugsij")]([ExtResource("6_nfgpu")])
+turret_mode = 1
+metadata/_custom_type_script = "uid://bfcrp7d10cskf"
+
+[sub_resource type="Resource" id="Resource_8mhx1"]
+script = ExtResource("8_cjd5d")
+item_def = ExtResource("6_nfgpu")
+metadata/_custom_type_script = "uid://dji7pch2e6jjt"
+
+[sub_resource type="Resource" id="Resource_gqgbn"]
+script = ExtResource("9_sfdkq")
+equipment_type = 3
+item_data = SubResource("Resource_8mhx1")
+metadata/_custom_type_script = "uid://dg3op23rm8phy"
+
+[sub_resource type="Resource" id="Resource_22lai"]
+script = ExtResource("10_20wr5")
+metadata/_custom_type_script = "uid://3is2qc8lprj1"
+
 [node name="TestDummy" unique_id=1691891269 instance=ExtResource("1_byjqj")]
 entity_def = ExtResource("2_8n1b5")
 
 [node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_6e3ql")
+
+[node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
+position = Vector2(16, -22)
 
 [node name="CollisionShape2D" parent="BodyHurtbox" parent_id_path=PackedInt32Array(511458273) index="0" unique_id=2017378462]
 position = Vector2(0, -18)
@@ -40,6 +79,40 @@ shape = SubResource("RectangleShape2D_i135f")
 position = Vector2(0, -22)
 shape = SubResource("RectangleShape2D_aajxx")
 debug_color = Color(0.7, 0, 0, 0.03137255)
+
+[node name="CollisionShape2D" parent="VisionSensor" parent_id_path=PackedInt32Array(1534038726) index="0" unique_id=376879403]
+shape = SubResource("CircleShape2D_ugsij")
+
+[node name="CombatOrigin" parent="Center" parent_id_path=PackedInt32Array(893569566) index="0" unique_id=90271966]
+position = Vector2(0, -22)
+
+[node name="TurretComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="4" unique_id=1689442988]
+script = ExtResource("4_taeh0")
+turret_config = SubResource("Resource_t1wp5")
+ammunition_slot = SubResource("Resource_gqgbn")
+attack_entry = SubResource("Resource_22lai")
+metadata/_custom_type_script = "uid://dxpsfyvmkctq"
+
+[node name="IdleState" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(438854359) index="0" unique_id=164553583]
+script = ExtResource("5_3eh5n")
+metadata/_custom_type_script = "uid://bfv08t87rs26c"
+
+[node name="CombatAttackingState" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(438854359) index="1" unique_id=1467878876]
+script = ExtResource("6_8ig6n")
+allow_reenter = true
+metadata/_custom_type_script = "uid://djb5h2fsvc4au"
+
+[node name="CombatIdleState" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(438854359) index="2" unique_id=509019584]
+script = ExtResource("7_f8cdq")
+metadata/_custom_type_script = "uid://bfqel43kpuxfk"
+
+[node name="CombatReadyState" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(438854359) index="3" unique_id=1557300560]
+script = ExtResource("8_xdqbh")
+metadata/_custom_type_script = "uid://ptxf5ubnyci4"
+
+[node name="CombatChargingState" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(438854359) index="4" unique_id=1222718601]
+script = ExtResource("9_6br6m")
+metadata/_custom_type_script = "uid://d4gj3xyu3q7q3"
 
 [editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
 [editable path="BodyHurtbox"]

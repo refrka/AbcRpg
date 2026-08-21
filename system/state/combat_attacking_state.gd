@@ -8,7 +8,7 @@ func _enter() -> void:
 
 	super()
 
-	animation_component.set_body_dir(combat_component.current_attack_dir, false)
+	animation_component.set_body_dir(combat_component.current_attack_dir, movement_component.is_moving())
 
 	attack_entry = combat_component.get_attack_entry()
 

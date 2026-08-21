@@ -17,7 +17,7 @@ func _enter() -> void:
 
 	combat_component.set_attack_dir(Game.get_mouse_direction())
 
-	print("setting face dir: ", combat_component.current_attack_dir)
+	animation_component.set_body_dir(combat_component.current_attack_dir, movement_component.is_moving())
 
 	movement_component.set_face_dir(combat_component.current_attack_dir)
 

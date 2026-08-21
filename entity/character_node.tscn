@@ -8,16 +8,7 @@
 [ext_resource type="Script" uid="uid://cvcq2asqkdmv5" path="res://system/component/animation_component.gd" id="4_0rdkl"]
 [ext_resource type="Script" uid="uid://bw7n4553g41yu" path="res://system/component/combat_component.gd" id="5_0hq70"]
 [ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="5_jg2qq"]
-[ext_resource type="Script" uid="uid://bfv08t87rs26c" path="res://system/state/idle_state.gd" id="6_pgotb"]
-[ext_resource type="Script" uid="uid://bttua67v7jdv6" path="res://system/state/moving_state.gd" id="7_0hq70"]
 [ext_resource type="Script" uid="uid://bd8k3lxk6hnr2" path="res://system/component/health_component.gd" id="8_bqwre"]
-[ext_resource type="Script" uid="uid://ptxf5ubnyci4" path="res://system/state/combat_ready_state.gd" id="9_gqgbn"]
-[ext_resource type="Script" uid="uid://djb5h2fsvc4au" path="res://system/state/combat_attacking_state.gd" id="10_22lai"]
-[ext_resource type="Script" uid="uid://bfqel43kpuxfk" path="res://system/state/combat_idle_state.gd" id="11_22lai"]
-[ext_resource type="Script" uid="uid://dy4amxptcn77h" path="res://system/state/flinch_state.gd" id="12_hv6ro"]
-[ext_resource type="Script" uid="uid://c1ijajxdu1n1k" path="res://system/state/combat_dodge_state.gd" id="14_me77t"]
-[ext_resource type="Script" uid="uid://d4lrj6h8ia0ko" path="res://system/state/combat_flinch_state.gd" id="17_ddap6"]
-[ext_resource type="Script" uid="uid://d4gj3xyu3q7q3" path="res://system/state/combat_charging_state.gd" id="18_ddap6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yw30f"]
 animations = [{
@@ -136,10 +127,10 @@ tracks/0/path = NodePath("%BodySprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.005999756, 0.059376538, 0.10735591, 0.16073269, 0.21124874),
+"times": PackedFloat32Array(0, 0.055142146, 0.10614608, 0.16073269, 0.21124874),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Color(1.8247963, 1.8247963, 1.8247963, 1), Color(1.353256, 0, 0, 1), Color(1.8247963, 1.8247963, 1.8247963, 1), Color(1.353256, 0, 0, 1), Color(1, 1, 1, 1)]
+"values": [Color(2.454227, 2.454227, 2.454227, 1), Color(1.353256, 0, 0, 1), Color(2.454227, 2.454227, 2.454227, 1), Color(1.353256, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -148,7 +139,7 @@ tracks/1/path = NodePath("%BodySprite:offset:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.057829686, 0.106827654, 0.1594551, 0.2115),
+"times": PackedFloat32Array(0, 0.053595293, 0.10561783, 0.1594551, 0.2115),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 2.0, -2.0, 2.0, 0.0]
@@ -163,8 +154,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_udydy"]
 radius = 58.034473
 
-[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine", "body_hurtbox", "combat_hitbox")]
+[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine", "body_hurtbox", "combat_hitbox", "vision_sensor", "combat_origin")]
 y_sort_enabled = true
+collision_mask = 0
 script = ExtResource("1_ufg3e")
 body_sprite = NodePath("VisualRoot/BodyVisualRoot/BodySprite")
 body_collision = NodePath("BodyCollision")
@@ -172,6 +164,8 @@ component_root = NodePath("ComponentRoot")
 state_machine = NodePath("StateMachine")
 body_hurtbox = NodePath("BodyHurtbox")
 combat_hitbox = NodePath("VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox")
+vision_sensor = NodePath("VisionSensor")
+combat_origin = NodePath("Center/CombatOrigin")
 
 [node name="VisualRoot" type="Node2D" parent="." unique_id=1685553084]
 y_sort_enabled = true
@@ -203,6 +197,8 @@ debug_color = Color(0.7, 0, 0, 0.03137255)
 
 [node name="VisionSensor" type="Area2D" parent="." unique_id=1534038726 node_paths=PackedStringArray("collision_shape")]
 position = Vector2(0, -16)
+collision_layer = 0
+collision_mask = 3
 script = ExtResource("2_8mhx1")
 collision_shape = NodePath("CollisionShape2D")
 metadata/_custom_type_script = "uid://c0s3d38vd56k5"
@@ -248,40 +244,6 @@ metadata/_custom_type_script = "uid://bd8k3lxk6hnr2"
 unique_name_in_owner = true
 script = ExtResource("5_jg2qq")
 metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
-
-[node name="IdleState" type="Node" parent="StateMachine" unique_id=107597940]
-script = ExtResource("6_pgotb")
-metadata/_custom_type_script = "uid://bfv08t87rs26c"
-
-[node name="MovingState" type="Node" parent="StateMachine" unique_id=818508662]
-script = ExtResource("7_0hq70")
-metadata/_custom_type_script = "uid://bttua67v7jdv6"
-
-[node name="FlinchState" type="Node" parent="StateMachine" unique_id=90465493]
-script = ExtResource("12_hv6ro")
-
-[node name="CombatAttackingState" type="Node" parent="StateMachine" unique_id=1041191584]
-script = ExtResource("10_22lai")
-allow_reenter = true
-metadata/_custom_type_script = "uid://djb5h2fsvc4au"
-
-[node name="CombatIdleState" type="Node" parent="StateMachine" unique_id=288554042]
-script = ExtResource("11_22lai")
-metadata/_custom_type_script = "uid://bfqel43kpuxfk"
-
-[node name="CombatDodgeState" type="Node" parent="StateMachine" unique_id=1799910409]
-script = ExtResource("14_me77t")
-
-[node name="CombatReadyState" type="Node" parent="StateMachine" unique_id=2111150120]
-script = ExtResource("9_gqgbn")
-metadata/_custom_type_script = "uid://ptxf5ubnyci4"
-
-[node name="CombatFlinchState" type="Node" parent="StateMachine" unique_id=392411461]
-script = ExtResource("17_ddap6")
-
-[node name="CombatChargingState" type="Node" parent="StateMachine" unique_id=1567307534]
-script = ExtResource("18_ddap6")
-metadata/_custom_type_script = "uid://d4gj3xyu3q7q3"
 
 [editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
 [editable path="BodyHurtbox"]

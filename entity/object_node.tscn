@@ -12,14 +12,17 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="ObjectNode" type="StaticBody2D" unique_id=1945380598 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine", "body_hurtbox")]
+[node name="ObjectNode" type="StaticBody2D" unique_id=1945380598 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine", "body_hurtbox", "combat_origin")]
 y_sort_enabled = true
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_24nlx")
 body_sprite = NodePath("VisualRoot/BodyVisualRoot/BodySprite")
 body_collision = NodePath("BodyCollision")
 component_root = NodePath("ComponentRoot")
 state_machine = NodePath("StateMachine")
 body_hurtbox = NodePath("BodyHurtbox")
+combat_origin = NodePath("Center/CombatOrigin")
 
 [node name="VisualRoot" type="Node2D" parent="." unique_id=497241016]
 y_sort_enabled = true
@@ -42,5 +45,13 @@ unique_name_in_owner = true
 [node name="StateMachine" type="Node" parent="." unique_id=1112131023]
 script = ExtResource("3_7x2mx")
 metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
+
+[node name="Center" type="Marker2D" parent="." unique_id=1184240476]
+
+[node name="CombatOrigin" type="Node2D" parent="Center" unique_id=1638007458]
+
+[node name="CombatSpriteRemote" type="RemoteTransform2D" parent="Center/CombatOrigin" unique_id=24633455]
+position = Vector2(16, 0)
+remote_path = NodePath("../../../VisualRoot/CombatVisualRoot/CombatSprite")
 
 [editable path="BodyHurtbox"]
