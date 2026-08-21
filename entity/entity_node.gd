@@ -86,6 +86,21 @@ func _reset() -> void:
 
 
 
+func receive_damage_package(damage_package: DamagePackage) -> void:
+
+	var health_component = get_component(HealthComponent)
+
+	if health_component:
+
+		health_component.receive_damage_package(damage_package)
+
+	var effects_component = get_component(EffectsComponent)
+
+	if effects_component:
+
+		effects_component.receive_damage_package(damage_package)
+
+
 
 
 
@@ -128,7 +143,11 @@ func is_in_combat() -> bool:
 
 func _connect_signals() -> void:
 
-	pass
+	var health_component = get_component(HealthComponent)
+
+	if health_component:
+
+		health_component.health_depleted.connect(_on_health_depleted)
 
 
 
@@ -182,3 +201,14 @@ func _deactivate() -> bool:
 	combat_hitbox._deactivate()
 
 	return true
+
+
+
+
+
+
+
+
+func _on_health_depleted() -> void:
+
+	queue_free.call_deferred()

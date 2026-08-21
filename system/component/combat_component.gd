@@ -320,4 +320,6 @@ func _on_dodge_pressed() -> void:
 
 func _on_combat_hit_detected(hit_entity: EntityNode) -> void:
 
-	pass
+	var damage_package = DamagePackage.from_attack_entry(get_attack_entry())
+
+	hit_entity.receive_damage_package(damage_package)
