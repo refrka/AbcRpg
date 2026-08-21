@@ -49,7 +49,9 @@ func _initialize(_entity: EntityNode) -> void:
 
 		combat_state = initial_combat_state
 
-	current_state = get_child(0) as State
+	if !get_children().is_empty():
+
+		current_state = get_child(0) as State
 
 	for state in get_children():
 

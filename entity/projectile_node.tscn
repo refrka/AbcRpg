@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://d2der5722ar0w"]
+
+[ext_resource type="Script" uid="uid://xkj3eec5o6yb" path="res://entity/projectile_node.gd" id="1_t0lx7"]
+[ext_resource type="Texture2D" uid="uid://co5mdgo54hj0i" path="res://item/equipment/ammunition/turret_tower_projectile_sprite.png" id="2_40yrk"]
+[ext_resource type="PackedScene" uid="uid://c2i4mnyfkw22f" path="res://system/combat/hurtbox.tscn" id="2_r6jms"]
+[ext_resource type="Script" uid="uid://h8bhxdb5nsyu" path="res://entity/object_def.gd" id="2_r65i1"]
+[ext_resource type="Script" uid="uid://bpmhno771vhh3" path="res://system/component/movement_component.gd" id="3_40yrk"]
+[ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="3_s6ivp"]
+[ext_resource type="PackedScene" uid="uid://rvq8w2fbv0oa" path="res://system/combat/hitbox.tscn" id="4_6b103"]
+
+[sub_resource type="Resource" id="Resource_yxfdr"]
+script = ExtResource("2_r65i1")
+metadata/_custom_type_script = "uid://h8bhxdb5nsyu"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y35ef"]
+atlas = ExtResource("2_40yrk")
+region = Rect2(0, 0, 12, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r65i1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y35ef")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6b103"]
+size = Vector2(5, 6)
+
+[node name="ProjectileNode" type="CharacterBody2D" unique_id=975817618 node_paths=PackedStringArray("on_screen_notifier", "body_sprite", "body_collision", "component_root", "state_machine", "body_hurtbox", "combat_hitbox")]
+script = ExtResource("1_t0lx7")
+on_screen_notifier = NodePath("VisibleOnScreenNotifier2D")
+entity_def = SubResource("Resource_yxfdr")
+body_sprite = NodePath("VisualRoot/BodyVisualRoot/BodySprite")
+body_collision = NodePath("BodyCollision")
+component_root = NodePath("ComponentRoot")
+state_machine = NodePath("StateMachine")
+body_hurtbox = NodePath("BodyHurtbox")
+combat_hitbox = NodePath("CombatHitbox")
+
+[node name="VisualRoot" type="Node2D" parent="." unique_id=2084653228]
+y_sort_enabled = true
+
+[node name="BodyVisualRoot" type="Node2D" parent="VisualRoot" unique_id=1577187232]
+y_sort_enabled = true
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="VisualRoot/BodyVisualRoot" unique_id=365011166]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_r65i1")
+
+[node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=475127601]
+
+[node name="CombatHitbox" parent="." unique_id=1556507908 instance=ExtResource("4_6b103")]
+
+[node name="CollisionShape2D" parent="CombatHitbox" index="0" unique_id=2057573165]
+position = Vector2(3.5, 0)
+shape = SubResource("RectangleShape2D_6b103")
+
+[node name="BodyHurtbox" parent="." unique_id=511458273 instance=ExtResource("2_r6jms")]
+
+[node name="ComponentRoot" type="Node" parent="." unique_id=280124417]
+unique_name_in_owner = true
+
+[node name="MovementComponent" type="Node" parent="ComponentRoot" unique_id=819207964]
+script = ExtResource("3_40yrk")
+metadata/_custom_type_script = "uid://bpmhno771vhh3"
+
+[node name="StateMachine" type="Node" parent="." unique_id=1594408232]
+script = ExtResource("3_s6ivp")
+metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1077174206]
+visible = false
+
+[editable path="CombatHitbox"]
+[editable path="BodyHurtbox"]

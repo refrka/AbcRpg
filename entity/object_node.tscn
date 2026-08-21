@@ -1,11 +1,46 @@
 [gd_scene format=3 uid="uid://ch5dyx5bpfnf5"]
 
 [ext_resource type="Script" uid="uid://f6riejhhke6a" path="res://entity/object_node.gd" id="1_24nlx"]
+[ext_resource type="PackedScene" uid="uid://c2i4mnyfkw22f" path="res://system/combat/hurtbox.tscn" id="2_4ptr2"]
+[ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="3_7x2mx"]
 
-[node name="ObjectNode" type="StaticBody2D" unique_id=1945380598]
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ptr2"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"idle_down",
+"speed": 5.0
+}]
+
+[node name="ObjectNode" type="StaticBody2D" unique_id=1945380598 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine", "body_hurtbox")]
+y_sort_enabled = true
 script = ExtResource("1_24nlx")
+body_sprite = NodePath("VisualRoot/BodyVisualRoot/BodySprite")
+body_collision = NodePath("BodyCollision")
+component_root = NodePath("ComponentRoot")
+state_machine = NodePath("StateMachine")
+body_hurtbox = NodePath("BodyHurtbox")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2100948546]
+[node name="VisualRoot" type="Node2D" parent="." unique_id=497241016]
+y_sort_enabled = true
+
+[node name="BodyVisualRoot" type="Node2D" parent="VisualRoot" unique_id=1008229108]
+y_sort_enabled = true
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="VisualRoot/BodyVisualRoot" unique_id=1588319379]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_4ptr2")
+animation = &"idle_down"
+
+[node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=2100948546]
+
+[node name="BodyHurtbox" parent="." unique_id=511458273 instance=ExtResource("2_4ptr2")]
 
 [node name="ComponentRoot" type="Node" parent="." unique_id=217743212]
 unique_name_in_owner = true
+
+[node name="StateMachine" type="Node" parent="." unique_id=1112131023]
+script = ExtResource("3_7x2mx")
+metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
+
+[editable path="BodyHurtbox"]

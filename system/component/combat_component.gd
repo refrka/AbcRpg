@@ -173,6 +173,58 @@ func _enable_buffer() -> void:
 
 
 
+func _fire_projectile() -> void:
+
+	var weapon_data = _get_weapon_data()
+
+	var ammunition_def = weapon_data.ammunition_data.item_def
+
+	var projectile_node = ProjectileNode.from_ammunition(ammunition_def)
+
+	projectile_node.rotation = current_attack_dir.angle()	
+
+	projectile_node.set_trajectory(current_attack_dir)
+
+	projectile_node.global_position = combat_origin.global_position
+
+	projectile_node.damage_package = _get_damage_package()
+
+	projectile_node.set_projectile_owner(entity)
+
+	entity.add_sibling(projectile_node)
+
+	projectile_node._initialize()
+
+	projectile_node._activate()
+
+
+
+
+
+
+func _get_weapon_data() -> EquipmentData:
+
+	var weapon_data: EquipmentData = null
+
+	if !entity.inventory.weapon_slot.is_empty():
+
+		weapon_data = entity.inventory.weapon_slot.item_data
+
+	return weapon_data
+
+
+
+
+func _get_damage_package() -> DamagePackage:
+
+	var attack_entry = get_attack_entry()
+	
+	var damage_package = DamagePackage.from_attack_entry(attack_entry)
+
+	return damage_package
+
+
+
 
 func _set_attack_dir(dir: Vector2) -> void:
 
@@ -320,6 +372,6 @@ func _on_dodge_pressed() -> void:
 
 func _on_combat_hit_detected(hit_entity: EntityNode) -> void:
 
-	var damage_package = DamagePackage.from_attack_entry(get_attack_entry())
+	var damage_package = _get_damage_package()
 
 	hit_entity.receive_damage_package(damage_package)

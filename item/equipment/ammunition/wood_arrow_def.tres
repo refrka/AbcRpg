@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="AmmunitionDef" format=3 uid="uid://ds1pe2xiao16c"]
+
+[ext_resource type="Script" uid="uid://pxshxl6sug7v" path="res://item/equipment/ammunition_def.gd" id="1_e1vvn"]
+[ext_resource type="Texture2D" uid="uid://co5mdgo54hj0i" path="res://item/equipment/ammunition/turret_tower_projectile_sprite.png" id="2_1pv8h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1pv8h"]
+size = Vector2(5, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y35ef"]
+atlas = ExtResource("2_1pv8h")
+region = Rect2(0, 0, 12, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s6ivp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y35ef")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 1.0
+}]
+
+[resource]
+script = ExtResource("1_e1vvn")
+hitbox_collision_shape = SubResource("RectangleShape2D_1pv8h")
+hitbox_collision_position = Vector2(3.5, 0)
+equipment_type = 3
+item_id = &"wood_arrow"
+display_name = &"Wood arrow"
+sprite_frames = SubResource("SpriteFrames_s6ivp")

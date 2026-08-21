@@ -141,6 +141,28 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_hg6s5"]
+length = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%ComponentRoot/CombatComponent")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.015999757),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_fire_projectile"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8t03j"]
+_data = {
+&"attack_0": SubResource("Animation_hg6s5")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkh3"]
 size = Vector2(17, 7)
 
@@ -333,7 +355,6 @@ entity_def = ExtResource("3_qjkh3")
 [node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_rgyib")
-animation = &"idle_down"
 
 [node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
 position = Vector2(16, -16)
@@ -342,6 +363,7 @@ position = Vector2(16, -16)
 position = Vector2(2, 0)
 
 [node name="CombatAnimationPlayer" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="1" unique_id=256507589]
+libraries/short_bow = SubResource("AnimationLibrary_8t03j")
 libraries/short_sword = SubResource("AnimationLibrary_qjkh3")
 
 [node name="CollisionShape2D" parent="BodyHurtbox" parent_id_path=PackedInt32Array(511458273) index="0" unique_id=2017378462]

@@ -172,11 +172,17 @@ func _activate() -> bool:
 
 		component._activate()
 
-	state_machine._activate()
+	if state_machine:
 
-	body_hurtbox._activate()
+		state_machine._activate()
 
-	combat_hitbox._activate()
+	if body_hurtbox:
+
+		body_hurtbox._activate()
+
+	if combat_hitbox:
+
+		combat_hitbox._activate()
 
 	return true
 

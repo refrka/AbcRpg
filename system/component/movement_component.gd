@@ -27,7 +27,7 @@ var face_dir:= Vector2.RIGHT
 
 var current_move_velocity: Vector2
 
-
+var velocity_override: VelocityModifier
 
 var modifiers: Array[VelocityModifier]
 
@@ -55,6 +55,64 @@ func halt() -> void:
 	entity.velocity = Vector2.ZERO
 
 
+
+
+
+func add_modifier(modifier: VelocityModifier) -> void:
+
+	if modifier.modifier_type == VelocityModifier.ModifierType.OVERRIDE:
+
+		velocity_override = modifier
+
+	else:
+
+		modifiers.append(modifier)
+	
+
+
+func get_move_speed() -> float:
+
+	var speed = entity.entity_def.move_speed
+
+	for modifier in modifiers:
+
+		if modifier.multiplier > 0.0:
+
+			speed *= modifier.multiplier
+
+	return speed
+
+
+
+
+
+
+func _get_impulse_velocity() -> Vector2:
+
+	var total = Vector2.ZERO
+
+	for modifier in modifiers:
+
+		if modifier.modifier_type == VelocityModifier.ModifierType.CUMULATIVE:
+
+			total += modifier.velocity
+
+	return total
+
+
+
+
+
+
+func _tick_modifiers(delta: float) -> void:
+
+	for i in range(modifiers.size() - 1, -1, -1):
+
+		modifiers[i].tick(delta)
+
+		if modifiers[i].is_expired():
+
+			modifiers.remove_at(i)
 
 
 
@@ -145,6 +203,8 @@ func _physics_process(delta: float) -> void:
 
 		return
 
+	_tick_modifiers(delta)
+
 	var move_velocity:= current_move_velocity
 
 	if move_dir == Vector2.ZERO or !can_move:
@@ -158,6 +218,10 @@ func _physics_process(delta: float) -> void:
 			set_face_dir(move_dir)
 
 		move_velocity = current_move_velocity.move_toward(move_dir * 350.0, 2800.0 * delta)
+
+	if velocity_override:
+
+		move_velocity = velocity_override.velocity
 
 	entity.velocity = move_velocity
 

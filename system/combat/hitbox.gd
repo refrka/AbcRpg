@@ -9,6 +9,7 @@ signal hit_detected(entity_node: EntityNode)
 
 var hit_list: Array[Hurtbox]
 
+var ignore_list: Array[EntityNode]
 
 
 
@@ -20,11 +21,12 @@ func clear_hit_list() -> void:
 
 
 
+
 func _on_area_entered_sensor(area: Area2D) -> void:
 
 	area = area as Hurtbox
 
-	if area.entity == entity:
+	if area.entity == entity or ignore_list.has(area.entity):
 
 		return
 

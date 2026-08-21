@@ -10,6 +10,8 @@ enum EquipmentType {
 
 	ACCESSORY,
 
+	AMMUNITION,
+
 }
 
 @export var equipment_type: EquipmentType
