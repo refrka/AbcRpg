@@ -4,15 +4,42 @@
 [ext_resource type="Script" uid="uid://dwugknpkaxs2l" path="res://player/player.gd" id="2_g1dw6"]
 [ext_resource type="Resource" uid="uid://2cb14jnh3rh3" path="res://player/player_def.tres" id="3_qjkh3"]
 [ext_resource type="Texture2D" uid="uid://do7we2soafq6v" path="res://player/player_sprite_sheet.png" id="3_yw30f"]
-[ext_resource type="Texture2D" uid="uid://dtnj4dnlbcn87" path="res://entity/characters/test_dummy_sprite.png" id="4_hg6s5"]
 [ext_resource type="Texture2D" uid="uid://cgywwh4f6fo1a" path="res://item/equipment/weapons/melee/short_sword_attack_0.png" id="5_qjkh3"]
 [ext_resource type="Texture2D" uid="uid://xe337v52kcoa" path="res://item/equipment/weapons/melee/short_sword_atttack_1.png" id="6_g6k8r"]
 [ext_resource type="Script" uid="uid://cd402iei3g0hg" path="res://system/component/input_component.gd" id="7_boad6"]
 [ext_resource type="Script" uid="uid://b6etv852eqfya" path="res://system/state/dodge_state.gd" id="8_rgyib"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgyib"]
+atlas = ExtResource("3_yw30f")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hg6s5"]
+atlas = ExtResource("3_yw30f")
+region = Rect2(48, 48, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_8t03j"]
-atlas = ExtResource("4_hg6s5")
-region = Rect2(0, 0, 48, 48)
+atlas = ExtResource("3_yw30f")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ieo8"]
+atlas = ExtResource("3_yw30f")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yllr7"]
+atlas = ExtResource("3_yw30f")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb6p2"]
+atlas = ExtResource("3_yw30f")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wodsf"]
+atlas = ExtResource("3_yw30f")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32hag"]
+atlas = ExtResource("3_yw30f")
+region = Rect2(144, 96, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yw30f"]
 atlas = ExtResource("3_yw30f")
@@ -38,16 +65,42 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("3_yw30f")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_boad6"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_rgyib"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
-"duration": 2.0,
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_rgyib")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_hg6s5")
+}, {
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_8t03j")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_2ieo8")
 }],
 "loop": 0,
-"name": &"dodge",
-"speed": 5.0
+"name": &"dodge_down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yllr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kb6p2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wodsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32hag")
+}],
+"loop": 0,
+"name": &"dodge_up",
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -266,6 +319,9 @@ _data = {
 &"attack_1": SubResource("Animation_rgyib")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgyib"]
+size = Vector2(20, 32)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qjkh3"]
 radius = 5.0
 height = 20.0
@@ -276,8 +332,8 @@ entity_def = ExtResource("3_qjkh3")
 
 [node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
 position = Vector2(0, -24)
-sprite_frames = SubResource("SpriteFrames_boad6")
-animation = &"dodge"
+sprite_frames = SubResource("SpriteFrames_rgyib")
+animation = &"idle_down"
 
 [node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
 position = Vector2(16, -16)
@@ -287,6 +343,10 @@ position = Vector2(2, 0)
 
 [node name="CombatAnimationPlayer" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="1" unique_id=256507589]
 libraries/short_sword = SubResource("AnimationLibrary_qjkh3")
+
+[node name="CollisionShape2D" parent="BodyHurtbox" parent_id_path=PackedInt32Array(511458273) index="0" unique_id=2017378462]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_rgyib")
 
 [node name="BodyCollision" parent="." index="3" unique_id=4360643]
 position = Vector2(0, -5)

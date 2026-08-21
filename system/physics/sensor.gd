@@ -24,9 +24,12 @@ signal sensor_exited_sensor(sensor: Sensor)
 			else: _deactivate()
 
 
+@export var collision_shape: CollisionShape2D
 
 
-var active:= true
+
+
+var active:= false
 
 var initialized:= false
 
@@ -183,6 +186,8 @@ func _activate() -> bool:
 
 	active = true
 
+	collision_shape.disabled = false
+
 	_connect_signals()
 
 	return true
@@ -196,6 +201,8 @@ func _deactivate() -> bool:
 	if !active: return false
 
 	active = false
+
+	collision_shape.disabled = true
 
 	_disconnect_signals()
 

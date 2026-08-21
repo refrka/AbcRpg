@@ -125,6 +125,8 @@ func _execute_attack() -> void:
 
 func _finish_attack() -> void:
 
+	entity.combat_hitbox.clear_hit_list()
+
 	buffer_enabled = false
 
 	if buffered:
@@ -258,6 +260,8 @@ func _connect_signals() -> void:
 
 	animation_component.combat_anim_player.animation_finished.connect(_on_combat_animation_finished)
 
+	entity.combat_hitbox.hit_detected.connect(_on_combat_hit_detected)
+
 
 
 
@@ -279,6 +283,8 @@ func _disconnect_signals() -> void:
 	var animation_component = entity.get_component(AnimationComponent)
 
 	animation_component.combat_anim_player.animation_finished.disconnect(_on_combat_animation_finished)
+
+	entity.combat_hitbox.hit_detected.disconnect(_on_combat_hit_detected)
 
 
 
@@ -309,3 +315,9 @@ func _on_combat_animation_finished(anim_name: StringName) -> void:
 func _on_dodge_pressed() -> void:
 
 	_handle_dodge()
+
+
+
+func _on_combat_hit_detected(hit_entity: EntityNode) -> void:
+
+	pass

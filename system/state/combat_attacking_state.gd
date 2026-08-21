@@ -6,6 +6,8 @@ var attack_entry: AttackEntry
 
 func _enter() -> void:
 
+	animation_component.set_body_dir(combat_component.current_attack_dir, false)
+
 	attack_entry = combat_component.get_attack_entry()
 
 	if !attack_entry.can_move:

@@ -48,6 +48,17 @@ func _initialize(_entity: EntityNode) -> bool:
 
 
 
+func halt() -> void:
+
+	move_dir = Vector2.ZERO
+
+	entity.velocity = Vector2.ZERO
+
+
+
+
+
+
 func _connect_signals() -> void:
 	
 	var input_component = entity.get_component(InputComponent)

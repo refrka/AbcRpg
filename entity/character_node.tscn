@@ -106,13 +106,15 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_udydy"]
 radius = 58.034473
 
-[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine")]
+[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine", "body_hurtbox", "combat_hitbox")]
 y_sort_enabled = true
 script = ExtResource("1_ufg3e")
 body_sprite = NodePath("VisualRoot/BodyVisualRoot/BodySprite")
 body_collision = NodePath("BodyCollision")
 component_root = NodePath("ComponentRoot")
 state_machine = NodePath("StateMachine")
+body_hurtbox = NodePath("BodyHurtbox")
+combat_hitbox = NodePath("VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox")
 
 [node name="VisualRoot" type="Node2D" parent="." unique_id=1685553084]
 y_sort_enabled = true
@@ -123,6 +125,7 @@ y_sort_enabled = true
 [node name="BodySprite" type="AnimatedSprite2D" parent="VisualRoot/BodyVisualRoot" unique_id=16791793]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_yw30f")
+animation = &"idle_down"
 
 [node name="CombatVisualRoot" type="Node2D" parent="VisualRoot" unique_id=2053548299]
 y_sort_enabled = true
@@ -141,9 +144,10 @@ libraries/ = SubResource("AnimationLibrary_pgotb")
 [node name="CollisionShape2D" parent="BodyHurtbox" index="0" unique_id=2017378462]
 debug_color = Color(0.7, 0, 0, 0.03137255)
 
-[node name="VisionSensor" type="Area2D" parent="." unique_id=1534038726]
+[node name="VisionSensor" type="Area2D" parent="." unique_id=1534038726 node_paths=PackedStringArray("collision_shape")]
 position = Vector2(0, -16)
 script = ExtResource("2_8mhx1")
+collision_shape = NodePath("CollisionShape2D")
 metadata/_custom_type_script = "uid://c0s3d38vd56k5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionSensor" unique_id=376879403]

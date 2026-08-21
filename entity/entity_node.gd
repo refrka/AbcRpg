@@ -13,6 +13,10 @@ class_name EntityNode extends PhysicsBody2D
 
 @export var state_machine: StateMachine
 
+@export var body_hurtbox: Hurtbox
+
+@export var combat_hitbox: Hitbox
+
 
 
 
@@ -48,6 +52,14 @@ func _initialize() -> bool:
 		component._initialize(self)
 
 	state_machine._initialize(self)
+
+	if body_hurtbox:
+
+		body_hurtbox._initialize(self)
+
+	if combat_hitbox:
+
+		combat_hitbox._initialize(self)
 
 	return true
 
@@ -143,6 +155,10 @@ func _activate() -> bool:
 
 	state_machine._activate()
 
+	body_hurtbox._activate()
+
+	combat_hitbox._activate()
+
 	return true
 
 
@@ -159,6 +175,10 @@ func _deactivate() -> bool:
 
 		component._deactivate()
 
-	state_machine._activate()
+	state_machine._deactivate()
+
+	body_hurtbox._deactivate()
+
+	combat_hitbox._deactivate()
 
 	return true

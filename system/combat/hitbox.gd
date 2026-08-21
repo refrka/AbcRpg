@@ -20,7 +20,7 @@ func clear_hit_list() -> void:
 
 
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered_sensor(area: Area2D) -> void:
 
 	area = area as Hurtbox
 

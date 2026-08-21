@@ -13,13 +13,15 @@ func _enter() -> void:
 
 	entity.body_sprite.animation_finished.connect(_on_body_sprite_animation_finished)
 
-	entity.body_sprite.play("dodge")
+	animation_component.set_dodge_dir(movement_component.face_dir)
 
 
 
 func _exit() -> void:
 
 	movement_component.movement_locked = false
+
+	movement_component.halt()
 
 	movement_component.update_dir()
 

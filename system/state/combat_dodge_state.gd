@@ -8,6 +8,8 @@ func _enter() -> void:
 
 	entity.body_sprite.animation_finished.connect(_on_body_sprite_animation_finished)
 
+	entity.body_hurtbox._deactivate()
+
 	transition_to(DodgeState)
 
 
@@ -15,6 +17,8 @@ func _enter() -> void:
 func _exit() -> void:
 
 	entity.body_sprite.animation_finished.disconnect(_on_body_sprite_animation_finished)
+
+	entity.body_hurtbox._activate()
 
 
 

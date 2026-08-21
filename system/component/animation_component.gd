@@ -46,13 +46,30 @@ func set_body_dir(dir: Vector2, moving: bool) -> void:
 
 		y_dir = "down"
 
-		animation += y_dir
+	else:
+
+		y_dir = "up"
+
+	animation += y_dir
+
+	entity.body_sprite.play(animation)
+
+
+
+func set_dodge_dir(dir: Vector2) -> void:
+
+	entity.body_sprite.flip_h = dir.x < 0.0
+
+	var animation = "dodge_"
+
+	if dir.y >= 0.0:
+
+		y_dir = "down"
 
 	else:
 
 		y_dir = "up"
 
-		animation += y_dir
+	animation += y_dir
 
 	entity.body_sprite.play(animation)
-
