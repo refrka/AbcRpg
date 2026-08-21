@@ -36,6 +36,10 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 	for damage_entry in damage_package.damage_entries:
 
+		var animation_component = entity.get_component(AnimationComponent)
+
+		animation_component.combat_anim_player.play("flinch")
+
 		reduce_health(damage_entry.amount)
 
 
@@ -48,6 +52,12 @@ func reduce_health(amount: float) -> void:
 		current_health -= amount
 
 		if !is_alive():
+
+			var animation_component = entity.get_component(AnimationComponent)
+
+			if animation_component.combat_anim_player.is_playing():
+
+				await animation_component.combat_anim_player.animation_finished
 
 			health_depleted.emit()
 
