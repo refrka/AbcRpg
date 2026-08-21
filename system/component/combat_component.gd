@@ -26,7 +26,7 @@ var buffer_enabled:= false
 
 var buffered:= false
 
-
+var charge_complete:= false
 
 
 
@@ -64,6 +64,18 @@ func _handle_attack_input(pressed: bool) -> void:
 
 				_try_buffer()
 
+	else:
+
+		if is_charging():
+
+			if charge_complete:
+
+				_execute_attack()
+
+			else:
+
+				_cancel_charge()
+
 
 
 
@@ -92,7 +104,17 @@ func _try_attack() -> void:
 
 		return
 
-	_execute_attack()
+	var attack_entry = get_attack_entry()
+
+	if attack_entry.has_charge:
+
+		_start_charge()
+
+	else:
+
+		set_attack_dir(Game.get_mouse_direction())
+
+		_execute_attack()
 
 
 
@@ -113,8 +135,6 @@ func _try_buffer() -> void:
 
 
 func _execute_attack() -> void:
-
-	_set_attack_dir(Game.get_mouse_direction())
 
 	current_attack_animation_name = get_attack_animation_name()
 
@@ -142,6 +162,35 @@ func _finish_attack() -> void:
 	current_attack_index = 0
 
 	entity.state_machine.request_state(CombatReadyState)
+
+
+
+
+
+
+func _start_charge() -> void:
+
+	entity.state_machine.request_state(CombatChargingState)
+
+
+
+func _cancel_charge() -> void:
+
+	entity.state_machine.request_state(CombatReadyState)
+
+
+
+func _interrupt_charge() -> void:
+
+	var animation_component = entity.get_component(AnimationComponent)
+
+	animation_component.combat_anim_player.play("RESET")
+
+
+
+func _complete_charge() -> void:
+
+	_execute_attack()
 
 
 
@@ -226,16 +275,6 @@ func _get_damage_package() -> DamagePackage:
 
 
 
-func _set_attack_dir(dir: Vector2) -> void:
-
-	current_attack_dir = dir
-
-	combat_origin.rotation = dir.angle()
-
-
-
-
-
 func _load_weapon_config(weapon_def: WeaponDef) -> void:
 
 	current_attack_config = weapon_def.default_attack_config
@@ -268,6 +307,22 @@ func get_attack_animation_name() -> String:
 
 
 
+func get_charge_animation_name() -> String:
+
+	return "%s/charge_%s" % [current_library_name, current_attack_index]
+
+
+
+func set_attack_dir(dir: Vector2) -> void:
+
+	current_attack_dir = dir
+
+	combat_origin.rotation = dir.angle()
+
+
+
+
+
 
 
 
@@ -280,6 +335,12 @@ func is_in_combat() -> bool:
 func is_attacking() -> bool:
 
 	return entity.state_machine.get_combat_state() is CombatAttackingState
+
+
+
+func is_charging() -> bool:
+
+	return entity.state_machine.get_combat_state() is CombatChargingState
 
 
 

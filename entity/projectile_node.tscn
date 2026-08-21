@@ -31,6 +31,7 @@ animations = [{
 size = Vector2(5, 6)
 
 [node name="ProjectileNode" type="CharacterBody2D" unique_id=975817618 node_paths=PackedStringArray("on_screen_notifier", "body_sprite", "body_collision", "component_root", "state_machine", "body_hurtbox", "combat_hitbox")]
+y_sort_enabled = true
 script = ExtResource("1_t0lx7")
 on_screen_notifier = NodePath("VisibleOnScreenNotifier2D")
 entity_def = SubResource("Resource_yxfdr")

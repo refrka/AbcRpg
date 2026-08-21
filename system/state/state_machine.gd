@@ -25,8 +25,6 @@ var active:= true
 
 var initialized:= false
 
-var current_state: State
-
 var entity: EntityNode
 
 
@@ -48,10 +46,6 @@ func _initialize(_entity: EntityNode) -> void:
 	if initial_combat_state:
 
 		combat_state = initial_combat_state
-
-	if !get_children().is_empty():
-
-		current_state = get_child(0) as State
 
 	for state in get_children():
 
@@ -203,6 +197,10 @@ func _deactivate() -> void:
 
 func _physics_process(delta: float) -> void:
 
-	if current_state and current_state.active:
+	if body_state and body_state.active:
 
-		current_state._tick(delta)
+		body_state._tick(delta)
+
+	if combat_state and combat_state.active:
+
+		combat_state._tick(delta)

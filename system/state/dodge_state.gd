@@ -17,6 +17,9 @@ func _enter() -> void:
 
 
 
+
+
+
 func _exit() -> void:
 
 	movement_component.movement_locked = false

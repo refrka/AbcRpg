@@ -57,7 +57,6 @@ func halt() -> void:
 
 
 
-
 func add_modifier(modifier: VelocityModifier) -> void:
 
 	if modifier.modifier_type == VelocityModifier.ModifierType.OVERRIDE:
@@ -67,7 +66,66 @@ func add_modifier(modifier: VelocityModifier) -> void:
 	else:
 
 		modifiers.append(modifier)
+
+
+
+func remove_modifier(modifier: VelocityModifier) -> void:
+
+	if modifiers.has(modifier):
+
+		print("removing")
+
+		modifiers.erase(modifier)
 	
+
+
+func update_dir() -> void:
+
+	var input_component = entity.get_component(InputComponent)
+
+	if input_component:
+
+		move_dir = input_component.input_dir
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+func set_move_dir(dir: Vector2) -> void:
+
+	if dir == move_dir: return
+
+	if movement_locked: return
+
+	move_dir = dir
+
+	if face_dir != move_dir:
+
+		set_face_dir(move_dir)
+
+	move_dir_updated.emit(dir)
+
+
+
+func set_face_dir(dir: Vector2) -> void:
+
+	if dir == face_dir or dir == Vector2.ZERO: return
+
+	face_dir = dir
+
+	face_dir_updated.emit(dir)
+
 
 
 func get_move_speed() -> float:
@@ -76,11 +134,34 @@ func get_move_speed() -> float:
 
 	for modifier in modifiers:
 
-		if modifier.multiplier > 0.0:
+		if modifier.multiplier != 0.0:
 
 			speed *= modifier.multiplier
 
 	return speed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+func is_moving() -> bool:
+
+	return move_dir != Vector2.ZERO
+
+
+
+
 
 
 
@@ -138,58 +219,6 @@ func _disconnect_signals() -> void:
 
 
 
-
-func update_dir() -> void:
-
-	var input_component = entity.get_component(InputComponent)
-
-	if input_component:
-
-		move_dir = input_component.input_dir
-
-
-
-
-func set_move_dir(dir: Vector2) -> void:
-
-	if dir == move_dir: return
-
-	if movement_locked: return
-
-	move_dir = dir
-
-	if face_dir != move_dir:
-
-		set_face_dir(move_dir)
-
-	move_dir_updated.emit(dir)
-
-
-
-
-func set_face_dir(dir: Vector2) -> void:
-
-	if dir == face_dir or dir == Vector2.ZERO: return
-
-	face_dir = dir
-
-	face_dir_updated.emit(dir)
-
-
-
-
-
-
-func is_moving() -> bool:
-
-	return move_dir != Vector2.ZERO
-
-
-
-
-
-
-
 func _on_input_dir_updated(dir: Vector2) -> void:
 
 	set_move_dir(dir)
@@ -217,7 +246,7 @@ func _physics_process(delta: float) -> void:
 
 			set_face_dir(move_dir)
 
-		move_velocity = current_move_velocity.move_toward(move_dir * 350.0, 2800.0 * delta)
+		move_velocity = current_move_velocity.move_toward(move_dir * get_move_speed(), 2800.0 * delta)
 
 	if velocity_override:
 

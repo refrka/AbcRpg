@@ -14,7 +14,10 @@
 [ext_resource type="Script" uid="uid://ptxf5ubnyci4" path="res://system/state/combat_ready_state.gd" id="9_gqgbn"]
 [ext_resource type="Script" uid="uid://djb5h2fsvc4au" path="res://system/state/combat_attacking_state.gd" id="10_22lai"]
 [ext_resource type="Script" uid="uid://bfqel43kpuxfk" path="res://system/state/combat_idle_state.gd" id="11_22lai"]
+[ext_resource type="Script" uid="uid://dy4amxptcn77h" path="res://system/state/flinch_state.gd" id="12_hv6ro"]
 [ext_resource type="Script" uid="uid://c1ijajxdu1n1k" path="res://system/state/combat_dodge_state.gd" id="14_me77t"]
+[ext_resource type="Script" uid="uid://d4lrj6h8ia0ko" path="res://system/state/combat_flinch_state.gd" id="17_ddap6"]
+[ext_resource type="Script" uid="uid://d4gj3xyu3q7q3" path="res://system/state/combat_charging_state.gd" id="18_ddap6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yw30f"]
 animations = [{
@@ -193,10 +196,6 @@ unique_name_in_owner = true
 script = ExtResource("5_jg2qq")
 metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
 
-[node name="CombatReadyState" type="Node" parent="StateMachine" unique_id=2111150120]
-script = ExtResource("9_gqgbn")
-metadata/_custom_type_script = "uid://ptxf5ubnyci4"
-
 [node name="IdleState" type="Node" parent="StateMachine" unique_id=107597940]
 script = ExtResource("6_pgotb")
 metadata/_custom_type_script = "uid://bfv08t87rs26c"
@@ -204,6 +203,9 @@ metadata/_custom_type_script = "uid://bfv08t87rs26c"
 [node name="MovingState" type="Node" parent="StateMachine" unique_id=818508662]
 script = ExtResource("7_0hq70")
 metadata/_custom_type_script = "uid://bttua67v7jdv6"
+
+[node name="FlinchState" type="Node" parent="StateMachine" unique_id=90465493]
+script = ExtResource("12_hv6ro")
 
 [node name="CombatAttackingState" type="Node" parent="StateMachine" unique_id=1041191584]
 script = ExtResource("10_22lai")
@@ -216,6 +218,17 @@ metadata/_custom_type_script = "uid://bfqel43kpuxfk"
 
 [node name="CombatDodgeState" type="Node" parent="StateMachine" unique_id=1799910409]
 script = ExtResource("14_me77t")
+
+[node name="CombatReadyState" type="Node" parent="StateMachine" unique_id=2111150120]
+script = ExtResource("9_gqgbn")
+metadata/_custom_type_script = "uid://ptxf5ubnyci4"
+
+[node name="CombatFlinchState" type="Node" parent="StateMachine" unique_id=392411461]
+script = ExtResource("17_ddap6")
+
+[node name="CombatChargingState" type="Node" parent="StateMachine" unique_id=1567307534]
+script = ExtResource("18_ddap6")
+metadata/_custom_type_script = "uid://d4gj3xyu3q7q3"
 
 [editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
 [editable path="BodyHurtbox"]
