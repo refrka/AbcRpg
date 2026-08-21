@@ -2,43 +2,28 @@ class_name CombatState extends State
 
 
 
+var combat_component: CombatComponent
 
 
 
 
-func _connect_signals() -> void:
+func _initialize(_entity: EntityNode, _state_machine: StateMachine) -> bool:
 
-	movement_component.move_started.connect(_on_move_started)
+	if !super(_entity, _state_machine): return false
 
-	movement_component.move_ended.connect(_on_move_ended)
+	combat_component = entity.get_component(CombatComponent)
 
-	movement_component.move_dir_updated.connect(_on_move_dir_updated)
-
-
-
-func _disconnect_signals() -> void:
-
-	movement_component.move_started.disconnect(_on_move_started)
-
-	movement_component.move_ended.disconnect(_on_move_ended)
-
-	movement_component.face_dir_updated.connect(_on_move_dir_updated)
+	return true
 
 
 
+func _reset() -> bool:
 
-func _on_move_started() -> void:
+	if !super(): return false
 
-	animation_component.set_body_dir(movement_component.face_dir, true)
+	combat_component = null
 
-
-
-func _on_move_ended() -> void:
-
-	animation_component.set_body_dir(movement_component.face_dir, false)
+	return true
 
 
 
-func _on_move_dir_updated(_dir: Vector2) -> void:
-
-	animation_component.set_body_dir(movement_component.face_dir, true)

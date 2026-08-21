@@ -20,6 +20,19 @@ class_name DebugMain extends UIElement
 
 @export var moving_state_row: DebugPlayerStateRow
 
+@export var dodge_state_row: DebugPlayerStateRow
+
+@export var combat_idle_state_row: DebugPlayerStateRow
+
+@export var combat_ready_state_row: DebugPlayerStateRow
+
+@export var combat_attacking_state_row: DebugPlayerStateRow
+
+@export var combat_dodge_state_row: DebugPlayerStateRow
+
+
+
+
 
 
 func _ready() -> void:
@@ -53,6 +66,12 @@ func _ready() -> void:
 
 func _update_player_body_state() -> void:
 
+	idle_state_row.deselect()
+
+	moving_state_row.deselect()
+
+	dodge_state_row.deselect()
+
 	var player = Game.get_player()
 
 	match player.state_machine.get_body_state().get_state_script():
@@ -61,19 +80,45 @@ func _update_player_body_state() -> void:
 
 			idle_state_row.select()
 
-			moving_state_row.deselect()
-
 		MovingState:
 
-			idle_state_row.deselect()
-
 			moving_state_row.select()
+
+		DodgeState:
+
+			dodge_state_row.select()
 
 
 
 func _update_player_combat_state() -> void:
 
-	pass
+	combat_idle_state_row.deselect()
+
+	combat_ready_state_row.deselect()
+
+	combat_attacking_state_row.deselect()
+
+	combat_dodge_state_row.deselect()
+
+	var player = Game.get_player()
+
+	match player.state_machine.get_combat_state().get_state_script():
+
+		CombatIdleState:
+
+			combat_idle_state_row.select()
+
+		CombatReadyState:
+
+			combat_ready_state_row.select()
+
+		CombatAttackingState:
+
+			combat_attacking_state_row.select()
+
+		CombatDodgeState:
+
+			combat_dodge_state_row.select()
 
 
 

@@ -2,6 +2,9 @@ class_name EntityNode extends PhysicsBody2D
 
 
 
+
+@export var entity_def: EntityDef
+
 @export var body_sprite: AnimatedSprite2D
 
 @export var body_collision: CollisionShape2D
@@ -18,7 +21,7 @@ var active:= false
 
 var initialized:= false
 
-
+var inventory: Inventory
 
 
 
@@ -28,9 +31,17 @@ var initialized:= false
 
 func _initialize() -> bool:
 
+	assert(entity_def != null, "Initializing undefined entity: %s" % self.name)
+
 	if initialized: return false
 
 	initialized = true
+
+	if entity_def.initial_inventory:
+
+		inventory = entity_def.initial_inventory.duplicate(true)
+
+		inventory._initialize()
 
 	for component in component_root.get_children():
 
@@ -40,6 +51,24 @@ func _initialize() -> bool:
 
 	return true
 
+
+
+
+
+
+func _reset() -> void:
+
+	if active: _deactivate()
+
+	initialized = false
+
+	for component in component_root.get_children():
+
+		component._reset()
+
+	state_machine._reset()
+
+	inventory._reset()
 
 
 

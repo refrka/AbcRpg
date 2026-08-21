@@ -16,9 +16,14 @@ var animation_component: AnimationComponent
 
 
 
+var can_move:= true
+
+var movement_locked:= false
+
+
 var move_dir: Vector2
 
-var face_dir: Vector2
+var face_dir:= Vector2.RIGHT
 
 var current_move_velocity: Vector2
 
@@ -65,9 +70,22 @@ func _disconnect_signals() -> void:
 
 
 
+func update_dir() -> void:
+
+	var input_component = entity.get_component(InputComponent)
+
+	if input_component:
+
+		move_dir = input_component.input_dir
+
+
+
+
 func set_move_dir(dir: Vector2) -> void:
 
 	if dir == move_dir: return
+
+	if movement_locked: return
 
 	move_dir = dir
 
@@ -93,6 +111,15 @@ func set_face_dir(dir: Vector2) -> void:
 
 
 
+func is_moving() -> bool:
+
+	return move_dir != Vector2.ZERO
+
+
+
+
+
+
 
 func _on_input_dir_updated(dir: Vector2) -> void:
 
@@ -109,7 +136,7 @@ func _physics_process(delta: float) -> void:
 
 	var move_velocity:= current_move_velocity
 
-	if move_dir == Vector2.ZERO:
+	if move_dir == Vector2.ZERO or !can_move:
 
 		move_velocity = current_move_velocity.move_toward(Vector2.ZERO, 1800.0 * delta)
 

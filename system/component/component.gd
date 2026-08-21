@@ -30,13 +30,11 @@ func _initialize(_entity: EntityNode) -> bool:
 
 
 
-
-
 func _reset() -> bool:
 
 	if !initialized: return false
 
-	_deactivate()
+	if active: _deactivate()
 
 	initialized = false
 

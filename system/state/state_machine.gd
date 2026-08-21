@@ -23,6 +23,8 @@ var combat_state: CombatState
 
 var active:= true
 
+var initialized:= false
+
 var current_state: State
 
 var entity: EntityNode
@@ -34,6 +36,8 @@ var entity: EntityNode
 
 
 func _initialize(_entity: EntityNode) -> void:
+
+	initialized = true
 
 	entity = _entity
 
@@ -50,6 +54,20 @@ func _initialize(_entity: EntityNode) -> void:
 	for state in get_children():
 
 		state._initialize(entity, self)
+
+
+
+
+
+
+func _reset() -> void:
+	
+	if active: _deactivate()
+
+	initialized = false
+
+	entity = null
+
 
 
 
@@ -87,6 +105,12 @@ func request_state(state_script: Script) -> void:
 
 func _change_body_state(state: BodyState) -> void:
 
+	if body_state == state and body_state.allow_reenter:
+
+		body_state._enter()
+
+		return
+
 	if body_state:
 
 		_deactivate_state(body_state)
@@ -101,6 +125,12 @@ func _change_body_state(state: BodyState) -> void:
 
 
 func _change_combat_state(state: CombatState) -> void:
+
+	if combat_state == state and combat_state.allow_reenter:
+
+		combat_state._enter()
+
+		return
 
 	if combat_state:
 

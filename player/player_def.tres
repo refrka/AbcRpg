@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CharacterDef" format=3 uid="uid://2cb14jnh3rh3"]
+
+[ext_resource type="Script" uid="uid://bqc2bim6ivi0d" path="res://item/inventory.gd" id="1_2b45f"]
+[ext_resource type="Script" uid="uid://b2swvbk1sv4ar" path="res://entity/character_def.gd" id="1_cujn1"]
+[ext_resource type="Script" uid="uid://cciboqf6a31u6" path="res://item/item_slot.gd" id="2_8fxaj"]
+[ext_resource type="Script" uid="uid://dji7pch2e6jjt" path="res://item/equipment_data.gd" id="3_3jfkr"]
+[ext_resource type="Resource" uid="uid://nc5cef2u54rl" path="res://item/equipment/weapons/melee/short_sword_def.tres" id="3_ajxwt"]
+[ext_resource type="Script" uid="uid://dg3op23rm8phy" path="res://item/equipment_slot.gd" id="3_y8wuh"]
+
+[sub_resource type="Resource" id="Resource_3jfkr"]
+script = ExtResource("3_3jfkr")
+item_def = ExtResource("3_ajxwt")
+count = 1
+metadata/_custom_type_script = "uid://dji7pch2e6jjt"
+
+[sub_resource type="Resource" id="Resource_y8wuh"]
+script = ExtResource("3_y8wuh")
+item_data = SubResource("Resource_3jfkr")
+metadata/_custom_type_script = "uid://dg3op23rm8phy"
+
+[sub_resource type="Resource" id="Resource_2b45f"]
+script = ExtResource("1_2b45f")
+weapon_slot = SubResource("Resource_y8wuh")
+metadata/_custom_type_script = "uid://bqc2bim6ivi0d"
+
+[resource]
+script = ExtResource("1_cujn1")
+entity_id = &"player"
+unique_id = &"player"
+display_name = &"Player"
+initial_inventory = SubResource("Resource_2b45f")

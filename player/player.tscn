@@ -2,8 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://cxifm1i14plat" path="res://entity/character_node.tscn" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://dwugknpkaxs2l" path="res://player/player.gd" id="2_g1dw6"]
-[ext_resource type="Script" uid="uid://c0s3d38vd56k5" path="res://system/physics/sensor.gd" id="2_rkbax"]
+[ext_resource type="Resource" uid="uid://2cb14jnh3rh3" path="res://player/player_def.tres" id="3_qjkh3"]
 [ext_resource type="Texture2D" uid="uid://do7we2soafq6v" path="res://player/player_sprite_sheet.png" id="3_yw30f"]
+[ext_resource type="Texture2D" uid="uid://dtnj4dnlbcn87" path="res://entity/characters/test_dummy_sprite.png" id="4_hg6s5"]
+[ext_resource type="Texture2D" uid="uid://cgywwh4f6fo1a" path="res://item/equipment/weapons/melee/short_sword_attack_0.png" id="5_qjkh3"]
+[ext_resource type="Texture2D" uid="uid://xe337v52kcoa" path="res://item/equipment/weapons/melee/short_sword_atttack_1.png" id="6_g6k8r"]
+[ext_resource type="Script" uid="uid://cd402iei3g0hg" path="res://system/component/input_component.gd" id="7_boad6"]
+[ext_resource type="Script" uid="uid://b6etv852eqfya" path="res://system/state/dodge_state.gd" id="8_rgyib"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t03j"]
+atlas = ExtResource("4_hg6s5")
+region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yw30f"]
 atlas = ExtResource("3_yw30f")
@@ -29,9 +38,17 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("3_yw30f")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_yw30f"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_boad6"]
 resource_local_to_scene = true
 animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_8t03j")
+}],
+"loop": 0,
+"name": &"dodge",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yw30f")
@@ -71,41 +88,225 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g1dw6"]
-radius = 58.034473
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkh3"]
+size = Vector2(17, 7)
+
+[sub_resource type="Animation" id="Animation_yw30f"]
+resource_name = "attack_0"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CombatSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_qjkh3")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CombatSprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CombatSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.015999757, 0.0724874, 0.1369504),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../Center/CombatOrigin/CombatSpriteRemote:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CombatSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0056390874, 0.19810462),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CombatSprite/CombatHitbox/CollisionShape2D:shape")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.0019614024, 0.2030082),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("RectangleShape2D_qjkh3"), null]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%ComponentRoot/CombatComponent")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.10738838),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_enable_buffer"
+}]
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6k8r"]
+size = Vector2(12, 16)
+
+[sub_resource type="Animation" id="Animation_rgyib"]
+resource_name = "attack_0"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CombatSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_g6k8r")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CombatSprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CombatSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.015999757, 0.0724874, 0.1369504),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../Center/CombatOrigin/CombatSpriteRemote:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(18, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CombatSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0056390874, 0.19810462),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CombatSprite/CombatHitbox/CollisionShape2D:shape")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.0019614024, 0.2030082),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("RectangleShape2D_g6k8r"), null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjkh3"]
+_data = {
+&"attack_0": SubResource("Animation_yw30f"),
+&"attack_1": SubResource("Animation_rgyib")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qjkh3"]
+radius = 5.0
+height = 20.0
 
 [node name="Player" unique_id=1691891269 groups=["player"] instance=ExtResource("1_oul6g")]
-y_sort_enabled = true
 script = ExtResource("2_g1dw6")
+entity_def = ExtResource("3_qjkh3")
 
-[node name="VisualRoot" parent="." index="0" unique_id=1685553084]
-y_sort_enabled = true
-
-[node name="BodyVisualRoot" parent="VisualRoot" index="0" unique_id=831679319]
-y_sort_enabled = true
-
-[node name="BodySprite" parent="VisualRoot/BodyVisualRoot" index="0" unique_id=16791793]
+[node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
 position = Vector2(0, -24)
-sprite_frames = SubResource("SpriteFrames_yw30f")
-animation = &"idle_down"
+sprite_frames = SubResource("SpriteFrames_boad6")
+animation = &"dodge"
 
-[node name="CombatVisualRoot" parent="VisualRoot" index="1" unique_id=2053548299]
-y_sort_enabled = true
+[node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
+position = Vector2(16, -16)
 
-[node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" index="0" unique_id=1921775663]
-position = Vector2(0, -16)
+[node name="CollisionShape2D" parent="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox" parent_id_path=PackedInt32Array(1556507908) index="0" unique_id=2057573165]
+position = Vector2(2, 0)
 
-[node name="VisionSensor" type="Area2D" parent="." index="1" unique_id=1267354173]
-position = Vector2(0, -16)
-script = ExtResource("2_rkbax")
-metadata/_custom_type_script = "uid://c0s3d38vd56k5"
+[node name="CombatAnimationPlayer" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="1" unique_id=256507589]
+libraries/short_sword = SubResource("AnimationLibrary_qjkh3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionSensor" index="0" unique_id=794653870]
-shape = SubResource("CircleShape2D_g1dw6")
+[node name="BodyCollision" parent="." index="3" unique_id=4360643]
+position = Vector2(0, -5)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_qjkh3")
 
 [node name="CombatOrigin" parent="Center" parent_id_path=PackedInt32Array(893569566) index="0" unique_id=90271966]
 position = Vector2(0, -16)
 
-[node name="StateMachine" parent="." index="5" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
+[node name="InputComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="3" unique_id=1698368127]
+script = ExtResource("7_boad6")
+metadata/_custom_type_script = "uid://cd402iei3g0hg"
+
+[node name="StateMachine" parent="." index="6" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
 initial_body_state = NodePath("IdleState")
 initial_combat_state = NodePath("CombatIdleState")
+
+[node name="DodgeState" type="Node" parent="StateMachine" index="6" unique_id=1882008641]
+script = ExtResource("8_rgyib")
+metadata/_custom_type_script = "uid://b6etv852eqfya"
+
+[editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
+[editable path="BodyHurtbox"]

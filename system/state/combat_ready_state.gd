@@ -13,7 +13,13 @@ var timer_active:= false
 
 
 
+func _enter() -> void:
 
+	super()
+
+	ready_timer = 2.5
+
+	timer_active = true
 
 
 

@@ -29,7 +29,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.7000722, 0.7000722, 0.7000722, 1)
 
-[node name="DebugMain" type="Control" unique_id=2076110897 node_paths=PackedStringArray("input_overlay", "player_info_panel", "input_overlay_state_label", "hover_state_label", "selected_state_label", "activated_check_box", "idle_state_row", "moving_state_row")]
+[node name="DebugMain" type="Control" unique_id=2076110897 node_paths=PackedStringArray("input_overlay", "player_info_panel", "input_overlay_state_label", "hover_state_label", "selected_state_label", "activated_check_box", "idle_state_row", "moving_state_row", "dodge_state_row", "combat_idle_state_row", "combat_ready_state_row", "combat_attacking_state_row", "combat_dodge_state_row")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,6 +46,11 @@ selected_state_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBo
 activated_check_box = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/ActivatedCheckBox")
 idle_state_row = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/IdleStateRow")
 moving_state_row = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/MovingStateRow")
+dodge_state_row = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/DodgeState")
+combat_idle_state_row = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/IdleStateRow")
+combat_ready_state_row = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/ReadyState")
+combat_attacking_state_row = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/AttackingState")
+combat_dodge_state_row = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/DodgeState")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2100422984]
 layout_mode = 1
@@ -203,7 +208,12 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1511250156]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "State"
+text = "Body State"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=650212258]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Combat State"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer" unique_id=635872355]
 layout_mode = 2
@@ -265,3 +275,128 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
 text = "Moving"
+
+[node name="DodgeState" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=276704632 node_paths=PackedStringArray("arrow_label", "state_label")]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+script = ExtResource("4_0u5tj")
+arrow_label = NodePath("MarginContainer/Label")
+state_label = NodePath("Label2")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/DodgeState" unique_id=394065255]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/DodgeState/MarginContainer" unique_id=1290601265]
+visible = false
+layout_mode = 2
+text = ">"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/DodgeState" unique_id=379913081]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+text = "Dodge"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=568658340]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="IdleStateRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=1971939261 node_paths=PackedStringArray("arrow_label", "state_label")]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+script = ExtResource("4_0u5tj")
+arrow_label = NodePath("MarginContainer/Label")
+state_label = NodePath("Label2")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/IdleStateRow" unique_id=2048843377]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/IdleStateRow/MarginContainer" unique_id=808652075]
+visible = false
+layout_mode = 2
+text = ">"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/IdleStateRow" unique_id=396225035]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+text = "Idle"
+
+[node name="ReadyState" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=68571266 node_paths=PackedStringArray("arrow_label", "state_label")]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+script = ExtResource("4_0u5tj")
+arrow_label = NodePath("MarginContainer/Label")
+state_label = NodePath("Label2")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/ReadyState" unique_id=199056715]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/ReadyState/MarginContainer" unique_id=51484440]
+visible = false
+layout_mode = 2
+text = ">"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/ReadyState" unique_id=299809833]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+text = "Ready"
+
+[node name="AttackingState" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=144218571 node_paths=PackedStringArray("arrow_label", "state_label")]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+script = ExtResource("4_0u5tj")
+arrow_label = NodePath("MarginContainer/Label")
+state_label = NodePath("Label2")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/AttackingState" unique_id=1828157052]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/AttackingState/MarginContainer" unique_id=989687054]
+visible = false
+layout_mode = 2
+text = ">"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/AttackingState" unique_id=345859215]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+text = "Attacking"
+
+[node name="DodgeState" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=102591344 node_paths=PackedStringArray("arrow_label", "state_label")]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+script = ExtResource("4_0u5tj")
+arrow_label = NodePath("MarginContainer/Label")
+state_label = NodePath("Label2")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/DodgeState" unique_id=2031503860]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/DodgeState/MarginContainer" unique_id=795116849]
+visible = false
+layout_mode = 2
+text = ">"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/DodgeState" unique_id=2105934801]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+text = "Dodge"

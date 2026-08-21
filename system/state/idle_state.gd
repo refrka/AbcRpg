@@ -23,6 +23,12 @@ func _disconnect_signals() -> void:
 
 func _enter() -> void:
 
+	if movement_component.is_moving():
+
+		transition_to(MovingState)
+
+		return
+
 	animation_component.set_body_dir(movement_component.face_dir, false)
 
 

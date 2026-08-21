@@ -4,9 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://c74kocy3mpvrq" path="res://ui/main_menu.tscn" id="2_pjpa4"]
 [ext_resource type="PackedScene" uid="uid://bcm53htxb38iq" path="res://player/player.tscn" id="3_bxsma"]
 [ext_resource type="PackedScene" uid="uid://ben0epy3fpbqf" path="res://ui/debug_main.tscn" id="4_lkrbl"]
+[ext_resource type="PackedScene" uid="uid://bb2bccbqcmnau" path="res://entity/characters/test_dummy.tscn" id="4_wd1uf"]
 
-[node name="GameRoot" type="Node" unique_id=13881179]
+[node name="GameRoot" type="Node" unique_id=13881179 node_paths=PackedStringArray("dummy")]
 script = ExtResource("1_xj5yv")
+dummy = NodePath("WorldCanvas/WorldRoot/TestDummy")
 
 [node name="MainMenuCanvas" type="CanvasLayer" parent="." unique_id=528574511]
 
@@ -25,9 +27,13 @@ layout_mode = 1
 [node name="WorldCanvas" type="CanvasLayer" parent="." unique_id=254509576]
 
 [node name="WorldRoot" type="Node2D" parent="WorldCanvas" unique_id=210974550 groups=["world_root"]]
+y_sort_enabled = true
 
 [node name="Player" parent="WorldCanvas/WorldRoot" unique_id=1691891269 instance=ExtResource("3_bxsma")]
 position = Vector2(225, 77)
+
+[node name="TestDummy" parent="WorldCanvas/WorldRoot" unique_id=1560747210 instance=ExtResource("4_wd1uf")]
+position = Vector2(402, 202)
 
 [node name="DebugCanvas" type="CanvasLayer" parent="." unique_id=545993034]
 

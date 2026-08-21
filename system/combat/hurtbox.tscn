@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c2i4mnyfkw22f"]
+
+[ext_resource type="Script" uid="uid://d1mrfotld341m" path="res://system/combat/hurtbox.gd" id="1_grt57"]
+
+[node name="Hurtbox" type="Area2D" unique_id=511458273]
+collision_layer = 512
+collision_mask = 256
+script = ExtResource("1_grt57")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2017378462]
