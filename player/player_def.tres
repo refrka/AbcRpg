@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dji7pch2e6jjt" path="res://item/equipment_data.gd" id="3_3jfkr"]
 [ext_resource type="Resource" uid="uid://ds1pe2xiao16c" path="res://item/equipment/ammunition/wood_arrow_def.tres" id="3_k6jhg"]
 [ext_resource type="Script" uid="uid://dg3op23rm8phy" path="res://item/equipment_slot.gd" id="3_y8wuh"]
-[ext_resource type="Resource" uid="uid://c5fi6aliewfpd" path="res://item/equipment/weapons/ranged/short_bow_def.tres" id="5_ss7w3"]
+[ext_resource type="Resource" uid="uid://nc5cef2u54rl" path="res://item/equipment/weapons/melee/short_sword_def.tres" id="5_k6jhg"]
 
 [sub_resource type="Resource" id="Resource_bqwre"]
 script = ExtResource("3_3jfkr")
@@ -17,7 +17,7 @@ metadata/_custom_type_script = "uid://dji7pch2e6jjt"
 [sub_resource type="Resource" id="Resource_3jfkr"]
 script = ExtResource("3_3jfkr")
 ammunition_data = SubResource("Resource_bqwre")
-item_def = ExtResource("5_ss7w3")
+item_def = ExtResource("5_k6jhg")
 count = 1
 metadata/_custom_type_script = "uid://dji7pch2e6jjt"
 

@@ -23,11 +23,12 @@ enum EffectType {
 @export var display_name: String
 
 
+var entity: EntityNode
 
 
-func _apply_effect(_target_entity: EntityNode) -> void:
+func _apply_effect(_entity: EntityNode) -> void:
 
-	pass
+	entity = _entity
 
 
 

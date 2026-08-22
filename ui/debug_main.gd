@@ -22,6 +22,10 @@ class_name DebugMain extends UIElement
 
 @export var dodge_state_row: DebugPlayerStateRow
 
+@export var flinch_state_row: DebugPlayerStateRow
+
+@export var restrained_state_row: DebugPlayerStateRow
+
 @export var combat_idle_state_row: DebugPlayerStateRow
 
 @export var combat_ready_state_row: DebugPlayerStateRow
@@ -29,6 +33,10 @@ class_name DebugMain extends UIElement
 @export var combat_attacking_state_row: DebugPlayerStateRow
 
 @export var combat_dodge_state_row: DebugPlayerStateRow
+
+@export var combat_flinch_state_row: DebugPlayerStateRow
+
+@export var combat_restrained_state_row: DebugPlayerStateRow
 
 
 
@@ -72,21 +80,23 @@ func _update_player_body_state() -> void:
 
 	dodge_state_row.deselect()
 
+	flinch_state_row.deselect()
+
+	restrained_state_row.deselect()
+
 	var player = Game.get_player()
 
 	match player.state_machine.get_body_state().get_state_script():
 
-		BodyIdleState:
+		BodyIdleState: idle_state_row.select()
 
-			idle_state_row.select()
+		BodyMovingState: moving_state_row.select()
 
-		BodyMovingState:
+		BodyDodgingState: dodge_state_row.select()
 
-			moving_state_row.select()
+		BodyFlinchState: flinch_state_row.select()
 
-		BodyDodgingState:
-
-			dodge_state_row.select()
+		BodyRestrainedState: restrained_state_row.select()
 
 
 
@@ -100,25 +110,25 @@ func _update_player_combat_state() -> void:
 
 	combat_dodge_state_row.deselect()
 
+	combat_flinch_state_row.deselect()
+
+	combat_restrained_state_row.deselect()
+
 	var player = Game.get_player()
 
 	match player.state_machine.get_combat_state().get_state_script():
 
-		CombatIdleState:
+		CombatIdleState: combat_idle_state_row.select()
 
-			combat_idle_state_row.select()
+		CombatReadyState: combat_ready_state_row.select()
 
-		CombatReadyState:
+		CombatAttackingState: combat_attacking_state_row.select()
 
-			combat_ready_state_row.select()
+		CombatDodgeState: combat_dodge_state_row.select()
 
-		CombatAttackingState:
+		CombatFlinchState: combat_flinch_state_row.select()
 
-			combat_attacking_state_row.select()
-
-		CombatDodgeState:
-
-			combat_dodge_state_row.select()
+		CombatRestrainedState: combat_restrained_state_row.select()
 
 
 

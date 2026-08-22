@@ -7,7 +7,7 @@ class_name AttackEntry extends Resource
 
 @export var damage_range:= Vector2(1.0, 1.0)
 
-@export var lunge_factor:= 1.5
+@export var lunge_force:= 0.0
 
 @export var movement_penalty:= 0.0
 

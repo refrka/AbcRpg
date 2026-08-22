@@ -18,6 +18,8 @@
 [ext_resource type="Script" uid="uid://ptxf5ubnyci4" path="res://system/state/combat_ready_state.gd" id="16_g4c7l"]
 [ext_resource type="Script" uid="uid://d4gj3xyu3q7q3" path="res://system/state/combat_charging_state.gd" id="18_7pqkx"]
 [ext_resource type="Script" uid="uid://b8grg86lkjwpx" path="res://system/state/body_flinch_state.gd" id="18_c35mf"]
+[ext_resource type="Script" uid="uid://dpiknhysfw02f" path="res://system/state/body_restrained_state.gd" id="19_65viv"]
+[ext_resource type="Script" uid="uid://cxuhliva2cihw" path="res://system/state/combat_restrained_state.gd" id="20_x7c3f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rgyib"]
 atlas = ExtResource("3_yw30f")
@@ -75,7 +77,7 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("3_yw30f")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_e7oew"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_65viv"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -441,7 +443,7 @@ entity_def = ExtResource("3_qjkh3")
 
 [node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
 position = Vector2(0, -24)
-sprite_frames = SubResource("SpriteFrames_e7oew")
+sprite_frames = SubResource("SpriteFrames_65viv")
 
 [node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
 position = Vector2(16, -16)
@@ -506,6 +508,13 @@ script = ExtResource("16_e7oew")
 [node name="BodyFlinchState" type="Node" parent="StateMachine" index="9" unique_id=212921976]
 script = ExtResource("18_c35mf")
 metadata/_custom_type_script = "uid://b8grg86lkjwpx"
+
+[node name="BodyRestrainedState" type="Node" parent="StateMachine" index="10" unique_id=296737917]
+script = ExtResource("19_65viv")
+metadata/_custom_type_script = "uid://dpiknhysfw02f"
+
+[node name="CombatRestrainedState" type="Node" parent="StateMachine" index="11" unique_id=129444281]
+script = ExtResource("20_x7c3f")
 
 [editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
 [editable path="BodyHurtbox"]

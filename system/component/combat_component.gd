@@ -84,7 +84,7 @@ func _handle_attack_input(pressed: bool) -> void:
 
 			if charge_complete:
 
-				_execute_attack()
+				_complete_charge()
 
 			else:
 
@@ -99,9 +99,7 @@ func _handle_dodge() -> void:
 
 		buffered = false
 
-		var animation_component = entity.get_component(AnimationComponent)
-
-		animation_component.combat_anim_player.stop()
+		_finish_attack()
 
 	entity.state_machine.request_state(CombatDodgeState)
 
@@ -196,21 +194,25 @@ func _start_charge() -> void:
 
 
 
+
+
 func _cancel_charge() -> void:
 
-	entity.state_machine.request_state(CombatReadyState)
-
-
-
-func _interrupt_charge() -> void:
+	charge_complete = false
 
 	var animation_component = entity.get_component(AnimationComponent)
 
 	animation_component.combat_anim_player.play("RESET")
 
+	entity.state_machine.request_state(CombatReadyState)
+
+
+
 
 
 func _complete_charge() -> void:
+
+	charge_complete = false
 
 	_execute_attack()
 

@@ -175,6 +175,8 @@ func _get_impulse_velocity() -> Vector2:
 
 	for modifier in modifiers:
 
+		print(modifier)
+
 		if modifier.modifier_type == VelocityModifier.ModifierType.CUMULATIVE:
 
 			total += modifier.velocity
@@ -249,7 +251,7 @@ func _physics_process(delta: float) -> void:
 
 		move_velocity = velocity_override.velocity
 
-	entity.velocity = move_velocity
+	entity.velocity = move_velocity + _get_impulse_velocity()
 
 	entity.move_and_slide()
 

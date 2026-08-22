@@ -10,8 +10,6 @@
 script = ExtResource("1_ndcbj")
 can_move = true
 movement_penalty = 0.8
-can_hold_charge = true
-can_aim_charge = true
 has_charge = true
 metadata/_custom_type_script = "uid://3is2qc8lprj1"
 

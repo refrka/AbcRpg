@@ -51,9 +51,7 @@ func _exit() -> void:
 
 	animation_component.combat_anim_player.animation_finished.disconnect(_on_combat_animation_finished)
 
-	animation_component.combat_anim_player.play("RESET")
-
-	animation_component.set_body_dir(movement_component.move_dir, movement_component.is_moving())
+	animation_component.set_body_dir(movement_component.face_dir, movement_component.is_moving())
 
 
 
@@ -79,4 +77,10 @@ func _tick(_delta: float) -> void:
 
 	if current_attack_entry.can_aim_charge:
 
-		combat_component.set_attack_dir(Game.get_mouse_direction(combat_component.combat_origin))
+		var dir = Game.get_mouse_direction(combat_component.combat_origin)
+
+		combat_component.set_attack_dir(dir)
+
+		animation_component.set_body_dir(dir, movement_component.is_moving())
+
+		movement_component.set_face_dir(dir)

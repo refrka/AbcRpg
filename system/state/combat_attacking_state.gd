@@ -14,9 +14,13 @@ func _enter() -> void:
 
 	attack_entry = combat_component.get_attack_entry()
 
-	if !attack_entry.can_move:
+	if attack_entry.lunge_force > 0.0:
 
-		movement_component.can_move = false
+		var lunge_vector = combat_component.current_attack_dir * attack_entry.lunge_force
+
+		var modifier = VelocityModifier.new_impulse(lunge_vector, 40.0)
+
+		movement_component.add_modifier(modifier)
 
 	animation_component.combat_anim_player.play(combat_component.current_attack_animation_name)
 

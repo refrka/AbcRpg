@@ -8,6 +8,8 @@ func _enter() -> void:
 
 	super()
 
+	animation_component.combat_anim_player.play("RESET")
+
 	entity.body_sprite.animation_finished.connect(_on_body_sprite_animation_finished)
 
 	entity.body_hurtbox._deactivate()

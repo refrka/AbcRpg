@@ -8,19 +8,17 @@ var movement_component: MovementComponent
 
 
 
-func _apply_effect(_target_entity: EntityNode) -> void:
+func _apply_effect(_entity: EntityNode) -> void:
 
-	super(_target_entity)
+	super(_entity)
 
-	_target_entity.state_machine.request_state(BodyIdleState)	
-
-	movement_component = _target_entity.get_component(MovementComponent)
-
-	movement_component.can_move = false
+	entity.state_machine.request_state(BodyRestrainedState)
 	
 
 
 
 func _stop() -> void:
 
-	movement_component.can_move = true
+	entity.state_machine.request_state(BodyIdleState)
+
+	
