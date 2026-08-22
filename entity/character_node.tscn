@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bw7n4553g41yu" path="res://system/component/combat_component.gd" id="5_0hq70"]
 [ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="5_jg2qq"]
 [ext_resource type="Script" uid="uid://bd8k3lxk6hnr2" path="res://system/component/health_component.gd" id="8_bqwre"]
+[ext_resource type="Script" uid="uid://dyjvaue3wy2t7" path="res://system/component/effects_component.gd" id="9_gqgbn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yw30f"]
 animations = [{
@@ -239,6 +240,10 @@ metadata/_custom_type_script = "uid://bw7n4553g41yu"
 [node name="HealthComponent" type="Node" parent="ComponentRoot" unique_id=1317424629]
 script = ExtResource("8_bqwre")
 metadata/_custom_type_script = "uid://bd8k3lxk6hnr2"
+
+[node name="EffectsComponent" type="Node" parent="ComponentRoot" unique_id=863239558]
+script = ExtResource("9_gqgbn")
+metadata/_custom_type_script = "uid://dyjvaue3wy2t7"
 
 [node name="StateMachine" type="Node" parent="." unique_id=438854359]
 unique_name_in_owner = true

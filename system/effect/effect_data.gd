@@ -12,7 +12,7 @@ var effect: Effect
 
 var time_alive:= 0.0
 
-
+var last_tick:= 0.0
 
 
 
@@ -31,30 +31,46 @@ func _stop() -> void:
 
 	active = false
 
+	effect._stop()
+
 
 
 
 func _expire() -> void:
+
+	_stop()
 
 	effect_expired.emit()
 
 
 
 
-func _tick(delta: float) -> void:
+func _is_expired() -> bool:
 
-	if !active: return
+	match effect.effect_type: 
 
-	time_alive += delta
+		Effect.EffectType.INSTANT:
 
-	if effect is TickEffect and effect.effect_type == Effect.EffectType.TICK:
+			return true
 
-		effect._do_tick(entity)
+		Effect.EffectType.PASSIVE, Effect.EffectType.TICK:
+
+			if time_alive > effect.duration:
+
+				return true
+
+			else:
+
+				return false
+
+	return true
 
 
 
 
 func _on_effect_expired() -> void:
+
+	active = false
 
 	effect_expired.emit()
 
@@ -70,4 +86,29 @@ static func new_effect(_effect: Effect, _entity: EntityNode) -> EffectData:
 
 	effect_data.effect = _effect
 
+	effect_data.entity = _entity
+
 	return effect_data
+
+
+
+	
+
+
+
+
+func _tick(delta: float) -> void:
+
+	if !active: return
+
+	if effect.duration <= 0.0: return
+
+	time_alive += delta
+
+	if effect is TickEffect and effect.effect_type == Effect.EffectType.TICK and time_alive - last_tick >= effect.tick_rate:
+
+		effect._do_tick(entity)
+
+	if _is_expired():
+
+		effect._expire()

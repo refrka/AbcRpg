@@ -142,6 +142,26 @@ func is_in_combat() -> bool:
 
 
 
+func add_effect(effect: Effect) -> EffectData:
+
+	var effects_component = get_component(EffectsComponent)
+
+	var effect_data = effects_component.add_effect(effect)
+
+	return effect_data
+
+
+
+func remove_effect(effect_data: EffectData) -> void:
+
+	var effects_component = get_component(EffectsComponent)
+
+	effects_component.remove_effect(effect_data)
+
+
+
+
+
 
 func _connect_signals() -> void:
 

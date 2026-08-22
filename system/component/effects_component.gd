@@ -10,7 +10,7 @@ var active_effects: Array[EffectData]
 
 
 
-func add_effect(effect: Effect) -> void:
+func add_effect(effect: Effect) -> EffectData:
 
 	var effect_data = EffectData.new_effect(effect, entity)
 
@@ -22,10 +22,14 @@ func add_effect(effect: Effect) -> void:
 
 	effect_data._start()
 
+	return effect_data
+
 
 
 
 func remove_effect(effect_data: EffectData) -> void:
+
+	effect_data._stop()
 
 	if active_effects.has(effect_data):
 

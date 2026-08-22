@@ -49,6 +49,8 @@ func _on_face_dir_updated(dir: Vector2) -> void:
 	animation_component.set_body_dir(dir, true)
 
 
+
+
 func _on_move_dir_updated(dir: Vector2) -> void:
 
 	if dir == Vector2.ZERO:
@@ -56,6 +58,8 @@ func _on_move_dir_updated(dir: Vector2) -> void:
 		animation_component.set_body_dir(movement_component.face_dir, true)
 
 	else:
+
+		movement_component.set_face_dir(dir)
 
 		animation_component.set_body_dir(dir, true)
 

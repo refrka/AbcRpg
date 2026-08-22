@@ -8,6 +8,8 @@ func _enter() -> void:
 
 	super()
 
+	movement_component.set_face_dir(combat_component.current_attack_dir)
+
 	animation_component.set_body_dir(combat_component.current_attack_dir, movement_component.is_moving())
 
 	attack_entry = combat_component.get_attack_entry()
@@ -27,4 +29,6 @@ func _exit() -> void:
 
 	movement_component.can_move = true
 
-	animation_component.set_body_dir(movement_component.move_dir, movement_component.is_moving())
+	if movement_component.is_moving():
+
+		animation_component.set_body_dir(movement_component.move_dir, true)

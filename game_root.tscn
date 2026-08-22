@@ -1,14 +1,23 @@
 [gd_scene format=3 uid="uid://cso55dihtqjbh"]
 
 [ext_resource type="Script" uid="uid://q3oj6jf67v3m" path="res://game_root.gd" id="1_xj5yv"]
+[ext_resource type="Script" uid="uid://ckwu6qdd3vopy" path="res://system/effect/restrained_passive_effect.gd" id="2_krhou"]
 [ext_resource type="PackedScene" uid="uid://c74kocy3mpvrq" path="res://ui/main_menu.tscn" id="2_pjpa4"]
 [ext_resource type="PackedScene" uid="uid://bcm53htxb38iq" path="res://player/player.tscn" id="3_bxsma"]
 [ext_resource type="Texture2D" uid="uid://do7we2soafq6v" path="res://player/player_sprite_sheet.png" id="4_6t5o2"]
 [ext_resource type="PackedScene" uid="uid://ben0epy3fpbqf" path="res://ui/debug_main.tscn" id="4_lkrbl"]
 [ext_resource type="PackedScene" uid="uid://bb2bccbqcmnau" path="res://entity/characters/test_dummy.tscn" id="4_wd1uf"]
 [ext_resource type="PackedScene" uid="uid://bpw2tyr3j5wtx" path="res://entity/characters/thief.tscn" id="5_0o8ui"]
+[ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="6_8tlgu"]
 [ext_resource type="PackedScene" uid="uid://c2pwpnqxicpka" path="res://entity/characters/apprentice.tscn" id="6_ledqy"]
 [ext_resource type="Script" uid="uid://lhkg7gcx3al7" path="res://system/game_camera.gd" id="7_8gxew"]
+[ext_resource type="Script" uid="uid://c7gifdx44tuuf" path="res://ui/health_bar.gd" id="10_aiwur"]
+
+[sub_resource type="Resource" id="Resource_4v00m"]
+script = ExtResource("2_krhou")
+effect_type = 1
+effect_id = &"restrained_effect"
+display_name = "Restrained"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rgyib"]
 atlas = ExtResource("4_6t5o2")
@@ -66,7 +75,7 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("4_6t5o2")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6t5o2"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_soos4"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -188,6 +197,7 @@ _data = {
 script = ExtResource("1_xj5yv")
 dummy = NodePath("WorldCanvas/WorldRoot/TestDummy")
 thief = NodePath("WorldCanvas/WorldRoot/Thief")
+effect = SubResource("Resource_4v00m")
 
 [node name="MainMenuCanvas" type="CanvasLayer" parent="." unique_id=528574511]
 
@@ -210,15 +220,23 @@ follow_viewport_enabled = true
 y_sort_enabled = true
 
 [node name="Player" parent="WorldCanvas/WorldRoot" unique_id=1691891269 instance=ExtResource("3_bxsma")]
-position = Vector2(225, 77)
+position = Vector2(170, 499)
 collision_mask = 1
 
 [node name="BodySprite" parent="WorldCanvas/WorldRoot/Player/VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(1691891269, 831679319) index="0" unique_id=16791793]
-sprite_frames = SubResource("SpriteFrames_6t5o2")
+sprite_frames = SubResource("SpriteFrames_soos4")
+
+[node name="StateMachine" parent="WorldCanvas/WorldRoot/Player" index="6" unique_id=438854359]
+script = ExtResource("6_8tlgu")
+metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
 
 [node name="TestDummy" parent="WorldCanvas/WorldRoot" unique_id=1560747210 instance=ExtResource("4_wd1uf")]
 position = Vector2(402, 202)
 collision_mask = 1
+
+[node name="StateMachine" parent="WorldCanvas/WorldRoot/TestDummy" index="6" unique_id=438854359]
+script = ExtResource("6_8tlgu")
+metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
 
 [node name="Thief" parent="WorldCanvas/WorldRoot" unique_id=418514344 instance=ExtResource("5_0o8ui")]
 position = Vector2(163, 249)
@@ -255,6 +273,28 @@ anim_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameCamera" unique_id=2103769497]
 libraries/ = SubResource("AnimationLibrary_ledqy")
+
+[node name="HUDCanvas" type="CanvasLayer" parent="." unique_id=1234062273]
+
+[node name="HUDRoot" type="Control" parent="HUDCanvas" unique_id=621311312]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HealthBar" type="ProgressBar" parent="HUDCanvas/HUDRoot" unique_id=1397041683 node_paths=PackedStringArray("health_component")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 29.0
+offset_right = 232.0
+offset_bottom = 56.0
+script = ExtResource("10_aiwur")
+health_component = NodePath("../../../WorldCanvas/WorldRoot/Player/ComponentRoot/HealthComponent")
+metadata/_custom_type_script = "uid://c7gifdx44tuuf"
 
 [editable path="WorldCanvas/WorldRoot/Player"]
 [editable path="WorldCanvas/WorldRoot/Player/VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]

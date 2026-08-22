@@ -47,13 +47,13 @@ func _fire() -> void:
 
 	projectile_node.set_projectile_owner(entity)
 
-	entity.add_sibling(projectile_node)
+	entity.add_sibling.call_deferred(projectile_node)
 
 	projectile_node._initialize()
 
 	projectile_node._activate()
 
-	firing_timer = 0.2
+	firing_timer = turret_config.fire_rate
 
 
 
@@ -83,9 +83,13 @@ func _on_entity_entered_vision_sensor(entity_node: EntityNode) -> void:
 
 	current_target = entity_node
 
-	firing_timer = 0.2
+	if firing_timer_active: return
+
+	firing_timer = turret_config.fire_rate
 
 	firing_timer_active = true
+
+	_fire()
 
 
 
@@ -95,9 +99,11 @@ func _on_entity_exited_vision_sensor(entity_node: EntityNode) -> void:
 
 	if current_target == entity_node:
 
-		current_target = null
+		current_target = entity.vision_sensor.get_nearest_entity()
 
-		firing_timer_active = false
+		if !current_target:
+
+			firing_timer_active = false
 
 
 

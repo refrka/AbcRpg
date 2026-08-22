@@ -30,6 +30,14 @@ func _apply_effect(_target_entity: EntityNode) -> void:
 	pass
 
 
-func _expire_effect() -> void:
+
+func _stop() -> void:
+
+	pass
+
+
+func _expire() -> void:
+
+	_stop()
 
 	expired.emit()

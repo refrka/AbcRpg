@@ -6,4 +6,5 @@
 script = ExtResource("1_e7ny4")
 entity_id = &"thief"
 display_name = &"Thief"
+base_max_health = 100.0
 metadata/_custom_type_script = "uid://b2swvbk1sv4ar"

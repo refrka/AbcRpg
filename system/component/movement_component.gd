@@ -154,6 +154,10 @@ func get_move_speed() -> float:
 
 func is_moving() -> bool:
 
+	if !can_move:
+
+		return false
+
 	return move_dir != Vector2.ZERO
 
 
