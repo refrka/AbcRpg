@@ -52,7 +52,9 @@ func set_body_dir(dir: Vector2, moving: bool) -> void:
 
 	animation += y_dir
 
-	entity.body_sprite.play(animation)
+	if entity.body_sprite.sprite_frames.has_animation(animation):
+
+		entity.body_sprite.play(animation)
 
 
 
@@ -72,4 +74,6 @@ func set_dodge_dir(dir: Vector2) -> void:
 
 	animation += y_dir
 
-	entity.body_sprite.play(animation)
+	if entity.body_sprite.sprite_frames.has_animation(animation):
+
+		entity.body_sprite.play(animation)

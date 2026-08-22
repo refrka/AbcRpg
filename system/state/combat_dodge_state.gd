@@ -39,4 +39,6 @@ func _on_body_sprite_animation_finished() -> void:
 
 	else:
 
+		movement_component.halt()
+
 		transition_to(CombatReadyState)

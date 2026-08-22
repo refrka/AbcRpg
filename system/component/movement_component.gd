@@ -112,6 +112,7 @@ func set_move_dir(dir: Vector2) -> void:
 
 
 
+
 func set_face_dir(dir: Vector2) -> void:
 
 	if dir == face_dir or dir == Vector2.ZERO: 

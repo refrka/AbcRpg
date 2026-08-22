@@ -3,7 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://cxifm1i14plat" path="res://entity/character_node.tscn" id="1_15ir2"]
 [ext_resource type="Resource" uid="uid://dciimcclu3grk" path="res://entity/characters/thief_def.tres" id="2_4f4y2"]
 [ext_resource type="Texture2D" uid="uid://durq7t7anqc6l" path="res://entity/characters/thief_sprite.png" id="2_m7ike"]
+[ext_resource type="Texture2D" uid="uid://qqvoh462oeko" path="res://entity/characters/bandit_sprite.png" id="3_4f4y2"]
 [ext_resource type="Script" uid="uid://crcpqla1i8mmf" path="res://system/component/navigation_component.gd" id="3_7pkal"]
+[ext_resource type="Script" uid="uid://rvs7yxftyi2c" path="res://system/component/behavior_component.gd" id="5_wsw3u"]
+[ext_resource type="Script" uid="uid://ck3c187my4mrw" path="res://system/behavior/wander_behavior.gd" id="6_g4cto"]
+[ext_resource type="Script" uid="uid://b2b8oiplu1kce" path="res://system/behavior/behavior.gd" id="7_g4cto"]
 [ext_resource type="Script" uid="uid://djb5h2fsvc4au" path="res://system/state/combat_attacking_state.gd" id="7_wsw3u"]
 [ext_resource type="Script" uid="uid://bfqel43kpuxfk" path="res://system/state/combat_idle_state.gd" id="8_g4cto"]
 [ext_resource type="Script" uid="uid://c1ijajxdu1n1k" path="res://system/state/combat_dodge_state.gd" id="9_kvklg"]
@@ -13,15 +17,34 @@
 [ext_resource type="Script" uid="uid://b14ycfqds2c2w" path="res://system/state/body_idle_state.gd" id="11_et480"]
 [ext_resource type="Script" uid="uid://bqjhwio0awfg1" path="res://system/state/body_moving_state.gd" id="12_wsw3u"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7pkal"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvklg"]
 atlas = ExtResource("2_m7ike")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4v00m"]
+atlas = ExtResource("2_m7ike")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_et480"]
+atlas = ExtResource("3_4f4y2")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bi0im"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7pkal")
+"texture": SubResource("AtlasTexture_kvklg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4v00m")
+}],
+"loop": 0,
+"name": &"dodge_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et480")
 }],
 "loop": 1,
 "name": &"idle_down",
@@ -29,7 +52,11 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e62np"]
-size = Vector2(18, 26)
+size = Vector2(18, 28)
+
+[sub_resource type="Resource" id="Resource_aajxx"]
+script = ExtResource("6_g4cto")
+metadata/_custom_type_script = "uid://ck3c187my4mrw"
 
 [node name="Thief" unique_id=1691891269 instance=ExtResource("1_15ir2")]
 entity_def = ExtResource("2_4f4y2")
@@ -37,14 +64,29 @@ entity_def = ExtResource("2_4f4y2")
 [node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_bi0im")
+animation = &"dodge_down"
+
+[node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
+position = Vector2(16, -14)
 
 [node name="CollisionShape2D" parent="BodyHurtbox" parent_id_path=PackedInt32Array(511458273) index="0" unique_id=2017378462]
-position = Vector2(0, -13)
+position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_e62np")
+
+[node name="VisionSensor" parent="." index="2" unique_id=1534038726]
+position = Vector2(0, -14)
+
+[node name="CombatOrigin" parent="Center" parent_id_path=PackedInt32Array(893569566) index="0" unique_id=90271966]
+position = Vector2(0, -14)
 
 [node name="NavigationComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="4" unique_id=653609944 node_paths=PackedStringArray("nav_agent")]
 script = ExtResource("3_7pkal")
 nav_agent = NodePath("../../NavigationAgent2D")
+
+[node name="BehaviorComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="5" unique_id=855815701]
+script = ExtResource("5_wsw3u")
+behaviors = Array[ExtResource("7_g4cto")]([SubResource("Resource_aajxx")])
+metadata/_custom_type_script = "uid://rvs7yxftyi2c"
 
 [node name="StateMachine" parent="." index="6" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
 initial_body_state = NodePath("BodyIdleState")

@@ -145,6 +145,8 @@ func _change_combat_state(state: CombatState) -> void:
 
 func _activate_state(state: State) -> void:
 
+	if state.active: return
+
 	state._activate()
 
 	state._enter()
@@ -153,6 +155,8 @@ func _activate_state(state: State) -> void:
 
 
 func _deactivate_state(state: State) -> void:
+
+	if !state.active: return
 
 	state._deactivate()
 
