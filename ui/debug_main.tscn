@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ylm7q7btvjue" path="res://ui/debug_main.gd" id="1_t1sn1"]
 [ext_resource type="Script" uid="uid://nffr6agdpias" path="res://ui/selectable_ui_element.gd" id="2_0u5tj"]
 [ext_resource type="Script" uid="uid://bfwugn1lcunwn" path="res://ui/ui_element.gd" id="3_h1aee"]
+[ext_resource type="Script" uid="uid://c7gifdx44tuuf" path="res://ui/health_bar.gd" id="3_y7p3h"]
 [ext_resource type="Script" uid="uid://d2fg3v6sacuoe" path="res://ui/debug_player_state_row.gd" id="4_0u5tj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0u5tj"]
@@ -174,9 +175,16 @@ text = "false"
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=94182475]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=716416317]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=259377874]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=716416317]
 layout_mode = 2
 text = "Player Info"
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=48952699]
+layout_mode = 2
+script = ExtResource("3_y7p3h")
 
 [node name="PlayerInfoPanel" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1395177558]
 custom_minimum_size = Vector2(400, 0)

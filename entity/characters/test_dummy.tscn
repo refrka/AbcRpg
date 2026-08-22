@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://dg3op23rm8phy" path="res://item/equipment_slot.gd" id="9_sfdkq"]
 [ext_resource type="Script" uid="uid://3is2qc8lprj1" path="res://system/combat/attack_entry.gd" id="10_20wr5"]
 [ext_resource type="Script" uid="uid://b14ycfqds2c2w" path="res://system/state/body_idle_state.gd" id="15_ugsij"]
+[ext_resource type="Script" uid="uid://b4hnnosk686g1" path="res://system/state/combat_flinch_state.gd" id="16_ajbx4"]
+[ext_resource type="Script" uid="uid://b8grg86lkjwpx" path="res://system/state/body_flinch_state.gd" id="17_cjd5d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_taeh0"]
 atlas = ExtResource("3_i135f")
@@ -38,7 +40,7 @@ size = Vector2(12, 36)
 size = Vector2(24, 4)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ugsij"]
-radius = 500.16898
+radius = 317.1514
 
 [sub_resource type="Resource" id="Resource_t1wp5"]
 script = ExtResource("7_ajbx4")
@@ -116,6 +118,14 @@ metadata/_custom_type_script = "uid://d4gj3xyu3q7q3"
 
 [node name="BodyIdleState" type="Node" parent="StateMachine" index="4" unique_id=1136773816]
 script = ExtResource("15_ugsij")
+
+[node name="CombatFlinchState" type="Node" parent="StateMachine" index="5" unique_id=54135745]
+script = ExtResource("16_ajbx4")
+metadata/_custom_type_script = "uid://b4hnnosk686g1"
+
+[node name="BodyFlinchState" type="Node" parent="StateMachine" index="6" unique_id=1383329139]
+script = ExtResource("17_cjd5d")
+metadata/_custom_type_script = "uid://b8grg86lkjwpx"
 
 [editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
 [editable path="BodyHurtbox"]

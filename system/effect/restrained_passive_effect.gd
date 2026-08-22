@@ -1,0 +1,1 @@
+class_name RestrainedPassiveEffect extends PassiveEffect

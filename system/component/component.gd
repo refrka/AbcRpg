@@ -2,6 +2,9 @@ class_name Component extends Node
 
 
 
+signal activated
+
+signal deactivated
 
 
 
@@ -89,6 +92,8 @@ func _activate() -> bool:
 
 	active = true
 
+	activated.emit()
+
 	return true
 
 
@@ -101,5 +106,7 @@ func _deactivate() -> bool:
 	_disconnect_signals()
 
 	active = false
+
+	deactivated.emit()
 
 	return true

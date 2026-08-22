@@ -1,0 +1,1 @@
+class_name PickpocketBehavior extends Behavior

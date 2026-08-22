@@ -66,7 +66,7 @@ func _handle_attack_input(pressed: bool) -> void:
 
 	if pressed:
 
-		if !is_attacking():
+		if !is_attacking() and !is_flinching():
 
 			_try_attack()
 
@@ -307,6 +307,12 @@ func _load_weapon_config(weapon_def: WeaponDef) -> void:
 
 
 
+func receive_damage_package(damage_package: DamagePackage) -> void:
+
+	if damage_package.get_total_damage() > 0.0:
+
+		entity.state_machine.request_state(CombatFlinchState)
+
 
 
 
@@ -373,6 +379,18 @@ func is_attacking() -> bool:
 func is_charging() -> bool:
 
 	return entity.state_machine.get_combat_state() is CombatChargingState
+
+
+
+func is_flinching() -> bool:
+
+	var animation_component = entity.get_component(AnimationComponent)
+
+	if animation_component.combat_anim_player.current_animation == "flinch":
+
+		return true
+
+	return entity.state_machine.get_combat_state() is CombatFlinchState
 
 
 

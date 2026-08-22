@@ -18,6 +18,19 @@ func add_damage_entry(entry: DamageEntry) -> void:
 
 
 
+func get_total_damage() -> float:
+
+	var sum = 0.0
+
+	for damage_entry in damage_entries:
+
+		sum += damage_entry.amount
+
+	return sum
+
+
+
+
 
 static func from_attack_entry(attack_entry: AttackEntry) -> DamagePackage:
 

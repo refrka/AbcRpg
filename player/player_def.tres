@@ -37,3 +37,4 @@ entity_id = &"player"
 unique_id = &"player"
 display_name = &"Player"
 initial_inventory = SubResource("Resource_2b45f")
+base_max_health = 10000.0

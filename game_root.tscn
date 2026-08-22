@@ -3,11 +3,144 @@
 [ext_resource type="Script" uid="uid://q3oj6jf67v3m" path="res://game_root.gd" id="1_xj5yv"]
 [ext_resource type="PackedScene" uid="uid://c74kocy3mpvrq" path="res://ui/main_menu.tscn" id="2_pjpa4"]
 [ext_resource type="PackedScene" uid="uid://bcm53htxb38iq" path="res://player/player.tscn" id="3_bxsma"]
+[ext_resource type="Texture2D" uid="uid://do7we2soafq6v" path="res://player/player_sprite_sheet.png" id="4_6t5o2"]
 [ext_resource type="PackedScene" uid="uid://ben0epy3fpbqf" path="res://ui/debug_main.tscn" id="4_lkrbl"]
 [ext_resource type="PackedScene" uid="uid://bb2bccbqcmnau" path="res://entity/characters/test_dummy.tscn" id="4_wd1uf"]
 [ext_resource type="PackedScene" uid="uid://bpw2tyr3j5wtx" path="res://entity/characters/thief.tscn" id="5_0o8ui"]
 [ext_resource type="PackedScene" uid="uid://c2pwpnqxicpka" path="res://entity/characters/apprentice.tscn" id="6_ledqy"]
 [ext_resource type="Script" uid="uid://lhkg7gcx3al7" path="res://system/game_camera.gd" id="7_8gxew"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgyib"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hg6s5"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t03j"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ieo8"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yllr7"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb6p2"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wodsf"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32hag"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(144, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yw30f"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjkh3"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqije"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0c2jh"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtti7"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2h3v"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6t5o2"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_rgyib")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_hg6s5")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_8t03j")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_2ieo8")
+}],
+"loop": 0,
+"name": &"dodge_down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yllr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kb6p2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wodsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32hag")
+}],
+"loop": 0,
+"name": &"dodge_up",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yw30f")
+}],
+"loop": 1,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjkh3")
+}],
+"loop": 1,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_pqije")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_0c2jh")
+}],
+"loop": 1,
+"name": &"moving_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_vtti7")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_e2h3v")
+}],
+"loop": 1,
+"name": &"moving_up",
+"speed": 5.0
+}]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_8gxew"]
 vertices = PackedVector2Array(1067.1875, 593.8125, 65.28906, 575.1797, 79.71875, 80.84375, 1077.7891, 64.171875)
@@ -80,6 +213,9 @@ y_sort_enabled = true
 position = Vector2(225, 77)
 collision_mask = 1
 
+[node name="BodySprite" parent="WorldCanvas/WorldRoot/Player/VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(1691891269, 831679319) index="0" unique_id=16791793]
+sprite_frames = SubResource("SpriteFrames_6t5o2")
+
 [node name="TestDummy" parent="WorldCanvas/WorldRoot" unique_id=1560747210 instance=ExtResource("4_wd1uf")]
 position = Vector2(402, 202)
 collision_mask = 1
@@ -108,6 +244,10 @@ mouse_filter = 2
 [node name="DebugMain" parent="DebugCanvas/DebugRoot" unique_id=2076110897 instance=ExtResource("4_lkrbl")]
 layout_mode = 1
 
+[node name="PlayerHealthBar" parent="DebugCanvas/DebugRoot/DebugMain/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(2076110897, 259377874) index="1" unique_id=48952699 node_paths=PackedStringArray("health_component")]
+size_flags_horizontal = 3
+health_component = NodePath("../../../../../../../../../WorldCanvas/WorldRoot/Thief/ComponentRoot/HealthComponent")
+
 [node name="GameCamera" type="Camera2D" parent="." unique_id=493776325 node_paths=PackedStringArray("anim_player") groups=["game_camera"]]
 anchor_mode = 0
 script = ExtResource("7_8gxew")
@@ -115,3 +255,14 @@ anim_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameCamera" unique_id=2103769497]
 libraries/ = SubResource("AnimationLibrary_ledqy")
+
+[editable path="WorldCanvas/WorldRoot/Player"]
+[editable path="WorldCanvas/WorldRoot/Player/VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
+[editable path="WorldCanvas/WorldRoot/Player/BodyHurtbox"]
+[editable path="WorldCanvas/WorldRoot/TestDummy"]
+[editable path="WorldCanvas/WorldRoot/TestDummy/VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
+[editable path="WorldCanvas/WorldRoot/TestDummy/BodyHurtbox"]
+[editable path="WorldCanvas/WorldRoot/Thief"]
+[editable path="WorldCanvas/WorldRoot/Thief/VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
+[editable path="WorldCanvas/WorldRoot/Thief/BodyHurtbox"]
+[editable path="DebugCanvas/DebugRoot/DebugMain"]

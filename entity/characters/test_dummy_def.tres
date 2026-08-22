@@ -36,4 +36,5 @@ entity_id = &"test_dummy"
 unique_id = &"test_dummy"
 display_name = &"Test dummy"
 initial_inventory = SubResource("Resource_vsdcc")
+base_max_health = 10000.0
 metadata/_custom_type_script = "uid://b2swvbk1sv4ar"

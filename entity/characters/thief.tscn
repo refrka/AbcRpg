@@ -16,6 +16,8 @@
 [ext_resource type="Script" uid="uid://d4gj3xyu3q7q3" path="res://system/state/combat_charging_state.gd" id="11_4v00m"]
 [ext_resource type="Script" uid="uid://b14ycfqds2c2w" path="res://system/state/body_idle_state.gd" id="11_et480"]
 [ext_resource type="Script" uid="uid://bqjhwio0awfg1" path="res://system/state/body_moving_state.gd" id="12_wsw3u"]
+[ext_resource type="Script" uid="uid://b4hnnosk686g1" path="res://system/state/combat_flinch_state.gd" id="17_4v00m"]
+[ext_resource type="Script" uid="uid://b8grg86lkjwpx" path="res://system/state/body_flinch_state.gd" id="18_7uro1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvklg"]
 atlas = ExtResource("2_m7ike")
@@ -120,6 +122,14 @@ script = ExtResource("11_et480")
 
 [node name="BodyMovingState" type="Node" parent="StateMachine" index="7" unique_id=658161369]
 script = ExtResource("12_wsw3u")
+
+[node name="CombatFlinchState" type="Node" parent="StateMachine" index="8" unique_id=1332921001]
+script = ExtResource("17_4v00m")
+metadata/_custom_type_script = "uid://b4hnnosk686g1"
+
+[node name="BodyFlinchState" type="Node" parent="StateMachine" index="9" unique_id=430627707]
+script = ExtResource("18_7uro1")
+metadata/_custom_type_script = "uid://b8grg86lkjwpx"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="7" unique_id=1045512078]
 

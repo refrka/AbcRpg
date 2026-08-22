@@ -3,6 +3,10 @@ class_name HealthComponent extends Component
 
 signal health_depleted
 
+signal health_restored(amount: float, current_health: float)
+
+signal health_reduced(amount: float, current_health: float)
+
 
 
 
@@ -36,10 +40,6 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 	for damage_entry in damage_package.damage_entries:
 
-		var animation_component = entity.get_component(AnimationComponent)
-
-		animation_component.combat_anim_player.play("flinch")
-
 		if entity is Player:
 
 			Game.camera.anim_player.play("shake")
@@ -49,11 +49,26 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 
 
+
+func restore_health(amount: float) -> void:
+
+	if is_alive():
+
+		current_health += amount
+
+		health_restored.emit(amount, current_health)
+
+
+
+
+
 func reduce_health(amount: float) -> void:
 
 	if is_alive():
 
 		current_health -= amount
+
+		health_reduced.emit(amount, current_health)
 
 		if !is_alive():
 
