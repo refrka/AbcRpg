@@ -61,13 +61,13 @@ func get_player() -> Player:
 
 
 
-func get_mouse_direction(origin_entity: EntityNode = null) -> Vector2:
+func get_mouse_direction(origin_node: Node2D = null) -> Vector2:
 
-	if !origin_entity:
+	if !origin_node:
 
-		origin_entity = get_player()
+		origin_node = get_player()
 
-	return origin_entity.global_position.direction_to(Scenes.world_root.get_global_mouse_position())
+	return origin_node.global_position.direction_to(Scenes.world_root.get_global_mouse_position())
 
 
 

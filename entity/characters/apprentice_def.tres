@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CharacterDef" format=3 uid="uid://ccvakdeffygmh"]
+
+[ext_resource type="Script" uid="uid://bqc2bim6ivi0d" path="res://item/inventory.gd" id="1_5hflk"]
+[ext_resource type="Script" uid="uid://b2swvbk1sv4ar" path="res://entity/character_def.gd" id="1_q66jf"]
+[ext_resource type="Script" uid="uid://cciboqf6a31u6" path="res://item/item_slot.gd" id="2_hcuq8"]
+
+[sub_resource type="Resource" id="Resource_q66jf"]
+script = ExtResource("1_5hflk")
+metadata/_custom_type_script = "uid://bqc2bim6ivi0d"
+
+[resource]
+script = ExtResource("1_q66jf")
+entity_id = &"apprentice"
+display_name = &"Apprentice"
+initial_inventory = SubResource("Resource_q66jf")
+metadata/_custom_type_script = "uid://b2swvbk1sv4ar"

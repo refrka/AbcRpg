@@ -1,4 +1,4 @@
-class_name IdleState extends BodyState
+class_name BodyIdleState extends BodyState
 
 
 

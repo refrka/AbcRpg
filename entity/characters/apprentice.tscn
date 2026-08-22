@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://c2pwpnqxicpka"]
+
+[ext_resource type="PackedScene" uid="uid://cxifm1i14plat" path="res://entity/character_node.tscn" id="1_rr5fi"]
+[ext_resource type="Resource" uid="uid://ccvakdeffygmh" path="res://entity/characters/apprentice_def.tres" id="2_emmu0"]
+[ext_resource type="Texture2D" uid="uid://dmndy46gmwk8v" path="res://entity/characters/apprentice_sprite.png" id="2_f56dd"]
+[ext_resource type="Script" uid="uid://b14ycfqds2c2w" path="res://system/state/body_idle_state.gd" id="4_sk3ox"]
+[ext_resource type="Script" uid="uid://bqjhwio0awfg1" path="res://system/state/body_moving_state.gd" id="5_p0t4d"]
+[ext_resource type="Script" uid="uid://djb5h2fsvc4au" path="res://system/state/combat_attacking_state.gd" id="6_weusy"]
+[ext_resource type="Script" uid="uid://d4gj3xyu3q7q3" path="res://system/state/combat_charging_state.gd" id="7_dk1gf"]
+[ext_resource type="Script" uid="uid://bfqel43kpuxfk" path="res://system/state/combat_idle_state.gd" id="8_s1c25"]
+[ext_resource type="Script" uid="uid://ptxf5ubnyci4" path="res://system/state/combat_ready_state.gd" id="9_ijwyg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emmu0"]
+atlas = ExtResource("2_f56dd")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4e0hr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emmu0")
+}],
+"loop": 1,
+"name": &"idle_down",
+"speed": 5.0
+}]
+
+[node name="Apprentice" unique_id=1691891269 instance=ExtResource("1_rr5fi")]
+entity_def = ExtResource("2_emmu0")
+
+[node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_4e0hr")
+
+[node name="StateMachine" parent="." index="6" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
+initial_body_state = NodePath("BodyIdleState")
+initial_combat_state = NodePath("CombatIdleState")
+
+[node name="BodyIdleState" type="Node" parent="StateMachine" index="0" unique_id=411559689]
+script = ExtResource("4_sk3ox")
+
+[node name="BodyMovingState" type="Node" parent="StateMachine" index="1" unique_id=1145241736]
+script = ExtResource("5_p0t4d")
+
+[node name="CombatAttackingState" type="Node" parent="StateMachine" index="2" unique_id=1508773351]
+script = ExtResource("6_weusy")
+metadata/_custom_type_script = "uid://djb5h2fsvc4au"
+
+[node name="CombatChargingState" type="Node" parent="StateMachine" index="3" unique_id=58149562]
+script = ExtResource("7_dk1gf")
+metadata/_custom_type_script = "uid://d4gj3xyu3q7q3"
+
+[node name="CombatIdleState" type="Node" parent="StateMachine" index="4" unique_id=626533772]
+script = ExtResource("8_s1c25")
+metadata/_custom_type_script = "uid://bfqel43kpuxfk"
+
+[node name="CombatReadyState" type="Node" parent="StateMachine" index="5" unique_id=1103396305]
+script = ExtResource("9_ijwyg")
+metadata/_custom_type_script = "uid://ptxf5ubnyci4"
+
+[editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
+[editable path="BodyHurtbox"]

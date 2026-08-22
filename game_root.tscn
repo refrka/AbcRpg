@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ben0epy3fpbqf" path="res://ui/debug_main.tscn" id="4_lkrbl"]
 [ext_resource type="PackedScene" uid="uid://bb2bccbqcmnau" path="res://entity/characters/test_dummy.tscn" id="4_wd1uf"]
 [ext_resource type="PackedScene" uid="uid://bpw2tyr3j5wtx" path="res://entity/characters/thief.tscn" id="5_0o8ui"]
+[ext_resource type="PackedScene" uid="uid://c2pwpnqxicpka" path="res://entity/characters/apprentice.tscn" id="6_ledqy"]
 [ext_resource type="Script" uid="uid://lhkg7gcx3al7" path="res://system/game_camera.gd" id="7_8gxew"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_8gxew"]
@@ -88,6 +89,9 @@ position = Vector2(163, 249)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="WorldCanvas/WorldRoot" unique_id=37434313]
 navigation_polygon = SubResource("NavigationPolygon_8gxew")
+
+[node name="Apprentice" parent="WorldCanvas/WorldRoot" unique_id=70237159 instance=ExtResource("6_ledqy")]
+position = Vector2(331, 341)
 
 [node name="DebugCanvas" type="CanvasLayer" parent="." unique_id=545993034]
 

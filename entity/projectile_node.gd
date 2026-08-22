@@ -12,12 +12,15 @@ var damage_package: DamagePackage
 
 
 
+var check_timer:= 0.0
 
 
 
 func _ready() -> void:
 
 	on_screen_notifier.screen_exited.connect(_on_screen_exited)
+
+	check_timer = 2.0
 
 
 
@@ -90,3 +93,26 @@ func _on_hit_detected(hit_entity: EntityNode) -> void:
 	hit_entity.receive_damage_package(damage_package)
 
 	queue_free.call_deferred()
+
+
+
+
+func _physics_process(delta: float) -> void:
+
+	if !active:
+
+		return
+
+	if check_timer > 0.0:
+
+		check_timer -= delta
+
+		if check_timer <= 0.0:
+
+			if !on_screen_notifier.is_on_screen():
+
+				queue_free()
+
+			else:
+
+				check_timer = 2.0

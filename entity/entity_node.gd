@@ -123,7 +123,7 @@ func get_component(component_script: Script) -> Component:
 
 func is_moving() -> bool:
 
-	return state_machine.current_state is MovingState
+	return state_machine.current_state is BodyMovingState
 
 
 

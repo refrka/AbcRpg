@@ -1,4 +1,4 @@
-class_name DodgingState extends BodyState
+class_name BodyDodgingState extends BodyState
 
 
 

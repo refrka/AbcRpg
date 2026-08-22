@@ -7,7 +7,7 @@ class_name AnimationComponent extends Component
 
 var blendspace_paths:= {
 
-	"moving": "parameters/MovingState/MovingBlend/blend_position"
+	"moving": "parameters/BodyMovingState/MovingBlend/blend_position"
 
 }
 

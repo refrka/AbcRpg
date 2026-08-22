@@ -1,4 +1,4 @@
-class_name MovingState extends BodyState
+class_name BodyMovingState extends BodyState
 
 
 

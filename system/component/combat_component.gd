@@ -101,7 +101,7 @@ func _handle_dodge() -> void:
 
 		var animation_component = entity.get_component(AnimationComponent)
 
-		animation_component.combat_anim_player.play("RESET")
+		animation_component.combat_anim_player.stop()
 
 	entity.state_machine.request_state(CombatDodgeState)
 
@@ -116,7 +116,7 @@ func _try_attack() -> void:
 
 	if !attack_stored:
 
-		if entity.state_machine.get_body_state() is DodgeState:
+		if entity.state_machine.get_body_state() is BodyDodgingState:
 
 			attack_stored = true
 
@@ -316,7 +316,7 @@ func get_attack_dir() -> Vector2:
 
 	if entity is Player:
 
-		return Game.get_mouse_direction()
+		return Game.get_mouse_direction(combat_origin)
 
 	return Vector2.ZERO
 

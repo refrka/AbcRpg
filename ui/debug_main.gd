@@ -76,15 +76,15 @@ func _update_player_body_state() -> void:
 
 	match player.state_machine.get_body_state().get_state_script():
 
-		IdleState:
+		BodyIdleState:
 
 			idle_state_row.select()
 
-		MovingState:
+		BodyMovingState:
 
 			moving_state_row.select()
 
-		DodgeState:
+		BodyDodgingState:
 
 			dodge_state_row.select()
 

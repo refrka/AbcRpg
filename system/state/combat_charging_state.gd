@@ -79,4 +79,4 @@ func _tick(_delta: float) -> void:
 
 	if current_attack_entry.can_aim_charge:
 
-		combat_component.set_attack_dir(Game.get_mouse_direction())
+		combat_component.set_attack_dir(Game.get_mouse_direction(combat_component.combat_origin))

@@ -108,17 +108,15 @@ func set_move_dir(dir: Vector2) -> void:
 
 	move_dir = dir
 
-	if face_dir != move_dir:
-
-		set_face_dir(move_dir)
-
 	move_dir_updated.emit(dir)
 
 
 
 func set_face_dir(dir: Vector2) -> void:
 
-	if dir == face_dir or dir == Vector2.ZERO: return
+	if dir == face_dir or dir == Vector2.ZERO: 
+		
+		return
 
 	face_dir = dir
 

@@ -12,7 +12,7 @@ func _enter() -> void:
 
 	entity.body_hurtbox._deactivate()
 
-	transition_to(DodgeState)
+	transition_to(BodyDodgingState)
 
 
 
