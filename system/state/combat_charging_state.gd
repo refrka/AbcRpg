@@ -15,7 +15,7 @@ func _enter() -> void:
 
 	super()
 
-	combat_component.set_attack_dir(Game.get_mouse_direction())
+	combat_component.set_attack_dir(combat_component.get_attack_dir())
 
 	animation_component.set_body_dir(combat_component.current_attack_dir, movement_component.is_moving())
 

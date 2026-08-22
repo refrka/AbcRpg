@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://bpw2tyr3j5wtx"]
+
+[ext_resource type="PackedScene" uid="uid://cxifm1i14plat" path="res://entity/character_node.tscn" id="1_15ir2"]
+[ext_resource type="Resource" uid="uid://dciimcclu3grk" path="res://entity/characters/thief_def.tres" id="2_4f4y2"]
+[ext_resource type="Texture2D" uid="uid://durq7t7anqc6l" path="res://entity/characters/thief_sprite.png" id="2_m7ike"]
+[ext_resource type="Script" uid="uid://crcpqla1i8mmf" path="res://system/component/navigation_component.gd" id="3_7pkal"]
+[ext_resource type="Script" uid="uid://bfv08t87rs26c" path="res://system/state/idle_state.gd" id="4_e62np"]
+[ext_resource type="Script" uid="uid://b6etv852eqfya" path="res://system/state/dodge_state.gd" id="5_4f4y2"]
+[ext_resource type="Script" uid="uid://bttua67v7jdv6" path="res://system/state/moving_state.gd" id="6_et480"]
+[ext_resource type="Script" uid="uid://djb5h2fsvc4au" path="res://system/state/combat_attacking_state.gd" id="7_wsw3u"]
+[ext_resource type="Script" uid="uid://bfqel43kpuxfk" path="res://system/state/combat_idle_state.gd" id="8_g4cto"]
+[ext_resource type="Script" uid="uid://c1ijajxdu1n1k" path="res://system/state/combat_dodge_state.gd" id="9_kvklg"]
+[ext_resource type="Script" uid="uid://ptxf5ubnyci4" path="res://system/state/combat_ready_state.gd" id="10_2kny7"]
+[ext_resource type="Script" uid="uid://d4gj3xyu3q7q3" path="res://system/state/combat_charging_state.gd" id="11_4v00m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pkal"]
+atlas = ExtResource("2_m7ike")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bi0im"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pkal")
+}],
+"loop": 1,
+"name": &"idle_down",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e62np"]
+size = Vector2(18, 26)
+
+[node name="Thief" unique_id=1691891269 instance=ExtResource("1_15ir2")]
+entity_def = ExtResource("2_4f4y2")
+
+[node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_bi0im")
+
+[node name="CollisionShape2D" parent="BodyHurtbox" parent_id_path=PackedInt32Array(511458273) index="0" unique_id=2017378462]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_e62np")
+
+[node name="NavigationComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="4" unique_id=653609944 node_paths=PackedStringArray("nav_agent")]
+script = ExtResource("3_7pkal")
+nav_agent = NodePath("../../NavigationAgent2D")
+
+[node name="StateMachine" parent="." index="6" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
+initial_body_state = NodePath("IdleState")
+initial_combat_state = NodePath("CombatIdleState")
+
+[node name="IdleState" type="Node" parent="StateMachine" index="0" unique_id=2133750043]
+script = ExtResource("4_e62np")
+metadata/_custom_type_script = "uid://bfv08t87rs26c"
+
+[node name="DodgeState" type="Node" parent="StateMachine" index="1" unique_id=2027634309]
+script = ExtResource("5_4f4y2")
+metadata/_custom_type_script = "uid://b6etv852eqfya"
+
+[node name="MovingState" type="Node" parent="StateMachine" index="2" unique_id=799109848]
+script = ExtResource("6_et480")
+metadata/_custom_type_script = "uid://bttua67v7jdv6"
+
+[node name="CombatAttackingState" type="Node" parent="StateMachine" index="3" unique_id=857277854]
+script = ExtResource("7_wsw3u")
+allow_reenter = true
+metadata/_custom_type_script = "uid://djb5h2fsvc4au"
+
+[node name="CombatIdleState" type="Node" parent="StateMachine" index="4" unique_id=116458691]
+script = ExtResource("8_g4cto")
+metadata/_custom_type_script = "uid://bfqel43kpuxfk"
+
+[node name="CombatDodgeState" type="Node" parent="StateMachine" index="5" unique_id=396831928]
+script = ExtResource("9_kvklg")
+
+[node name="CombatReadyState" type="Node" parent="StateMachine" index="6" unique_id=1089240893]
+script = ExtResource("10_2kny7")
+metadata/_custom_type_script = "uid://ptxf5ubnyci4"
+
+[node name="CombatChargingState" type="Node" parent="StateMachine" index="7" unique_id=148196412]
+script = ExtResource("11_4v00m")
+metadata/_custom_type_script = "uid://d4gj3xyu3q7q3"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="7" unique_id=1045512078]
+
+[editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
+[editable path="BodyHurtbox"]

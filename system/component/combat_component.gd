@@ -19,6 +19,8 @@ var current_library_name: String
 
 var current_attack_animation_name: String
 
+var current_target: EntityNode
+
 
 
 
@@ -35,15 +37,23 @@ var attack_stored:= false
 
 
 
+
+
+
+
+
+
 func _initialize(_entity: EntityNode) -> bool:
 
 	if !super(_entity): return false
 
-	var weapon_slot = entity.inventory.weapon_slot
+	if entity.inventory:
 
-	if !weapon_slot.is_empty():
+		var weapon_slot = entity.inventory.weapon_slot
 
-		_load_weapon_config(weapon_slot.item_data.item_def)
+		if !weapon_slot.is_empty():
+
+			_load_weapon_config(weapon_slot.item_data.item_def)
 
 	return true
 
@@ -122,7 +132,7 @@ func _try_attack() -> void:
 
 	else:
 
-		set_attack_dir(Game.get_mouse_direction())
+		set_attack_dir(get_attack_dir())
 
 		_execute_attack()
 
@@ -299,6 +309,16 @@ func _load_weapon_config(weapon_def: WeaponDef) -> void:
 
 
 
+
+
+
+func get_attack_dir() -> Vector2:
+
+	if entity is Player:
+
+		return Game.get_mouse_direction()
+
+	return Vector2.ZERO
 
 
 

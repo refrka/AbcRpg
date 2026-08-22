@@ -11,12 +11,10 @@
 [ext_resource type="Script" uid="uid://b6etv852eqfya" path="res://system/state/dodge_state.gd" id="8_rgyib"]
 [ext_resource type="Script" uid="uid://bfv08t87rs26c" path="res://system/state/idle_state.gd" id="10_e7oew"]
 [ext_resource type="Script" uid="uid://bttua67v7jdv6" path="res://system/state/moving_state.gd" id="11_c35mf"]
-[ext_resource type="Script" uid="uid://dy4amxptcn77h" path="res://system/state/flinch_state.gd" id="12_65viv"]
 [ext_resource type="Script" uid="uid://djb5h2fsvc4au" path="res://system/state/combat_attacking_state.gd" id="13_x7c3f"]
 [ext_resource type="Script" uid="uid://bfqel43kpuxfk" path="res://system/state/combat_idle_state.gd" id="14_bjvpn"]
 [ext_resource type="Script" uid="uid://c1ijajxdu1n1k" path="res://system/state/combat_dodge_state.gd" id="15_s7qer"]
 [ext_resource type="Script" uid="uid://ptxf5ubnyci4" path="res://system/state/combat_ready_state.gd" id="16_g4c7l"]
-[ext_resource type="Script" uid="uid://d4lrj6h8ia0ko" path="res://system/state/combat_flinch_state.gd" id="17_knn7v"]
 [ext_resource type="Script" uid="uid://d4gj3xyu3q7q3" path="res://system/state/combat_charging_state.gd" id="18_7pqkx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rgyib"]
@@ -75,7 +73,7 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("3_yw30f")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_e7oew"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_tqiix"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -441,7 +439,7 @@ entity_def = ExtResource("3_qjkh3")
 
 [node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
 position = Vector2(0, -24)
-sprite_frames = SubResource("SpriteFrames_e7oew")
+sprite_frames = SubResource("SpriteFrames_tqiix")
 
 [node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
 position = Vector2(16, -16)
@@ -482,29 +480,23 @@ metadata/_custom_type_script = "uid://b6etv852eqfya"
 script = ExtResource("11_c35mf")
 metadata/_custom_type_script = "uid://bttua67v7jdv6"
 
-[node name="FlinchState" type="Node" parent="StateMachine" index="3" unique_id=1466575816]
-script = ExtResource("12_65viv")
-
-[node name="CombatAttackingState" type="Node" parent="StateMachine" index="4" unique_id=1946344821]
+[node name="CombatAttackingState" type="Node" parent="StateMachine" index="3" unique_id=1946344821]
 script = ExtResource("13_x7c3f")
 allow_reenter = true
 metadata/_custom_type_script = "uid://djb5h2fsvc4au"
 
-[node name="CombatIdleState" type="Node" parent="StateMachine" index="5" unique_id=252927655]
+[node name="CombatIdleState" type="Node" parent="StateMachine" index="4" unique_id=252927655]
 script = ExtResource("14_bjvpn")
 metadata/_custom_type_script = "uid://bfqel43kpuxfk"
 
-[node name="CombatDodgeState" type="Node" parent="StateMachine" index="6" unique_id=1410693898]
+[node name="CombatDodgeState" type="Node" parent="StateMachine" index="5" unique_id=1410693898]
 script = ExtResource("15_s7qer")
 
-[node name="CombatReadyState" type="Node" parent="StateMachine" index="7" unique_id=706806404]
+[node name="CombatReadyState" type="Node" parent="StateMachine" index="6" unique_id=706806404]
 script = ExtResource("16_g4c7l")
 metadata/_custom_type_script = "uid://ptxf5ubnyci4"
 
-[node name="CombatFlinchState" type="Node" parent="StateMachine" index="8" unique_id=2116188460]
-script = ExtResource("17_knn7v")
-
-[node name="CombatChargingState" type="Node" parent="StateMachine" index="9" unique_id=348221189]
+[node name="CombatChargingState" type="Node" parent="StateMachine" index="7" unique_id=348221189]
 script = ExtResource("18_7pqkx")
 metadata/_custom_type_script = "uid://d4gj3xyu3q7q3"
 

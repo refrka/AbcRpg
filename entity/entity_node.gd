@@ -96,17 +96,11 @@ func _reset() -> void:
 
 func receive_damage_package(damage_package: DamagePackage) -> void:
 
-	var health_component = get_component(HealthComponent)
+	for component in component_root.get_children():
 
-	if health_component:
+		if component.has_method("receive_damage_package"):
 
-		health_component.receive_damage_package(damage_package)
-
-	var effects_component = get_component(EffectsComponent)
-
-	if effects_component:
-
-		effects_component.receive_damage_package(damage_package)
+			component.receive_damage_package(damage_package)
 
 
 

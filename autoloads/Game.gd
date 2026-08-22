@@ -8,15 +8,19 @@ var last_save_dict:= {}
 
 var player: Player
 
-
+var camera: Camera2D
 
 
 
 func _ready() -> void:
 
+	camera = get_tree().get_first_node_in_group("game_camera")
+
 	player = get_tree().get_first_node_in_group("player")
 
 	_load()
+
+
 
 
 

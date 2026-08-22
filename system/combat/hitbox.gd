@@ -26,7 +26,7 @@ func _on_area_entered_sensor(area: Area2D) -> void:
 
 	area = area as Hurtbox
 
-	if area.entity == entity or ignore_list.has(area.entity):
+	if !area.active or area.entity == entity or ignore_list.has(area.entity):
 
 		return
 

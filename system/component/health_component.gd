@@ -40,6 +40,10 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 		animation_component.combat_anim_player.play("flinch")
 
+		if entity is Player:
+
+			Game.camera.anim_player.play("shake")
+
 		reduce_health(damage_entry.amount)
 
 
