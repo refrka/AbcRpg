@@ -10,6 +10,8 @@ func _enter() -> void:
 
 	super()
 
+	movement_component.halt()
+
 	movement_component.can_move = false
 
 

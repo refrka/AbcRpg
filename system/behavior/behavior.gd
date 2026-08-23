@@ -8,6 +8,23 @@ class_name Behavior extends Resource
 signal evaluation_requested
 
 
+
+enum BehaviorType {
+
+	AMBIENT,
+
+	CONFLICT,
+
+	PRESERVATION,
+
+	SOCIAL,
+
+}
+
+
+
+@export var behavior_type: BehaviorType
+
 @export var display_name: String
 
 @export var baseline_score:= 1.0
@@ -24,6 +41,10 @@ var active:= false
 
 
 var entity: EntityNode
+
+var behavior_profile: BehaviorProfile
+
+var attribute_remap: AttributeRemap
 
 var movement_component: MovementComponent
 
@@ -44,6 +65,10 @@ var target_disposition: Disposition
 func _initialize(_entity: EntityNode) -> void:
 
 	entity = _entity
+
+	behavior_profile = entity.entity_def.behavior_profile
+
+	attribute_remap = behavior_profile.get_remap(behavior_type)
 
 	movement_component = entity.get_component(MovementComponent)
 
@@ -93,6 +118,27 @@ func _get_final_multiplier(baseline: float) -> float:
 	return baseline
 
 
+func _get_curve_sample(curve: Curve, value: float, domain_min:= 0.0, domain_max:= 1.0) -> float:
+
+	return curve.sample(clampf(value, domain_min, domain_max))
+
+
+
+func _get_fear_multiplier() -> float:
+
+	var fear_score = _get_curve_sample(attribute_remap.fear_curve, target_disposition.fear)
+
+	return fear_score
+
+
+func _get_affection_multiplier() -> float:
+
+	return 1.0
+
+
+func _get_respect_multiplier() -> float:
+
+	return 1.0
 
 
 

@@ -15,6 +15,8 @@ func _ready() -> void:
 
 	health_component.health_reduced.connect(_on_health_reduced)
 
+	_update_progress()
+
 
 
 

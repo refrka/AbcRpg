@@ -7,11 +7,11 @@ signal expired
 
 
 
-var fear:= FearAttribute.new()
+var fear:= 0.0
 
-var affection:= AffectionAttribute.new()
+var affection:= 0.0
 
-var respect:= RespectAttribute.new()
+var respect:= 0.0
 
 
 

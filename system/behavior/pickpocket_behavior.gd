@@ -13,7 +13,15 @@ func _evaluate(_target_disposition: Disposition) -> float:
 
 	var evaluation = super(_target_disposition)
 
+	if pickpocket_complete or IsHealthCriticalCondition.run({"entity_node": entity}):
+
+		return 0.0
+
 	if target_disposition:
+
+		if entity.global_position.distance_to(target_disposition.target_entity.global_position) > 500.0:
+
+			return 0.0
 
 		return _get_final_multiplier(evaluation)
 
@@ -27,7 +35,17 @@ func _start() -> void:
 
 	super()
 
-	navigation_component.set_target_entity(target_disposition.target_entity)
+	# navigation_component.set_target_entity(target_disposition.target_entity)
+
+
+
+
+
+func _stop() -> void:
+
+	super()
+
+	navigation_component.set_target_entity(null)
 
 
 
@@ -36,15 +54,12 @@ func _start() -> void:
 
 func _get_final_multiplier(baseline: float) -> float:
 
-	var fear_multiplier = target_disposition.fear._get_multiplier(2.0, 0.0)
+	var final_multiplier = baseline 
 
-	var affection_multiplier:= 1.0
+	return final_multiplier * _get_fear_multiplier()
 
-	var respect_multiplier:= 1.0
 
-	var final_multiplier = baseline
 
-	return final_multiplier
 
 
 
@@ -52,16 +67,12 @@ func _connect_signals() -> void:
 
 	navigation_component.navigation_completed.connect(_on_navigation_completed)
 
-	entity.vision_sensor.entity_exited_sensor.connect(_on_entity_exited_vision_sensor)
-
 
 
 
 func _disconnect_signals() -> void:
 
 	navigation_component.navigation_completed.disconnect(_on_navigation_completed)
-
-	entity.vision_sensor.entity_exited_sensor.disconnect(_on_entity_exited_vision_sensor)
 
 
 
@@ -90,22 +101,19 @@ func _on_navigation_completed() -> void:
 
 	if !target_disposition or !target_disposition.target_entity: return
 
-	var distance = entity.global_position.distance_to(target_disposition.target_entity.global_position)
+	var target_entity = target_disposition.target_entity
 
-	if distance <= 32.0:
+	var distance = entity.global_position.distance_to(target_entity.global_position)
 
-		target_disposition.target_entity.state_machine.request_state(BodyRestrainedState)
+	if distance <= 24.0:
+
+		target_entity.state_machine.request_state(BodyRestrainedState)
+
+		await Game.get_tree().create_timer(1.5).timeout
+
+		target_entity.state_machine.request_state(BodyIdleState)
+
+		pickpocket_complete = true
 
 
 
-
-
-func _on_entity_exited_vision_sensor(entity_node: EntityNode) -> void:
-
-	if entity_node == target_disposition.target_entity:
-
-		target_disposition.target_entity = null
-
-		navigation_component.set_target_entity(null)
-
-		evaluation_requested.emit()

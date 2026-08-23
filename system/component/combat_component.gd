@@ -296,7 +296,7 @@ func _get_damage_package() -> DamagePackage:
 
 	var attack_entry = get_attack_entry()
 	
-	var damage_package = DamagePackage.from_attack_entry(attack_entry)
+	var damage_package = DamagePackage.from_attack_entry(attack_entry, entity)
 
 	return damage_package
 

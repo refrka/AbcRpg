@@ -88,6 +88,17 @@ func reduce_health(amount: float) -> void:
 
 
 
+
+
+
+
+
 func is_alive() -> bool:
 
 	return current_health > 0.0
+
+
+
+func is_critical() -> bool:
+
+	return current_health / max_health <= 0.25

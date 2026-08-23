@@ -446,7 +446,7 @@ position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_65viv")
 
 [node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
-position = Vector2(18, -16)
+position = Vector2(16, -16)
 
 [node name="CombatAnimationPlayer" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="1" unique_id=256507589]
 libraries/short_bow = SubResource("AnimationLibrary_8t03j")

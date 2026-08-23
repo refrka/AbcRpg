@@ -221,6 +221,7 @@ y_sort_enabled = true
 [node name="Player" parent="WorldCanvas/WorldRoot" unique_id=1691891269 instance=ExtResource("3_bxsma")]
 position = Vector2(170, 499)
 collision_mask = 1
+motion_mode = 0
 
 [node name="BodySprite" parent="WorldCanvas/WorldRoot/Player/VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(1691891269, 831679319) index="0" unique_id=16791793]
 sprite_frames = SubResource("SpriteFrames_aiwur")
@@ -228,9 +229,11 @@ sprite_frames = SubResource("SpriteFrames_aiwur")
 [node name="TestDummy" parent="WorldCanvas/WorldRoot" unique_id=1560747210 instance=ExtResource("4_wd1uf")]
 position = Vector2(999, 202)
 collision_mask = 1
+motion_mode = 0
 
 [node name="Thief" parent="WorldCanvas/WorldRoot" unique_id=418514344 instance=ExtResource("5_0o8ui")]
 position = Vector2(454, 258)
+motion_mode = 0
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="WorldCanvas/WorldRoot" unique_id=37434313]
 navigation_polygon = SubResource("NavigationPolygon_8gxew")
@@ -281,7 +284,7 @@ offset_top = 29.0
 offset_right = 232.0
 offset_bottom = 56.0
 script = ExtResource("10_aiwur")
-health_component = NodePath("../../../WorldCanvas/WorldRoot/Player/ComponentRoot/HealthComponent")
+health_component = NodePath("../../../WorldCanvas/WorldRoot/Thief/ComponentRoot/HealthComponent")
 metadata/_custom_type_script = "uid://c7gifdx44tuuf"
 
 [editable path="WorldCanvas/WorldRoot/Player"]

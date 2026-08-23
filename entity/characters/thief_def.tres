@@ -1,11 +1,39 @@
 [gd_resource type="Resource" script_class="CharacterDef" format=3 uid="uid://dciimcclu3grk"]
 
 [ext_resource type="Script" uid="uid://b2swvbk1sv4ar" path="res://entity/character_def.gd" id="1_e7ny4"]
+[ext_resource type="Script" uid="uid://fyybon8skto1" path="res://system/behavior/attribute_remap.gd" id="1_qq5ly"]
+[ext_resource type="Script" uid="uid://38c3jtlykn51" path="res://system/behavior/behavior_profile.gd" id="2_27bkw"]
+
+[sub_resource type="Curve" id="Curve_pccyj"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25293714, 0.7672956), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_ktr1l"]
+script = ExtResource("1_qq5ly")
+fear_curve = SubResource("Curve_pccyj")
+metadata/_custom_type_script = "uid://fyybon8skto1"
+
+[sub_resource type="Curve" id="Curve_27bkw"]
+_data = [Vector2(0, 0.99371046), 0.0, 0.0, 0, 0, Vector2(0.6814099, 0.49056578), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_qq5ly"]
+script = ExtResource("1_qq5ly")
+fear_curve = SubResource("Curve_27bkw")
+metadata/_custom_type_script = "uid://fyybon8skto1"
+
+[sub_resource type="Resource" id="Resource_e7ny4"]
+script = ExtResource("2_27bkw")
+attribute_remaps = Dictionary[int, ExtResource("1_qq5ly")]({
+1: SubResource("Resource_qq5ly"),
+2: SubResource("Resource_ktr1l")
+})
+metadata/_custom_type_script = "uid://38c3jtlykn51"
 
 [resource]
 script = ExtResource("1_e7ny4")
 move_speed = 200.0
+behavior_profile = SubResource("Resource_e7ny4")
 entity_id = &"thief"
 display_name = &"Thief"
-base_max_health = 100.0
 metadata/_custom_type_script = "uid://b2swvbk1sv4ar"

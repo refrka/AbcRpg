@@ -61,11 +61,11 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 		disposition = _generate_disposition(damage_package.source_entity)
 
-		disposition.fear.value -= 0.1
+	disposition.fear += 0.1
 
-		disposition.affection.value -= 0.1
+	disposition.affection -= 0.1
 
-		disposition.respect.value -= 0.1
+	disposition.respect -= 0.1
 
 
 
@@ -101,9 +101,17 @@ func _disconnect_signals() -> void:
 
 func _choose_behavior(target_disposition: Disposition = null) -> void:
 
+	if !target_disposition and current_behavior:
+
+		target_disposition = current_behavior.target_disposition
+
 	var new_behavior = _evaluate_behaviors(target_disposition)
 
-	if current_behavior and new_behavior != current_behavior:
+	if new_behavior == current_behavior:
+
+		return
+
+	if current_behavior:
 		
 		current_behavior._stop()
 
@@ -126,6 +134,8 @@ func _evaluate_behaviors(target_disposition: Disposition = null) -> Behavior:
 	for behavior in behaviors:
 
 		var evaluation = behavior._evaluate(target_disposition)
+
+		print("evaluation for ", behavior.display_name, ": ", evaluation)
 
 		if !chosen_behavior or evaluation > highest_evaluation:
 
@@ -234,6 +244,9 @@ func _on_entity_exited_vision_sensor(entity_node: EntityNode) -> void:
 
 		disposition.start_timer()
 
+	_evaluate_behaviors(disposition)
+
+
 
 
 func _on_disposition_expired(disposition: Disposition) -> void:
@@ -269,4 +282,4 @@ func _physics_process(delta: float) -> void:
 
 		if evaluation_timer >= evaluation_time:
 
-			current_behavior = _evaluate_behaviors()
+			_choose_behavior()

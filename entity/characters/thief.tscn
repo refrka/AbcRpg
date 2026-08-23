@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://d4gj3xyu3q7q3" path="res://system/state/combat_charging_state.gd" id="11_4v00m"]
 [ext_resource type="Resource" uid="uid://2cb14jnh3rh3" path="res://player/player_def.tres" id="11_avvhb"]
 [ext_resource type="Script" uid="uid://b14ycfqds2c2w" path="res://system/state/body_idle_state.gd" id="11_et480"]
+[ext_resource type="Script" uid="uid://ccsjcn37bphav" path="res://system/behavior/retreat_behavior.gd" id="12_ktr1l"]
 [ext_resource type="Script" uid="uid://bqjhwio0awfg1" path="res://system/state/body_moving_state.gd" id="12_wsw3u"]
 [ext_resource type="Script" uid="uid://b4hnnosk686g1" path="res://system/state/combat_flinch_state.gd" id="17_4v00m"]
 [ext_resource type="Script" uid="uid://b8grg86lkjwpx" path="res://system/state/body_flinch_state.gd" id="18_7uro1"]
@@ -125,8 +126,15 @@ metadata/_custom_type_script = "uid://ck3c187my4mrw"
 [sub_resource type="Resource" id="Resource_krhou"]
 script = ExtResource("9_raayb")
 target_defs = Array[ExtResource("10_avvhb")]([ExtResource("11_avvhb")])
+behavior_type = 1
 display_name = "Pickpocket"
 metadata/_custom_type_script = "uid://5p5asql3w7oh"
+
+[sub_resource type="Resource" id="Resource_avvhb"]
+script = ExtResource("12_ktr1l")
+behavior_type = 2
+display_name = "Retreat"
+metadata/_custom_type_script = "uid://ccsjcn37bphav"
 
 [node name="Thief" unique_id=1691891269 instance=ExtResource("1_15ir2")]
 entity_def = ExtResource("2_4f4y2")
@@ -134,8 +142,6 @@ entity_def = ExtResource("2_4f4y2")
 [node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_bi0im")
-animation = &"moving_down"
-frame_progress = 0.5382399
 
 [node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
 position = Vector2(16, -14)
@@ -164,7 +170,7 @@ nav_agent = NodePath("../../NavigationAgent2D")
 
 [node name="BehaviorComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="5" unique_id=855815701]
 script = ExtResource("5_wsw3u")
-behaviors = Array[ExtResource("7_g4cto")]([SubResource("Resource_aajxx"), SubResource("Resource_krhou")])
+behaviors = Array[ExtResource("7_g4cto")]([SubResource("Resource_aajxx"), SubResource("Resource_krhou"), SubResource("Resource_avvhb")])
 metadata/_custom_type_script = "uid://rvs7yxftyi2c"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="7" unique_id=1045512078]

@@ -239,7 +239,11 @@ func _physics_process(delta: float) -> void:
 
 	var move_velocity:= current_move_velocity
 
-	if move_dir == Vector2.ZERO or !can_move:
+	if !can_move:
+
+		return
+
+	if move_dir == Vector2.ZERO:
 
 		move_velocity = current_move_velocity.move_toward(Vector2.ZERO, 1800.0 * delta)
 

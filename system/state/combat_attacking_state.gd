@@ -31,6 +31,8 @@ func _exit() -> void:
 
 	super()
 
+	animation_component.combat_anim_player.play("RESET")
+
 	movement_component.can_move = true
 
 	if movement_component.is_moving():
