@@ -61,11 +61,30 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 		disposition = _generate_disposition(damage_package.source_entity)
 
-	disposition.fear += 0.1
+	var reaction_tag = entity.entity_def.behavior_profile.get_reaction_tag(ReceivedDamageTag)
 
-	disposition.affection -= 0.1
+	if reaction_tag:
 
-	disposition.respect -= 0.1
+		_apply_reaction_tag(reaction_tag, disposition)
+
+
+
+
+func _apply_reaction_tag(reaction_tag: ReactionTag, disposition: Disposition = null) -> void:
+
+	attitude += reaction_tag.attitude_delta
+
+	temperament += reaction_tag.temperament_delta
+
+	if disposition:
+
+		disposition.fear += reaction_tag.fear_delta
+
+		disposition.affection += reaction_tag.affection_delta
+
+		disposition.respect += reaction_tag.respect_delta
+
+	
 
 
 

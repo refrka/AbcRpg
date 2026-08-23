@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b2swvbk1sv4ar" path="res://entity/character_def.gd" id="1_e7ny4"]
 [ext_resource type="Script" uid="uid://fyybon8skto1" path="res://system/behavior/attribute_remap.gd" id="1_qq5ly"]
+[ext_resource type="Script" uid="uid://dbcds43ohrrxx" path="res://system/behavior/reaction_tag.gd" id="2_8bvsm"]
 [ext_resource type="Script" uid="uid://38c3jtlykn51" path="res://system/behavior/behavior_profile.gd" id="2_27bkw"]
+[ext_resource type="Script" uid="uid://b3bubacp38oh2" path="res://system/behavior/reaction_tags/received_damage_tag.gd" id="3_8bvsm"]
 
 [sub_resource type="Curve" id="Curve_pccyj"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25293714, 0.7672956), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -22,12 +24,18 @@ script = ExtResource("1_qq5ly")
 fear_curve = SubResource("Curve_27bkw")
 metadata/_custom_type_script = "uid://fyybon8skto1"
 
+[sub_resource type="Resource" id="Resource_xjbxk"]
+script = ExtResource("3_8bvsm")
+fear_delta = 0.2
+metadata/_custom_type_script = "uid://b3bubacp38oh2"
+
 [sub_resource type="Resource" id="Resource_e7ny4"]
 script = ExtResource("2_27bkw")
 attribute_remaps = Dictionary[int, ExtResource("1_qq5ly")]({
 1: SubResource("Resource_qq5ly"),
 2: SubResource("Resource_ktr1l")
 })
+reaction_tags = Array[ExtResource("2_8bvsm")]([SubResource("Resource_xjbxk")])
 metadata/_custom_type_script = "uid://38c3jtlykn51"
 
 [resource]

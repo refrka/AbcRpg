@@ -29,6 +29,8 @@ enum BehaviorType {
 
 @export var baseline_score:= 1.0
 
+@export var remap_override: AttributeRemap
+
 @export var entity_whitelist: Array[EntityDef]
 
 @export var entity_blacklist: Array[EntityDef]
