@@ -14,7 +14,14 @@ var movement_component: MovementComponent
 
 var target_position: Vector2
 
+var target_entity: EntityNode
+
 var current_path_position: Vector2
+
+
+
+
+var update_timer:= 0.0
 
 
 
@@ -37,6 +44,8 @@ func _initialize(_entity: EntityNode) -> bool:
 
 func set_target_position(position: Vector2) -> void:
 
+	update_timer = 0.0
+
 	target_position = position
 
 	nav_agent.target_position = position
@@ -45,7 +54,9 @@ func set_target_position(position: Vector2) -> void:
 
 
 
+func set_target_entity(entity_node: EntityNode) -> void:
 
+	target_entity = entity_node
 
 
 
@@ -79,6 +90,14 @@ func _disconnect_signals() -> void:
 func _physics_process(delta: float) -> void:
 
 	if !active: return
+
+	if target_entity and update_timer < 0.2:
+
+		update_timer += delta
+
+		if update_timer >= 0.2:
+
+			set_target_position(target_entity.global_position)
 
 	if !nav_agent.is_navigation_finished():
 

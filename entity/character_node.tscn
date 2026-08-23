@@ -184,7 +184,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_udydy"]
 radius = 58.034473
 
-[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine", "body_hurtbox", "combat_hitbox", "vision_sensor", "combat_origin")]
+[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine", "body_hurtbox", "combat_hitbox", "vision_sensor", "interact_sensor", "combat_origin")]
 y_sort_enabled = true
 collision_mask = 0
 script = ExtResource("1_ufg3e")
@@ -195,6 +195,7 @@ state_machine = NodePath("StateMachine")
 body_hurtbox = NodePath("BodyHurtbox")
 combat_hitbox = NodePath("VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox")
 vision_sensor = NodePath("VisionSensor")
+interact_sensor = NodePath("InteractSensor")
 combat_origin = NodePath("Center/CombatOrigin")
 
 [node name="VisualRoot" type="Node2D" parent="." unique_id=1685553084]
@@ -236,6 +237,10 @@ metadata/_custom_type_script = "uid://c0s3d38vd56k5"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionSensor" unique_id=376879403]
 shape = SubResource("CircleShape2D_udydy")
 debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="InteractSensor" type="Area2D" parent="." unique_id=1065023119]
+script = ExtResource("2_8mhx1")
+metadata/_custom_type_script = "uid://c0s3d38vd56k5"
 
 [node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=4360643]
 unique_name_in_owner = true

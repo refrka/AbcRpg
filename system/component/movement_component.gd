@@ -175,8 +175,6 @@ func _get_impulse_velocity() -> Vector2:
 
 	for modifier in modifiers:
 
-		print(modifier)
-
 		if modifier.modifier_type == VelocityModifier.ModifierType.CUMULATIVE:
 
 			total += modifier.velocity
@@ -224,7 +222,9 @@ func _disconnect_signals() -> void:
 
 func _on_input_dir_updated(dir: Vector2) -> void:
 
-	set_move_dir(dir)
+	if can_move:
+
+		set_move_dir(dir)
 
 
 

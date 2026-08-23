@@ -18,16 +18,13 @@ var idle_timer:= 0.0
 
 
 
-var navigation_component: NavigationComponent
 
 
 
+func _evaluate(_data:= {}) -> float:
 
-func _initialize(_entity: EntityNode) -> void:
+	return 0.001
 
-	super(_entity)
-
-	navigation_component = entity.get_component(NavigationComponent)
 
 
 
@@ -72,6 +69,8 @@ func _wander() -> void:
 
 
 
+
+
 func _idle() -> void:
 
 	idle = true
@@ -92,6 +91,8 @@ func _on_navigation_completed() -> void:
 
 
 func _tick(delta: float) -> void:
+
+	if !active: return
 
 	if idle and idle_timer > 0.0:
 

@@ -1,14 +1,20 @@
 class_name Behavior extends Resource
 
 
+@export var display_name: String
 
+
+var data: Dictionary
 
 var active:= false
 
 var entity: EntityNode
 
+var target_entity: EntityNode
+
 var movement_component: MovementComponent
 
+var navigation_component: NavigationComponent
 
 
 
@@ -18,13 +24,28 @@ func _initialize(_entity: EntityNode) -> void:
 
 	movement_component = entity.get_component(MovementComponent)
 
+	navigation_component = entity.get_component(NavigationComponent)
+
 
 
 
 
 func _evaluate(_data:= {}) -> float:
 
+	data = _data
+
 	return 1.0
+
+
+
+
+func _reevaluate(_data:= {}) -> void:
+
+	var behavior_component = entity.get_component(BehaviorComponent)
+
+	behavior_component._choose_behavior(_data)
+
+
 
 
 
@@ -33,7 +54,11 @@ func _start() -> void:
 	_activate()
 
 
-func _end() -> void:
+
+
+func _stop() -> void:
+
+	data = {}
 
 	_deactivate()
 

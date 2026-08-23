@@ -6,8 +6,11 @@ class_name BehaviorComponent extends Component
 
 @export var behaviors: Array[Behavior]
 
+@export var evaluation_time:= 2.0
+
 var current_behavior: Behavior
 
+var evaluation_timer:= 0.0
 
 
 
@@ -34,7 +37,32 @@ func _initialize(_entity: EntityNode) -> bool:
 
 
 
-func _evaluate_behaviors() -> Behavior:
+func _connect_signals() -> void:
+
+	entity.vision_sensor.entity_entered_sensor.connect(_on_entity_entered_vision_sensor)
+
+
+
+
+func _choose_behavior(_data:= {}) -> void:
+
+	var new_behavior = _evaluate_behaviors(_data)
+
+	if current_behavior and new_behavior != current_behavior:
+		
+		current_behavior._stop()
+
+	current_behavior = new_behavior
+
+	current_behavior._start()
+
+
+
+
+
+func _evaluate_behaviors(_data:= {}) -> Behavior:
+
+	evaluation_timer = 0.0
 
 	var chosen_behavior: Behavior = null
 
@@ -42,7 +70,7 @@ func _evaluate_behaviors() -> Behavior:
 
 	for behavior in behaviors:
 
-		var evaluation = behavior._evaluate()
+		var evaluation = behavior._evaluate(_data)
 
 		if !chosen_behavior or evaluation > highest_evaluation:
 
@@ -83,6 +111,13 @@ func _deactivate() -> bool:
 
 
 
+func _on_entity_entered_vision_sensor(entity_node: EntityNode) -> void:
+
+	_choose_behavior({"entity_node": entity_node})
+
+
+
+
 
 func _physics_process(delta: float) -> void:
 
@@ -91,3 +126,11 @@ func _physics_process(delta: float) -> void:
 	if current_behavior and current_behavior.active:
 
 		current_behavior._tick(delta)
+
+	if evaluation_timer < evaluation_time:
+
+		evaluation_timer += delta
+
+		if evaluation_timer >= evaluation_time:
+
+			current_behavior = _evaluate_behaviors()

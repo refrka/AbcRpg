@@ -19,6 +19,8 @@ class_name EntityNode extends PhysicsBody2D
 
 @export var vision_sensor: Sensor
 
+@export var interact_sensor: Sensor
+
 @export var combat_origin: Node2D
 
 
@@ -57,17 +59,13 @@ func _initialize() -> bool:
 
 	state_machine._initialize(self)
 
-	if body_hurtbox:
+	if body_hurtbox: body_hurtbox._initialize(self)
 
-		body_hurtbox._initialize(self)
+	if combat_hitbox: combat_hitbox._initialize(self)
 
-	if combat_hitbox:
+	if vision_sensor: vision_sensor._initialize(self)
 
-		combat_hitbox._initialize(self)
-
-	if vision_sensor:
-
-		vision_sensor._initialize(self)
+	if interact_sensor: interact_sensor._initialize(self)
 
 	return true
 
@@ -194,21 +192,13 @@ func _activate() -> bool:
 
 		component._activate()
 
-	if state_machine:
+	if state_machine: state_machine._activate()
 
-		state_machine._activate()
+	if body_hurtbox: body_hurtbox._activate()
 
-	if body_hurtbox:
+	if combat_hitbox: combat_hitbox._activate()
 
-		body_hurtbox._activate()
-
-	if combat_hitbox:
-
-		combat_hitbox._activate()
-
-	if vision_sensor:
-
-		vision_sensor._activate()
+	if vision_sensor: vision_sensor._activate()
 
 	return true
 
@@ -226,21 +216,13 @@ func _deactivate() -> bool:
 
 		component._deactivate()
 
-	if state_machine:
+	if state_machine: state_machine._deactivate()
 
-		state_machine._deactivate()
+	if body_hurtbox: body_hurtbox._deactivate()
 
-	if body_hurtbox:
+	if combat_hitbox: combat_hitbox._deactivate()
 
-		body_hurtbox._deactivate()
-
-	if combat_hitbox:
-
-		combat_hitbox._deactivate()
-
-	if vision_sensor:
-
-		vision_sensor._deactivate()
+	if vision_sensor: vision_sensor._deactivate()
 
 	return true
 

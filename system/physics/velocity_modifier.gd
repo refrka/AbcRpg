@@ -34,13 +34,9 @@ func tick(delta: float) -> void:
 
 	_time_alive += delta
 
-	print("ticking velocity: ", velocity)
-
 	if decay_rate > 0.0:
 
 		velocity *= clampf(1.0 - decay_rate * delta, 0.0, 1.0)
-
-		print("velocity now: ", velocity)
 
 
 

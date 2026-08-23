@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_e7ny4")
+move_speed = 200.0
 entity_id = &"thief"
 display_name = &"Thief"
 base_max_health = 100.0
