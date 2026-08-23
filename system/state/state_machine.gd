@@ -132,6 +132,10 @@ func _change_combat_state(state: CombatState) -> void:
 
 		_deactivate_state(combat_state)
 
+	if entity is Player:
+
+		print("combat state: ", combat_state.get_state_name())
+
 	combat_state = state
 
 	_activate_state(combat_state)

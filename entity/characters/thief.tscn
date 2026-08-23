@@ -107,9 +107,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e62np"]
-size = Vector2(18, 28)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_4v00m"]
 radius = 207.06038
 
@@ -146,10 +143,6 @@ sprite_frames = SubResource("SpriteFrames_bi0im")
 [node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
 position = Vector2(16, -14)
 
-[node name="CollisionShape2D" parent="BodyHurtbox" parent_id_path=PackedInt32Array(511458273) index="0" unique_id=2017378462]
-position = Vector2(0, -14)
-shape = SubResource("RectangleShape2D_e62np")
-
 [node name="VisionSensor" parent="." index="2" unique_id=1534038726]
 position = Vector2(0, -14)
 
@@ -174,7 +167,7 @@ behaviors = Array[ExtResource("7_g4cto")]([SubResource("Resource_aajxx"), SubRes
 metadata/_custom_type_script = "uid://rvs7yxftyi2c"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="7" unique_id=1045512078]
-target_desired_distance = 32.0
+target_desired_distance = 24.0
 
 [node name="StateMachine" parent="." index="8" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
 initial_body_state = NodePath("BodyIdleState")

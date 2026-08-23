@@ -26,6 +26,8 @@ var debug_root: Control
 
 func _ready() -> void:
 
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 	debug_root = get_tree().get_first_node_in_group("debug_root")
 
 	debug_root.hide()

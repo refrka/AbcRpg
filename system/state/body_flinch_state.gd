@@ -1,4 +1,4 @@
-class_name BodyFlinchState extends BodyState
+class_name BodyFlinchState extends BodyBusyState
 
 
 

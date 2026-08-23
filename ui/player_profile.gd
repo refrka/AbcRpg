@@ -1,0 +1,1 @@
+class_name PlayerProfile extends OverlayElement

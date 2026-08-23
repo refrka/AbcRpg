@@ -19,6 +19,53 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgyib"]
+size = Vector2(20, 32)
+
+[sub_resource type="Animation" id="Animation_22lai"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle_down"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%BodySprite/../../../BodyHurtbox/CollisionShape2D:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("RectangleShape2D_rgyib")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%BodySprite/../../../BodyHurtbox/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8mhx1"]
+_data = {
+&"RESET": SubResource("Animation_22lai")
+}
+
 [sub_resource type="Animation" id="Animation_8mhx1"]
 length = 0.001
 tracks/0/type = "value"
@@ -222,6 +269,9 @@ unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_yw30f")
 animation = &"idle_down"
 
+[node name="BodyAnimationPlayer" type="AnimationPlayer" parent="VisualRoot/BodyVisualRoot/BodySprite" unique_id=1722909834]
+libraries/ = SubResource("AnimationLibrary_8mhx1")
+
 [node name="CombatVisualRoot" type="Node2D" parent="VisualRoot" unique_id=2053548299]
 y_sort_enabled = true
 
@@ -237,6 +287,8 @@ libraries/ = SubResource("AnimationLibrary_pgotb")
 [node name="BodyHurtbox" parent="." unique_id=511458273 instance=ExtResource("3_me77t")]
 
 [node name="CollisionShape2D" parent="BodyHurtbox" index="0" unique_id=2017378462]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_rgyib")
 debug_color = Color(0.7, 0, 0, 0.03137255)
 
 [node name="VisionSensor" type="Area2D" parent="." unique_id=1534038726 node_paths=PackedStringArray("collision_shape")]
@@ -274,9 +326,10 @@ unique_name_in_owner = true
 script = ExtResource("3_0rdkl")
 metadata/_custom_type_script = "uid://bpmhno771vhh3"
 
-[node name="AnimationComponent" type="Node" parent="ComponentRoot" unique_id=223820024 node_paths=PackedStringArray("combat_anim_player")]
+[node name="AnimationComponent" type="Node" parent="ComponentRoot" unique_id=223820024 node_paths=PackedStringArray("combat_anim_player", "body_anim_player")]
 script = ExtResource("4_0rdkl")
 combat_anim_player = NodePath("../../VisualRoot/CombatVisualRoot/CombatAnimationPlayer")
+body_anim_player = NodePath("../../VisualRoot/BodyVisualRoot/BodySprite/BodyAnimationPlayer")
 metadata/_custom_type_script = "uid://cvcq2asqkdmv5"
 
 [node name="CombatComponent" type="Node" parent="ComponentRoot" unique_id=2066181832 node_paths=PackedStringArray("combat_origin")]

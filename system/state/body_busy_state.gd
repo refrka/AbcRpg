@@ -23,3 +23,7 @@ func _exit() -> void:
 	super()
 
 	movement_component.can_move = true
+
+	movement_component.update_dir()
+
+	

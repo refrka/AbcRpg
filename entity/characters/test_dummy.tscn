@@ -40,7 +40,7 @@ size = Vector2(12, 36)
 size = Vector2(24, 4)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ugsij"]
-radius = 23.769728
+radius = 33.54102
 
 [sub_resource type="Resource" id="Resource_t1wp5"]
 script = ExtResource("7_ajbx4")
@@ -95,7 +95,7 @@ ammunition_slot = SubResource("Resource_gqgbn")
 attack_entry = SubResource("Resource_22lai")
 metadata/_custom_type_script = "uid://dxpsfyvmkctq"
 
-[node name="StateMachine" parent="." index="6" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
+[node name="StateMachine" parent="." index="7" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
 initial_body_state = NodePath("BodyIdleState")
 initial_combat_state = NodePath("CombatIdleState")
 

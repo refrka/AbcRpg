@@ -3,6 +3,8 @@ class_name AnimationComponent extends Component
 
 @export var combat_anim_player: AnimationPlayer
 
+@export var body_anim_player: AnimationPlayer
+
 
 
 var blendspace_paths:= {

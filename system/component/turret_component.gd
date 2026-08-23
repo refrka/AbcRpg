@@ -81,6 +81,8 @@ func _disconnect_signals() -> void:
 
 func _on_entity_entered_vision_sensor(entity_node: EntityNode) -> void:
 
+	if !active: return
+
 	current_target = entity_node
 
 	if firing_timer_active: return

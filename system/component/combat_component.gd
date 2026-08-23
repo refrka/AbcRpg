@@ -95,6 +95,8 @@ func _handle_attack_input(pressed: bool) -> void:
 
 func _handle_dodge() -> void:
 
+	if is_dodging() or is_busy(): return
+
 	if is_attacking():
 
 		buffered = false
@@ -385,6 +387,16 @@ func is_attacking() -> bool:
 func is_charging() -> bool:
 
 	return entity.state_machine.get_combat_state() is CombatChargingState
+
+
+func is_dodging() -> bool:
+
+	return entity.state_machine.get_combat_state() is CombatDodgeState
+
+
+func is_busy() -> bool:
+
+	return entity.state_machine.get_body_state() is BodyBusyState
 
 
 

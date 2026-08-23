@@ -77,6 +77,10 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("3_yw30f")
 region = Rect2(240, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_65viv"]
+atlas = ExtResource("3_yw30f")
+region = Rect2(192, 48, 48, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_65viv"]
 resource_local_to_scene = true
 animations = [{
@@ -151,7 +155,63 @@ animations = [{
 "loop": 1,
 "name": &"moving_up",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65viv")
+}],
+"loop": 1,
+"name": &"restrained",
+"speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65viv"]
+size = Vector2(22, 20)
+
+[sub_resource type="Animation" id="Animation_x7c3f"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"restrained"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%BodySprite/../../../BodyHurtbox/CollisionShape2D:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("RectangleShape2D_65viv")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%BodySprite/../../../BodyHurtbox/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, -10)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjvpn"]
+_data = {
+&"restrained": SubResource("Animation_x7c3f")
+}
 
 [sub_resource type="Animation" id="Animation_hg6s5"]
 length = 0.05
@@ -445,6 +505,9 @@ entity_def = ExtResource("3_qjkh3")
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_65viv")
 
+[node name="BodyAnimationPlayer" parent="VisualRoot/BodyVisualRoot/BodySprite" index="0" unique_id=1722909834]
+libraries/player = SubResource("AnimationLibrary_bjvpn")
+
 [node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
 position = Vector2(16, -16)
 
@@ -455,6 +518,9 @@ libraries/short_sword = SubResource("AnimationLibrary_qjkh3")
 [node name="CollisionShape2D" parent="BodyHurtbox" parent_id_path=PackedInt32Array(511458273) index="0" unique_id=2017378462]
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_rgyib")
+
+[node name="CollisionShape2D" parent="VisionSensor" parent_id_path=PackedInt32Array(1534038726) index="0" unique_id=376879403]
+metadata/_edit_lock_ = true
 
 [node name="BodyCollision" parent="." index="4" unique_id=4360643]
 position = Vector2(0, -5)

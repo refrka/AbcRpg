@@ -154,7 +154,7 @@ func _evaluate_behaviors(target_disposition: Disposition = null) -> Behavior:
 
 		var evaluation = behavior._evaluate(target_disposition)
 
-		print("evaluation for ", behavior.display_name, ": ", evaluation)
+		print("score: %s (%s)" % [behavior.display_name, evaluation])
 
 		if !chosen_behavior or evaluation > highest_evaluation:
 

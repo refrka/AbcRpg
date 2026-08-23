@@ -46,6 +46,8 @@ func set_target_position(position: Vector2) -> void:
 
 	update_timer = 0.0
 
+	if target_position == position: return
+
 	target_position = position
 
 	nav_agent.target_position = position
@@ -99,10 +101,10 @@ func _physics_process(delta: float) -> void:
 
 			set_target_position(target_entity.global_position)
 
-	if !nav_agent.is_navigation_finished():
+	if nav_agent.is_navigation_finished(): return
 
-		current_path_position = nav_agent.get_next_path_position()
+	current_path_position = nav_agent.get_next_path_position()
 
-		var move_dir = entity.global_position.direction_to(current_path_position)
+	var move_dir = entity.global_position.direction_to(current_path_position)
 
-		movement_component.set_move_dir(move_dir)
+	movement_component.set_move_dir(move_dir)

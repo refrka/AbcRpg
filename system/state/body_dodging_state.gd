@@ -15,6 +15,10 @@ func _enter() -> void:
 
 	movement_component.set_move_dir(dir)
 
+	var dodge_impulse = VelocityModifier.new_impulse(dir * 400.0, 25.0)
+
+	movement_component.add_modifier(dodge_impulse)
+
 	movement_component.movement_locked = true
 
 	entity.body_sprite.animation_finished.connect(_on_body_sprite_animation_finished)

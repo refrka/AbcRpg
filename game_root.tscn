@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://bb2bccbqcmnau" path="res://entity/characters/test_dummy.tscn" id="4_wd1uf"]
 [ext_resource type="PackedScene" uid="uid://bpw2tyr3j5wtx" path="res://entity/characters/thief.tscn" id="5_0o8ui"]
 [ext_resource type="Script" uid="uid://lhkg7gcx3al7" path="res://system/game_camera.gd" id="7_8gxew"]
+[ext_resource type="PackedScene" uid="uid://bxdxtskhyss1g" path="res://ui/player_profile.tscn" id="8_krhou"]
+[ext_resource type="PackedScene" uid="uid://bohgwo8kry1tc" path="res://ui/game_menu.tscn" id="10_8tlgu"]
 [ext_resource type="Script" uid="uid://c7gifdx44tuuf" path="res://ui/health_bar.gd" id="10_aiwur"]
 
 [sub_resource type="Resource" id="Resource_4v00m"]
@@ -73,7 +75,11 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("4_6t5o2")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_aiwur"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_65viv"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8tlgu"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -147,12 +153,23 @@ animations = [{
 "loop": 1,
 "name": &"moving_up",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65viv")
+}],
+"loop": 1,
+"name": &"restrained",
+"speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgyib"]
+size = Vector2(20, 32)
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_8gxew"]
-vertices = PackedVector2Array(1067.1875, 593.8125, 65.28906, 575.1797, 79.71875, 80.84375, 1077.7891, 64.171875)
+vertices = PackedVector2Array(595.25, 42.882813, 602.71875, 324.70313, 55.289063, 309.25, 34.78125, 36.132813)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(70, 71, 55, 585, 1077, 604, 1088, 54)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(24, 26, 46, 319, 613, 335, 605, 33)])
 
 [sub_resource type="Animation" id="Animation_0o8ui"]
 length = 0.001
@@ -219,17 +236,21 @@ follow_viewport_enabled = true
 y_sort_enabled = true
 
 [node name="Player" parent="WorldCanvas/WorldRoot" unique_id=1691891269 instance=ExtResource("3_bxsma")]
-position = Vector2(170, 499)
+position = Vector2(-1, 0)
 collision_mask = 1
 motion_mode = 0
 
 [node name="BodySprite" parent="WorldCanvas/WorldRoot/Player/VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(1691891269, 831679319) index="0" unique_id=16791793]
-sprite_frames = SubResource("SpriteFrames_aiwur")
+sprite_frames = SubResource("SpriteFrames_8tlgu")
 
 [node name="TestDummy" parent="WorldCanvas/WorldRoot" unique_id=1560747210 instance=ExtResource("4_wd1uf")]
-position = Vector2(999, 202)
+position = Vector2(438, 148)
 collision_mask = 1
 motion_mode = 0
+
+[node name="CollisionShape2D" parent="WorldCanvas/WorldRoot/TestDummy/BodyHurtbox" parent_id_path=PackedInt32Array(1560747210, 511458273) index="0" unique_id=2017378462]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_rgyib")
 
 [node name="Thief" parent="WorldCanvas/WorldRoot" unique_id=418514344 instance=ExtResource("5_0o8ui")]
 position = Vector2(454, 258)
@@ -237,33 +258,6 @@ motion_mode = 0
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="WorldCanvas/WorldRoot" unique_id=37434313]
 navigation_polygon = SubResource("NavigationPolygon_8gxew")
-
-[node name="DebugCanvas" type="CanvasLayer" parent="." unique_id=545993034]
-
-[node name="DebugRoot" type="Control" parent="DebugCanvas" unique_id=203147304 groups=["debug_root"]]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="DebugMain" parent="DebugCanvas/DebugRoot" unique_id=2076110897 instance=ExtResource("4_lkrbl")]
-layout_mode = 1
-
-[node name="PlayerHealthBar" parent="DebugCanvas/DebugRoot/DebugMain/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(2076110897, 259377874) index="1" unique_id=48952699 node_paths=PackedStringArray("health_component")]
-size_flags_horizontal = 3
-health_component = NodePath("../../../../../../../../../WorldCanvas/WorldRoot/Thief/ComponentRoot/HealthComponent")
-
-[node name="GameCamera" type="Camera2D" parent="." unique_id=493776325 node_paths=PackedStringArray("anim_player") groups=["game_camera"]]
-anchor_mode = 0
-script = ExtResource("7_8gxew")
-anim_player = NodePath("AnimationPlayer")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="GameCamera" unique_id=2103769497]
-libraries/ = SubResource("AnimationLibrary_ledqy")
 
 [node name="HUDCanvas" type="CanvasLayer" parent="." unique_id=1234062273]
 
@@ -286,6 +280,64 @@ offset_bottom = 56.0
 script = ExtResource("10_aiwur")
 health_component = NodePath("../../../WorldCanvas/WorldRoot/Thief/ComponentRoot/HealthComponent")
 metadata/_custom_type_script = "uid://c7gifdx44tuuf"
+
+[node name="ProfileCanvas" type="CanvasLayer" parent="." unique_id=203315298]
+
+[node name="ProfileRoot" type="Control" parent="ProfileCanvas" unique_id=239058895]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PlayerProfile" parent="ProfileCanvas/ProfileRoot" unique_id=2022760484 instance=ExtResource("8_krhou")]
+visible = false
+layout_mode = 1
+
+[node name="GameMenuCanvas" type="CanvasLayer" parent="." unique_id=478145288]
+
+[node name="GameMenuRoot" type="Control" parent="GameMenuCanvas" unique_id=448173972 groups=["game_menu_root"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GameMenu" parent="GameMenuCanvas/GameMenuRoot" unique_id=566421928 instance=ExtResource("10_8tlgu")]
+layout_mode = 1
+pause_game = true
+metadata/_edit_lock_ = true
+
+[node name="DebugCanvas" type="CanvasLayer" parent="." unique_id=545993034]
+
+[node name="DebugRoot" type="Control" parent="DebugCanvas" unique_id=203147304 groups=["debug_root"]]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DebugMain" parent="DebugCanvas/DebugRoot" unique_id=2076110897 instance=ExtResource("4_lkrbl")]
+layout_mode = 1
+
+[node name="PlayerHealthBar" parent="DebugCanvas/DebugRoot/DebugMain/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(2076110897, 259377874) index="1" unique_id=48952699 node_paths=PackedStringArray("health_component")]
+size_flags_horizontal = 3
+health_component = NodePath("../../../../../../../../../WorldCanvas/WorldRoot/Player/ComponentRoot/HealthComponent")
+
+[node name="GameCamera" type="Camera2D" parent="." unique_id=493776325 node_paths=PackedStringArray("anim_player") groups=["game_camera"]]
+anchor_mode = 0
+script = ExtResource("7_8gxew")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameCamera" unique_id=2103769497]
+libraries/ = SubResource("AnimationLibrary_ledqy")
 
 [editable path="WorldCanvas/WorldRoot/Player"]
 [editable path="WorldCanvas/WorldRoot/Player/VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]

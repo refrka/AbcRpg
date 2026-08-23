@@ -14,6 +14,10 @@ func _evaluate(_target_disposition: Disposition) -> float:
 
 	var baseline = super(_target_disposition)
 
+	if IsHealthCriticalCondition.run({"entity_node": entity}):
+
+		return 1.0
+
 	if !target_disposition:
 
 		return 0.0

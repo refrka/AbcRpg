@@ -35,7 +35,7 @@ func _start() -> void:
 
 	super()
 
-	# navigation_component.set_target_entity(target_disposition.target_entity)
+	navigation_component.set_target_entity(target_disposition.target_entity)
 
 
 
@@ -59,6 +59,14 @@ func _get_final_multiplier(baseline: float) -> float:
 	return final_multiplier * _get_fear_multiplier()
 
 
+
+
+
+func _get_fear_multiplier() -> float:
+
+	
+	
+	return super()
 
 
 
@@ -99,9 +107,13 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 func _on_navigation_completed() -> void:
 
-	if !target_disposition or !target_disposition.target_entity: return
+	if !target_disposition or !target_disposition.target_entity or pickpocket_complete: return
 
 	var target_entity = target_disposition.target_entity
+
+	if target_entity.state_machine.get_body_state() is BodyDodgingState:
+
+		return
 
 	var distance = entity.global_position.distance_to(target_entity.global_position)
 
