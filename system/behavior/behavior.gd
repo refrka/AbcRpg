@@ -1,7 +1,18 @@
 class_name Behavior extends Resource
 
 
+
 @export var display_name: String
+
+@export var baseline_score:= 1.0
+
+
+
+var attitude: float
+
+var temperament: float
+
+
 
 
 var data: Dictionary
@@ -34,7 +45,7 @@ func _evaluate(_data:= {}) -> float:
 
 	data = _data
 
-	return 1.0
+	return baseline_score
 
 
 

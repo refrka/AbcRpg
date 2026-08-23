@@ -37,6 +37,15 @@ func _initialize(_entity: EntityNode) -> bool:
 
 
 
+func receive_damage_package(damage_package: DamagePackage) -> void:
+
+	if current_behavior and current_behavior.has_method("receive_damage_package"):
+
+		current_behavior.receive_damage_package(damage_package)
+
+
+
+
 func _connect_signals() -> void:
 
 	entity.vision_sensor.entity_entered_sensor.connect(_on_entity_entered_vision_sensor)

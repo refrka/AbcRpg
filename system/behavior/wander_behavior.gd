@@ -21,12 +21,6 @@ var idle_timer:= 0.0
 
 
 
-func _evaluate(_data:= {}) -> float:
-
-	return 0.001
-
-
-
 
 func _start() -> void:
 

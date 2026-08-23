@@ -11,7 +11,7 @@ var pickpocket_complete:= false
 
 func _evaluate(_data:= {}) -> float:
 
-	super(_data)
+	var evaluation = super(_data)
 
 	if !data.has("entity_node"):
 
@@ -25,7 +25,7 @@ func _evaluate(_data:= {}) -> float:
 
 	target_entity = entity_node
 
-	return 1.0
+	return evaluation
 
 
 
@@ -36,6 +36,10 @@ func _start() -> void:
 	super()
 
 	navigation_component.set_target_entity(target_entity)
+
+
+
+
 
 
 
@@ -54,6 +58,17 @@ func _disconnect_signals() -> void:
 	navigation_component.navigation_completed.disconnect(_on_navigation_completed)
 
 	entity.vision_sensor.entity_exited_sensor.disconnect(_on_entity_exited_vision_sensor)
+
+
+
+
+
+func receive_damage_package(damage_package: DamagePackage) -> void:
+
+	if damage_package.source == target_entity:
+
+		pass
+
 
 
 

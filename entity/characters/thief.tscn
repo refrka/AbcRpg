@@ -34,6 +34,26 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("3_4f4y2")
 region = Rect2(0, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_avvhb"]
+atlas = ExtResource("3_4f4y2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktr1l"]
+atlas = ExtResource("3_4f4y2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pccyj"]
+atlas = ExtResource("3_4f4y2")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ite3b"]
+atlas = ExtResource("3_4f4y2")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efk01"]
+atlas = ExtResource("3_4f4y2")
+region = Rect2(32, 32, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_bi0im"]
 animations = [{
 "frames": [{
@@ -54,6 +74,36 @@ animations = [{
 "loop": 1,
 "name": &"idle_down",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avvhb")
+}],
+"loop": 1,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ktr1l")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_pccyj")
+}],
+"loop": 1,
+"name": &"moving_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ite3b")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_efk01")
+}],
+"loop": 1,
+"name": &"moving_up",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e62np"]
@@ -69,6 +119,7 @@ height = 18.0
 [sub_resource type="Resource" id="Resource_aajxx"]
 script = ExtResource("6_g4cto")
 display_name = "Wander"
+baseline_score = 0.15
 metadata/_custom_type_script = "uid://ck3c187my4mrw"
 
 [sub_resource type="Resource" id="Resource_krhou"]
@@ -83,6 +134,8 @@ entity_def = ExtResource("2_4f4y2")
 [node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_bi0im")
+animation = &"moving_down"
+frame_progress = 0.5382399
 
 [node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
 position = Vector2(16, -14)
@@ -97,7 +150,7 @@ position = Vector2(0, -14)
 [node name="CollisionShape2D" parent="VisionSensor" index="0" unique_id=376879403]
 shape = SubResource("CircleShape2D_4v00m")
 
-[node name="BodyCollision" parent="." index="3" unique_id=4360643]
+[node name="BodyCollision" parent="." index="4" unique_id=4360643]
 position = Vector2(0, -4)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_aiwur")
@@ -114,7 +167,10 @@ script = ExtResource("5_wsw3u")
 behaviors = Array[ExtResource("7_g4cto")]([SubResource("Resource_aajxx"), SubResource("Resource_krhou")])
 metadata/_custom_type_script = "uid://rvs7yxftyi2c"
 
-[node name="StateMachine" parent="." index="6" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="7" unique_id=1045512078]
+target_desired_distance = 32.0
+
+[node name="StateMachine" parent="." index="8" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
 initial_body_state = NodePath("BodyIdleState")
 initial_combat_state = NodePath("CombatIdleState")
 
@@ -154,9 +210,6 @@ metadata/_custom_type_script = "uid://b4hnnosk686g1"
 [node name="BodyFlinchState" type="Node" parent="StateMachine" index="9" unique_id=430627707]
 script = ExtResource("18_7uro1")
 metadata/_custom_type_script = "uid://b8grg86lkjwpx"
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="7" unique_id=1045512078]
-target_desired_distance = 32.0
 
 [editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
 [editable path="BodyHurtbox"]

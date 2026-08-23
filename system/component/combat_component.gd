@@ -112,6 +112,10 @@ func _try_attack() -> void:
 
 	if !_is_attack_index_valid(current_attack_index): return
 
+	if entity.state_machine.get_body_state() is BodyBusyState:
+
+		return
+
 	if !attack_stored:
 
 		if entity.state_machine.get_body_state() is BodyDodgingState:
