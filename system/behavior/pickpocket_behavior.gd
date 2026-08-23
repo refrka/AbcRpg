@@ -15,7 +15,7 @@ func _evaluate(_target_disposition: Disposition) -> float:
 
 	if target_disposition:
 
-		return evaluation
+		return _get_final_multiplier(evaluation)
 
 	return 0.0
 
@@ -33,6 +33,18 @@ func _start() -> void:
 
 
 
+
+func _get_final_multiplier(baseline: float) -> float:
+
+	var fear_multiplier = target_disposition.fear._get_multiplier(2.0, 0.0)
+
+	var affection_multiplier:= 1.0
+
+	var respect_multiplier:= 1.0
+
+	var final_multiplier = baseline
+
+	return final_multiplier
 
 
 
@@ -76,7 +88,7 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 func _on_navigation_completed() -> void:
 
-	if !target_disposition.target_entity: return
+	if !target_disposition or !target_disposition.target_entity: return
 
 	var distance = entity.global_position.distance_to(target_disposition.target_entity.global_position)
 

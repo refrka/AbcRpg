@@ -1,1 +1,3 @@
-class_name FearAttribute extends BehaviorAttribute
+class_name FearAttribute extends DispositionAttribute
+
+

@@ -57,7 +57,7 @@ func _evaluate(_target_disposition: Disposition) -> float:
 
 	target_disposition = _target_disposition
 
-	if entity_blacklist.has(target_disposition.target_entity.entity_def):
+	if target_disposition and entity_blacklist.has(target_disposition.target_entity.entity_def):
 
 		return 0.0
 
@@ -90,15 +90,7 @@ func _stop() -> void:
 
 func _get_final_multiplier(baseline: float) -> float:
 
-	var fear_multiplier:= 1.0
-
-	var affection_multiplier:= 1.0
-
-	var respect_multiplier:= 1.0
-
-	var final_multiplier = baseline
-
-	return final_multiplier
+	return baseline
 
 
 

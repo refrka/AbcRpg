@@ -1,1 +1,4 @@
-class_name AffectionAttribute extends BehaviorAttribute
+class_name AffectionAttribute extends DispositionAttribute
+
+
+

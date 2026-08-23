@@ -55,6 +55,18 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 		current_behavior.receive_damage_package(damage_package)
 
+	var disposition = _get_disposition(damage_package.source_entity)
+
+	if !disposition:
+
+		disposition = _generate_disposition(damage_package.source_entity)
+
+		disposition.fear.value -= 0.1
+
+		disposition.affection.value -= 0.1
+
+		disposition.respect.value -= 0.1
+
 
 
 
@@ -128,7 +140,7 @@ func _evaluate_behaviors(target_disposition: Disposition = null) -> Behavior:
 
 
 
-func _generate_disposition(target_entity: EntityNode) -> void:
+func _generate_disposition(target_entity: EntityNode) -> Disposition:
 
 	var disposition = Disposition.create_new(target_entity)
 
@@ -136,7 +148,7 @@ func _generate_disposition(target_entity: EntityNode) -> void:
 
 	dispositions.append(disposition)
 
-
+	return disposition
 
 
 
@@ -173,7 +185,7 @@ func _activate() -> bool:
 
 	if !current_behavior:
 
-		current_behavior = _evaluate_behaviors()
+		_choose_behavior()
 
 	current_behavior._start()
 
@@ -204,7 +216,7 @@ func _on_entity_entered_vision_sensor(entity_node: EntityNode) -> void:
 
 	if !disposition:
 
-		_generate_disposition(entity_node)
+		disposition = _generate_disposition(entity_node)
 
 	else:
 
@@ -233,7 +245,7 @@ func _on_disposition_expired(disposition: Disposition) -> void:
 
 func _on_behavior_evaluation_requested(_behavior: Behavior) -> void:
 
-	_evaluate_behaviors()
+	_choose_behavior()
 
 
 

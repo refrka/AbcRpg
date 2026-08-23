@@ -1,1 +1,1 @@
-class_name RespectAttribute extends BehaviorAttribute
+class_name RespectAttribute extends DispositionAttribute
