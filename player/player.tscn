@@ -257,7 +257,7 @@ size = Vector2(17, 7)
 
 [sub_resource type="Animation" id="Animation_yw30f"]
 resource_name = "attack_0"
-length = 0.3
+length = 0.19999999999999998
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -313,7 +313,7 @@ tracks/4/path = NodePath("CombatSprite:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.0056390874, 0.19810462),
+"times": PackedFloat32Array(0.0056390874, 0.16392645),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -325,7 +325,7 @@ tracks/5/path = NodePath("CombatSprite/CombatHitbox/CollisionShape2D:shape")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.0019614024, 0.2030082),
+"times": PackedFloat32Array(0.0019614024, 0.16370332),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [SubResource("RectangleShape2D_qjkh3"), null]
@@ -337,7 +337,7 @@ tracks/6/path = NodePath("%ComponentRoot/CombatComponent")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.10738838),
+"times": PackedFloat32Array(0.08517258),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -350,7 +350,7 @@ size = Vector2(12, 16)
 
 [sub_resource type="Animation" id="Animation_rgyib"]
 resource_name = "attack_0"
-length = 0.3
+length = 0.22386695
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -446,7 +446,7 @@ position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_65viv")
 
 [node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
-position = Vector2(16, -16)
+position = Vector2(18, -16)
 
 [node name="CombatAnimationPlayer" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="1" unique_id=256507589]
 libraries/short_bow = SubResource("AnimationLibrary_8t03j")
@@ -456,7 +456,7 @@ libraries/short_sword = SubResource("AnimationLibrary_qjkh3")
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_rgyib")
 
-[node name="BodyCollision" parent="." index="3" unique_id=4360643]
+[node name="BodyCollision" parent="." index="4" unique_id=4360643]
 position = Vector2(0, -5)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_qjkh3")
@@ -468,7 +468,7 @@ position = Vector2(0, -16)
 script = ExtResource("7_boad6")
 metadata/_custom_type_script = "uid://cd402iei3g0hg"
 
-[node name="StateMachine" parent="." index="6" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
+[node name="StateMachine" parent="." index="7" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
 initial_body_state = NodePath("BodyIdleState")
 initial_combat_state = NodePath("CombatIdleState")
 

@@ -19,6 +19,8 @@ func _enter() -> void:
 
 	entity.body_sprite.animation_finished.connect(_on_body_sprite_animation_finished)
 
+	entity.body_collision.disabled = true
+
 	animation_component.set_dodge_dir(dir)
 
 
@@ -33,6 +35,8 @@ func _exit() -> void:
 	movement_component.halt()
 
 	movement_component.update_dir()
+
+	entity.body_collision.disabled = false
 
 	entity.body_sprite.animation_finished.disconnect(_on_body_sprite_animation_finished)
 

@@ -2,6 +2,9 @@ class_name DamagePackage extends Resource
 
 
 
+
+var source_entity: EntityNode
+
 var damage_entries: Array[DamageEntry]
 
 
@@ -32,9 +35,11 @@ func get_total_damage() -> float:
 
 
 
-static func from_attack_entry(attack_entry: AttackEntry) -> DamagePackage:
+static func from_attack_entry(attack_entry: AttackEntry, _source_entity: EntityNode = null) -> DamagePackage:
 
 	var damage_package = DamagePackage.new()
+
+	damage_package.source_entity = _source_entity
 
 	var damage_entry = DamageEntry.new()
 

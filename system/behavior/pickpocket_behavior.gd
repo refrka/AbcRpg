@@ -9,23 +9,15 @@ var pickpocket_complete:= false
 
 
 
-func _evaluate(_data:= {}) -> float:
+func _evaluate(_target_disposition: Disposition) -> float:
 
-	var evaluation = super(_data)
+	var evaluation = super(_target_disposition)
 
-	if !data.has("entity_node"):
+	if target_disposition:
 
-		return 0.0
+		return evaluation
 
-	var entity_node = data["entity_node"]
-
-	if !target_defs.has(data["entity_node"].entity_def):
-
-		return 0.0
-
-	target_entity = entity_node
-
-	return evaluation
+	return 0.0
 
 
 
@@ -35,7 +27,7 @@ func _start() -> void:
 
 	super()
 
-	navigation_component.set_target_entity(target_entity)
+	navigation_component.set_target_entity(target_disposition.target_entity)
 
 
 
@@ -63,9 +55,13 @@ func _disconnect_signals() -> void:
 
 
 
+
+
+
+
 func receive_damage_package(damage_package: DamagePackage) -> void:
 
-	if damage_package.source == target_entity:
+	if damage_package.source_entity == target_disposition.target_entity:
 
 		pass
 
@@ -74,13 +70,19 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 
 
+
+
+
+
 func _on_navigation_completed() -> void:
 
-	var distance = entity.global_position.distance_to(target_entity.global_position)
+	if !target_disposition.target_entity: return
+
+	var distance = entity.global_position.distance_to(target_disposition.target_entity.global_position)
 
 	if distance <= 32.0:
 
-		target_entity.state_machine.request_state(BodyRestrainedState)
+		target_disposition.target_entity.state_machine.request_state(BodyRestrainedState)
 
 
 
@@ -88,10 +90,10 @@ func _on_navigation_completed() -> void:
 
 func _on_entity_exited_vision_sensor(entity_node: EntityNode) -> void:
 
-	if entity_node == target_entity:
+	if entity_node == target_disposition.target_entity:
 
-		target_entity = null
+		target_disposition.target_entity = null
 
 		navigation_component.set_target_entity(null)
 
-		_reevaluate()
+		evaluation_requested.emit()
