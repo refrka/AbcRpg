@@ -46,7 +46,7 @@ func add_amount(amount: int) -> int:
 
 		new_count += remaining
 
-		return 0
+		remaining = 0
 
 	else:
 
@@ -74,7 +74,7 @@ func remove_amount(amount: int) -> int:
 
 		new_count -= remaining
 
-		return 0
+		remaining = 0
 
 	else:
 
@@ -111,6 +111,8 @@ func can_accept(_item_def: ItemDef, amount:= 1) -> bool:
 
 
 func is_full() -> bool:
+
+	if is_empty(): return false
 
 	return count >= item_def.max_stack
 

@@ -49,11 +49,11 @@ func _initialize(_entity: EntityNode) -> bool:
 
 	if entity.inventory:
 
-		var weapon_slot = entity.inventory.weapon_slot
+		var weapon_data = entity.inventory.weapon_data
 
-		if !weapon_slot.is_empty():
+		if !weapon_data.is_empty():
 
-			_load_weapon_config(weapon_slot.item_data.item_def)
+			_load_weapon_config(weapon_data.item_data.item_def)
 
 	return true
 

@@ -32,8 +32,6 @@ func _enter() -> void:
 
 	super()
 
-	movement_component.update_dir()
-
 	movement_component.set_face_dir(movement_component.move_dir)
 
 	animation_component.set_body_dir(movement_component.move_dir, true)
@@ -43,10 +41,6 @@ func _enter() -> void:
 func _exit() -> void:
 
 	super()
-
-	if entity is Player:
-
-		print("exit moving")
 
 
 

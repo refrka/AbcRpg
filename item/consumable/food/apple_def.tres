@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemDef" format=3 uid="uid://buxnei4447my6"]
+
+[ext_resource type="Script" uid="uid://bet8dxf125h6d" path="res://item/item_def.gd" id="1_c1y6r"]
+[ext_resource type="Texture2D" uid="uid://i3fme7hmrak1" path="res://item/consumable/food/apple_icon.png" id="1_gtj66"]
+
+[resource]
+script = ExtResource("1_c1y6r")
+item_id = &"apple"
+display_name = &"Apple"
+icon_texture = ExtResource("1_gtj66")
+metadata/_custom_type_script = "uid://bet8dxf125h6d"

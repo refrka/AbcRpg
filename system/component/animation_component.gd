@@ -38,10 +38,6 @@ var y_dir:= ""
 
 func set_body_dir(dir: Vector2, moving: bool) -> void:
 
-	if entity is Player:
-
-		print("setting body: ", dir)
-
 	entity.body_sprite.flip_h = dir.x < 0.0
 
 	flip_h = entity.body_sprite.flip_h
@@ -59,10 +55,6 @@ func set_body_dir(dir: Vector2, moving: bool) -> void:
 	animation += y_dir
 
 	if entity.body_sprite.sprite_frames.has_animation(animation):
-
-		if entity is Player:
-
-			print(animation)
 
 		entity.body_sprite.play(animation)
 

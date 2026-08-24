@@ -30,7 +30,17 @@ func _initialize() -> bool:
 
 func load_inventory(inventory: Inventory) -> void:
 
-	pass
+	resize(inventory.size)
+
+	for i in range(inventory.item_list.size()):
+
+		if i > inventory.size: break
+
+		var item_slot = item_slots[i]
+
+		var item_data = inventory.item_list[i]
+
+		item_slot.set_item_data(item_data)
 
 
 
@@ -60,6 +70,14 @@ func resize(grid_size: int) -> void:
 		child._deactivate()
 
 		child_count += 1
+
+	item_slots.clear()
+
+	item_slots.resize(grid_size)
+
+	for i in range(grid_size):
+
+		item_slots.set(i, grid.get_child(i))
 
 
 

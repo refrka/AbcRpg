@@ -222,9 +222,7 @@ func _disconnect_signals() -> void:
 
 func _on_input_dir_updated(dir: Vector2) -> void:
 
-	if can_move:
-
-		set_move_dir(dir)
+	set_move_dir(dir)
 
 
 

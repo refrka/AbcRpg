@@ -18,8 +18,6 @@ func _enter() -> void:
 
 	super()
 
-	animation_component.set_body_dir(movement_component.move_dir, false)
-
 	animation_component.body_anim_player.play("%s/restrained" % entity.entity_def.entity_id)
 
 	entity.state_machine.request_state(CombatRestrainedState)
@@ -36,7 +34,7 @@ func _exit() -> void:
 
 	break_free_count = 0.0
 
-	animation_component.body_anim_player.play("RESET")
+	animation_component.body_anim_player.stop()
 
 	entity.state_machine.request_state(CombatReadyState)
 
