@@ -7,9 +7,9 @@ class_name Inventory extends Resource
 
 @export var size:= 9
 
-@export var slots: Array[ItemSlot]
+var slots: Array[ItemSlot]
 
-@export var weapon_slot: EquipmentSlot
+var weapon_slot: EquipmentSlot
 
 
 var initialized:= false

@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://cr6x3pdjagv48"]
+
+[ext_resource type="Script" uid="uid://nffr6agdpias" path="res://ui/selectable_ui_element.gd" id="1_m0q4r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0q4r"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.33141065, 0.33141062, 0.33141065, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxngi"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.42828208, 0.4282822, 0.428282, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fxdd"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.33141065, 0.33141062, 0.33141065, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="ItemSlot" type="MarginContainer" unique_id=1793815595 node_paths=PackedStringArray("linked_panel")]
+custom_minimum_size = Vector2(32, 32)
+script = ExtResource("1_m0q4r")
+linked_panel = NodePath("PanelContainer")
+default_stylebox = SubResource("StyleBoxFlat_m0q4r")
+hovered_stylebox = SubResource("StyleBoxFlat_lxngi")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=472755729]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3fxdd")

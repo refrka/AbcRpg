@@ -1,40 +1,11 @@
 [gd_resource type="Resource" script_class="CharacterDef" format=3 uid="uid://casgduexd0ueg"]
 
 [ext_resource type="Script" uid="uid://b2swvbk1sv4ar" path="res://entity/character_def.gd" id="1_vsdcc"]
-[ext_resource type="Script" uid="uid://bqc2bim6ivi0d" path="res://item/inventory.gd" id="1_yxfdr"]
-[ext_resource type="Script" uid="uid://cciboqf6a31u6" path="res://item/item_slot.gd" id="2_2adva"]
-[ext_resource type="Resource" uid="uid://ds1pe2xiao16c" path="res://item/equipment/ammunition/wood_arrow_def.tres" id="3_dpqif"]
-[ext_resource type="Script" uid="uid://dji7pch2e6jjt" path="res://item/equipment_data.gd" id="4_v5aw8"]
-[ext_resource type="Resource" uid="uid://c5fi6aliewfpd" path="res://item/equipment/weapons/ranged/short_bow_def.tres" id="5_63apf"]
-[ext_resource type="Script" uid="uid://dg3op23rm8phy" path="res://item/equipment_slot.gd" id="6_681ng"]
-
-[sub_resource type="Resource" id="Resource_dn1kc"]
-script = ExtResource("4_v5aw8")
-item_def = ExtResource("3_dpqif")
-count = 50
-metadata/_custom_type_script = "uid://dji7pch2e6jjt"
-
-[sub_resource type="Resource" id="Resource_c4435"]
-script = ExtResource("4_v5aw8")
-ammunition_data = SubResource("Resource_dn1kc")
-item_def = ExtResource("5_63apf")
-metadata/_custom_type_script = "uid://dji7pch2e6jjt"
-
-[sub_resource type="Resource" id="Resource_xx8wt"]
-script = ExtResource("6_681ng")
-item_data = SubResource("Resource_c4435")
-metadata/_custom_type_script = "uid://dg3op23rm8phy"
-
-[sub_resource type="Resource" id="Resource_vsdcc"]
-script = ExtResource("1_yxfdr")
-weapon_slot = SubResource("Resource_xx8wt")
-metadata/_custom_type_script = "uid://bqc2bim6ivi0d"
 
 [resource]
 script = ExtResource("1_vsdcc")
 entity_id = &"test_dummy"
 unique_id = &"test_dummy"
 display_name = &"Test dummy"
-initial_inventory = SubResource("Resource_vsdcc")
 base_max_health = 100.0
 metadata/_custom_type_script = "uid://b2swvbk1sv4ar"

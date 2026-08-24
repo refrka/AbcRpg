@@ -1,8 +1,21 @@
 [gd_scene format=3 uid="uid://bxdxtskhyss1g"]
 
 [ext_resource type="Script" uid="uid://ccmtjrslm522x" path="res://ui/player_profile.gd" id="1_pd1kv"]
+[ext_resource type="PackedScene" uid="uid://krq6ncaklyut" path="res://ui/inventory_grid.tscn" id="2_5n6if"]
 
-[node name="PlayerProfile" type="MarginContainer" unique_id=2022760484 groups=["player_profile"]]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5n6if"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.22, 0.22, 0.22, 0.9490196)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="PlayerProfile" type="MarginContainer" unique_id=2022760484 node_paths=PackedStringArray("inventory_grid") groups=["player_profile"]]
 process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +27,48 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 script = ExtResource("1_pd1kv")
+inventory_grid = NodePath("PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/InventoryGrid")
 pause_game = true
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1140124413]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5n6if")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=976509830]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1891242309]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=340862593]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=499128445]
+layout_mode = 2
+text = "Player Name"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1985348179]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1447061012]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=787102405]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2093766929]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="InventoryGrid" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1082122628 instance=ExtResource("2_5n6if")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1449431039]
 layout_mode = 2

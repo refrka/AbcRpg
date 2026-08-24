@@ -82,7 +82,9 @@ func get_combat_state() -> CombatState:
 
 
 
-func request_state(state_script: Script) -> void:
+func request_state(state_script: Script) -> State:
+
+	var new_state: State = null
 
 	for state in get_children():
 
@@ -90,22 +92,28 @@ func request_state(state_script: Script) -> void:
 
 			if state is BodyState:
 
-				_change_body_state(state)
+				new_state = _change_body_state(state)
 
 			elif state is CombatState:
 
-				_change_combat_state(state)
+				new_state = _change_combat_state(state)
+
+			return new_state
+
+	return new_state
 
 
 
 
-func _change_body_state(state: BodyState) -> void:
+func _change_body_state(state: BodyState) -> BodyState:
 
-	if body_state == state and body_state.allow_reenter:
+	if body_state == state:
+		
+		if body_state.allow_reenter:
 
-		body_state._enter()
+			body_state._enter()
 
-		return
+		return null
 
 	if body_state:
 
@@ -117,14 +125,18 @@ func _change_body_state(state: BodyState) -> void:
 
 	body_state_changed.emit(body_state)
 
+	return body_state
 
 
 
-func _change_combat_state(state: CombatState) -> void:
 
-	if combat_state == state and combat_state.allow_reenter:
+func _change_combat_state(state: CombatState) -> CombatState:
 
-		combat_state._enter()
+	if combat_state == state:
+		
+		if combat_state.allow_reenter:
+
+			combat_state._enter()
 
 		return
 
@@ -132,15 +144,13 @@ func _change_combat_state(state: CombatState) -> void:
 
 		_deactivate_state(combat_state)
 
-	if entity is Player:
-
-		print("combat state: ", combat_state.get_state_name())
-
 	combat_state = state
 
 	_activate_state(combat_state)
 
 	combat_state_changed.emit(combat_state)
+
+	return combat_state
 
 
 

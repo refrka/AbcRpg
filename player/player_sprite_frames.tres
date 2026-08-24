@@ -42,6 +42,14 @@ region = Rect2(0, 0, 48, 48)
 atlas = ExtResource("1_vtti7")
 region = Rect2(48, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tlgu"]
+atlas = ExtResource("1_vtti7")
+region = Rect2(288, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_soos4"]
+atlas = ExtResource("1_vtti7")
+region = Rect2(336, 48, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_pqije"]
 atlas = ExtResource("1_vtti7")
 region = Rect2(96, 0, 48, 48)
@@ -62,14 +70,18 @@ region = Rect2(240, 0, 48, 48)
 atlas = ExtResource("1_vtti7")
 region = Rect2(192, 48, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7c3f"]
+atlas = ExtResource("1_vtti7")
+region = Rect2(240, 48, 48, 48)
+
 [resource]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
-"duration": 1.2,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_rgyib")
 }, {
-"duration": 0.75,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_hg6s5")
 }, {
 "duration": 0.75,
@@ -116,6 +128,17 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_8tlgu")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_soos4")
+}],
+"loop": 1,
+"name": &"knocked_down",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_pqije")
 }, {
@@ -138,8 +161,11 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_65viv")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_x7c3f")
 }],
 "loop": 1,
 "name": &"restrained",

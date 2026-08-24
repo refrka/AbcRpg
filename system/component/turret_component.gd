@@ -89,9 +89,9 @@ func _on_entity_entered_vision_sensor(entity_node: EntityNode) -> void:
 
 	firing_timer = turret_config.fire_rate
 
-	firing_timer_active = true
+	# firing_timer_active = true
 
-	_fire()
+	# _fire()
 
 
 
@@ -125,4 +125,6 @@ func _process(delta: float) -> void:
 
 		if firing_timer <= 0.0:
 
-			_fire()
+			# _fire()
+
+			pass

@@ -15,7 +15,7 @@ func _enter() -> void:
 
 	movement_component.set_move_dir(dir)
 
-	var dodge_impulse = VelocityModifier.new_impulse(dir * 400.0, 25.0)
+	var dodge_impulse = VelocityModifier.new_impulse(dir * 250.0, 22.0)
 
 	movement_component.add_modifier(dodge_impulse)
 

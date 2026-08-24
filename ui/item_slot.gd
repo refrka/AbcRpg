@@ -1,13 +1,10 @@
-class_name ItemSlot extends Resource
-
+class_name ItemSlot extends UIElement
 
 
 signal slot_data_updated
 
 
-
-@export var item_data: ItemData
-
+var item_data: ItemData
 
 
 

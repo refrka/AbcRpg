@@ -41,6 +41,8 @@ func _ready() -> void:
 
 	player_profile = get_tree().get_first_node_in_group("player_profile")
 
+	player_profile._initialize()
+
 	player_profile._deactivate()
 
 	player_profile.hide()

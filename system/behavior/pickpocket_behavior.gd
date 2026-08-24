@@ -6,12 +6,20 @@ class_name PickpocketBehavior extends Behavior
 
 var pickpocket_complete:= false
 
+var cooldown:= 0.0
+
 
 
 
 func _evaluate(_target_disposition: Disposition) -> float:
 
 	var evaluation = super(_target_disposition)
+
+	if cooldown > 0.0:
+
+		cooldown -= 1.0
+
+		return 0.0
 
 	if pickpocket_complete or IsHealthCriticalCondition.run({"entity_node": entity}):
 
@@ -107,7 +115,7 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 func _on_navigation_completed() -> void:
 
-	if !target_disposition or !target_disposition.target_entity or pickpocket_complete: return
+	if !target_disposition or !target_disposition.target_entity or pickpocket_complete or cooldown > 0.0: return
 
 	var target_entity = target_disposition.target_entity
 
@@ -119,13 +127,30 @@ func _on_navigation_completed() -> void:
 
 	if distance <= 24.0:
 
-		target_entity.state_machine.request_state(BodyRestrainedState)
+		var restrained_state = target_entity.state_machine.request_state(BodyRestrainedState)
 
-		await Game.get_tree().create_timer(1.5).timeout
+		if restrained_state:
 
-		target_entity.state_machine.request_state(BodyIdleState)
+			restrained_state.break_free.connect(_on_entity_break_free.bind(restrained_state))
 
-		pickpocket_complete = true
+		# await Game.get_tree().create_timer(1.5).timeout
 
+		# target_entity.state_machine.request_state(BodyIdleState)
+
+		# pickpocket_complete = true
+
+
+
+
+
+func _on_entity_break_free(restrained_state: BodyRestrainedState) -> void:
+
+	restrained_state.break_free.disconnect(_on_entity_break_free)
+
+	cooldown = 3.0
+
+	target_disposition.target_entity.state_machine.request_state(BodyIdleState)
+
+	evaluation_requested.emit()
 
 
