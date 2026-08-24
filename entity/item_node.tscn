@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://n03vdsdlo68k"]
+
+[ext_resource type="PackedScene" uid="uid://ch5dyx5bpfnf5" path="res://entity/object_node.tscn" id="1_mgqmv"]
+[ext_resource type="Script" uid="uid://du2e457m4voau" path="res://entity/item_node.gd" id="2_5nqgb"]
+[ext_resource type="Script" uid="uid://h8bhxdb5nsyu" path="res://entity/object_def.gd" id="3_hhj0b"]
+[ext_resource type="Texture2D" uid="uid://d312lfhgfs8px" path="res://item/item_shadow.png" id="4_1bwnk"]
+
+[sub_resource type="Resource" id="Resource_5nqgb"]
+script = ExtResource("3_hhj0b")
+entity_id = &"item"
+display_name = &"Item"
+base_max_health = 1.0
+metadata/_custom_type_script = "uid://h8bhxdb5nsyu"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1bwnk"]
+radius = 7.0
+
+[node name="ItemNode" unique_id=1945380598 node_paths=PackedStringArray("item_sprite") instance=ExtResource("1_mgqmv")]
+collision_layer = 4
+script = ExtResource("2_5nqgb")
+item_data = null
+item_sprite = NodePath("VisualRoot/BodyVisualRoot/ItemSprite")
+entity_def = SubResource("Resource_5nqgb")
+
+[node name="ItemShadowSprite" type="Sprite2D" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(1008229108) index="1" unique_id=36349822]
+modulate = Color(1, 1, 1, 0.46666667)
+texture = ExtResource("4_1bwnk")
+
+[node name="ItemSprite" type="Sprite2D" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(1008229108) index="2" unique_id=2076384925]
+
+[node name="BodyCollision" parent="." index="1" unique_id=2100948546]
+shape = SubResource("CircleShape2D_1bwnk")
+debug_color = Color(0.7, 0.66499996, 0, 0.05882353)
+
+[editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
+[editable path="BodyHurtbox"]

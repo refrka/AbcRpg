@@ -11,6 +11,10 @@ signal dodge_pressed
 
 signal break_free_pressed
 
+signal interact_pressed
+
+signal interact_released
+
 
 
 
@@ -45,6 +49,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("break_free"):
 
 		break_free_pressed.emit()
+
+	if event.is_action_pressed("interact"):
+
+		interact_pressed.emit()
+
+	if event.is_action_released("interact"):
+
+		interact_released.emit()
 
 
 

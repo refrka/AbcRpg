@@ -116,8 +116,6 @@ func _execute_pickpocket(restrained_state: BodyRestrainedState) -> void:
 
 func _fail_pickpocket(restrained_state: BodyRestrainedState) -> void:
 
-	print("pickpocket failed")
-
 	cooldown = 3.0
 
 	target_disposition.target_entity.state_machine.request_state(BodyIdleState)

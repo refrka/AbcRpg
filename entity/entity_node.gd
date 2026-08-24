@@ -19,7 +19,9 @@ class_name EntityNode extends PhysicsBody2D
 
 @export var vision_sensor: Sensor
 
-@export var interact_sensor: Sensor
+@export var interact_sensor: InteractSensor
+
+@export var pick_up_sensor: PickUpSensor
 
 @export var combat_origin: Node2D
 
@@ -66,6 +68,8 @@ func _initialize() -> bool:
 	if vision_sensor: vision_sensor._initialize(self)
 
 	if interact_sensor: interact_sensor._initialize(self)
+
+	if pick_up_sensor: pick_up_sensor._initialize(self)
 
 	return true
 
@@ -200,7 +204,13 @@ func _activate() -> bool:
 
 	if vision_sensor: vision_sensor._activate()
 
+	if interact_sensor: interact_sensor._activate()
+
+	if pick_up_sensor: pick_up_sensor._activate()
+
 	return true
+
+
 
 
 
@@ -223,6 +233,10 @@ func _deactivate() -> bool:
 	if combat_hitbox: combat_hitbox._deactivate()
 
 	if vision_sensor: vision_sensor._deactivate()
+
+	if interact_sensor: interact_sensor._deactivate()
+
+	if pick_up_sensor: pick_up_sensor._deactivate()
 
 	return true
 

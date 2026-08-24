@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://c2i4mnyfkw22f" path="res://system/combat/hurtbox.tscn" id="3_me77t"]
 [ext_resource type="Script" uid="uid://cvcq2asqkdmv5" path="res://system/component/animation_component.gd" id="4_0rdkl"]
 [ext_resource type="Script" uid="uid://bw7n4553g41yu" path="res://system/component/combat_component.gd" id="5_0hq70"]
+[ext_resource type="Script" uid="uid://bq7haq54lt81j" path="res://entity/interact_sensor.gd" id="5_22lai"]
 [ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="5_jg2qq"]
+[ext_resource type="Script" uid="uid://dgb0wmg6r3kc0" path="res://entity/pick_up_sensor.gd" id="6_8mhx1"]
 [ext_resource type="Script" uid="uid://bd8k3lxk6hnr2" path="res://system/component/health_component.gd" id="8_bqwre"]
 [ext_resource type="Script" uid="uid://dyjvaue3wy2t7" path="res://system/component/effects_component.gd" id="9_gqgbn"]
 
@@ -143,7 +145,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("%BodySprite:modulate")
+tracks/6/path = NodePath("../BodyVisualRoot/BodySprite:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -155,7 +157,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("%BodySprite:offset:x")
+tracks/7/path = NodePath("../BodyVisualRoot/BodySprite:offset:x")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -167,7 +169,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("%BodySprite:scale")
+tracks/8/path = NodePath("../BodyVisualRoot/BodySprite:scale")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -183,11 +185,11 @@ length = 0.22
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%BodySprite:modulate")
+tracks/0/path = NodePath("../BodyVisualRoot/BodySprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.055142146, 0.10614608, 0.16073269, 0.21124874),
+"times": PackedFloat32Array(0.0017358895, 0.056878034, 0.10788197, 0.16246858, 0.21298464),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(2.454227, 2.454227, 2.454227, 1), Color(1.353256, 0, 0, 1), Color(2.454227, 2.454227, 2.454227, 1), Color(1.353256, 0, 0, 1), Color(1, 1, 1, 1)]
@@ -195,13 +197,13 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("%BodySprite:offset:x")
+tracks/1/path = NodePath("../BodyVisualRoot/BodySprite:offset:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.053595293, 0.10561783, 0.1594551, 0.2115),
+"times": PackedFloat32Array(0.0017358895, 0.05533118, 0.10735372, 0.161191, 0.2132359),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [0.0, 2.0, -2.0, 2.0, 0.0]
 }
 
@@ -211,26 +213,26 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%BodySprite:scale")
+tracks/0/path = NodePath("CombatSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.5, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CombatSprite:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0.00036293315),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BodyVisualRoot/BodySprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pgotb"]
@@ -243,7 +245,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_udydy"]
 radius = 58.034473
 
-[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine", "body_hurtbox", "combat_hitbox", "vision_sensor", "interact_sensor", "combat_origin")]
+[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine", "body_hurtbox", "combat_hitbox", "vision_sensor", "interact_sensor", "pick_up_sensor", "combat_origin")]
 y_sort_enabled = true
 collision_mask = 0
 motion_mode = 1
@@ -256,6 +258,7 @@ body_hurtbox = NodePath("BodyHurtbox")
 combat_hitbox = NodePath("VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox")
 vision_sensor = NodePath("VisionSensor")
 interact_sensor = NodePath("InteractSensor")
+pick_up_sensor = NodePath("PickUpSensor")
 combat_origin = NodePath("Center/CombatOrigin")
 
 [node name="VisualRoot" type="Node2D" parent="." unique_id=1685553084]
@@ -282,27 +285,6 @@ position = Vector2(16, 0)
 [node name="CombatAnimationPlayer" type="AnimationPlayer" parent="VisualRoot/CombatVisualRoot" unique_id=256507589]
 libraries/ = SubResource("AnimationLibrary_pgotb")
 
-[node name="BodyVisualRoot2" type="Node2D" parent="VisualRoot" unique_id=2067861218]
-
-[node name="BodySprite" type="AnimatedSprite2D" parent="VisualRoot/BodyVisualRoot2" unique_id=2095371008]
-scale = Vector2(0.5, 1)
-sprite_frames = SubResource("SpriteFrames_yw30f")
-animation = &"idle_down"
-
-[node name="BodyAnimationPlayer" type="AnimationPlayer" parent="VisualRoot/BodyVisualRoot2/BodySprite" unique_id=414009973]
-libraries/ = SubResource("AnimationLibrary_8mhx1")
-
-[node name="CombatVisualRoot2" type="Node2D" parent="VisualRoot" unique_id=1994581889]
-
-[node name="CombatSprite" type="Sprite2D" parent="VisualRoot/CombatVisualRoot2" unique_id=1167363650]
-visible = false
-position = Vector2(16, 0)
-
-[node name="CombatHitbox" parent="VisualRoot/CombatVisualRoot2/CombatSprite" unique_id=678314027 instance=ExtResource("2_udydy")]
-
-[node name="CombatAnimationPlayer" type="AnimationPlayer" parent="VisualRoot/CombatVisualRoot2" unique_id=1525028417]
-libraries/ = SubResource("AnimationLibrary_pgotb")
-
 [node name="BodyHurtbox" parent="." unique_id=511458273 instance=ExtResource("3_me77t")]
 
 [node name="CollisionShape2D" parent="BodyHurtbox" index="0" unique_id=2017378462]
@@ -322,9 +304,24 @@ metadata/_custom_type_script = "uid://c0s3d38vd56k5"
 shape = SubResource("CircleShape2D_udydy")
 debug_color = Color(0, 0.6, 0.69803923, 0)
 
-[node name="InteractSensor" type="Area2D" parent="." unique_id=1065023119]
-script = ExtResource("2_8mhx1")
+[node name="InteractSensor" type="Area2D" parent="." unique_id=1065023119 node_paths=PackedStringArray("collision_shape")]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("5_22lai")
+collision_shape = NodePath("CollisionShape2D")
 metadata/_custom_type_script = "uid://c0s3d38vd56k5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractSensor" unique_id=977891592]
+debug_color = Color(0.6719664, 0.4000586, 0.7903112, 0)
+
+[node name="PickUpSensor" type="Area2D" parent="." unique_id=1125136771 node_paths=PackedStringArray("collision_shape")]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_8mhx1")
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpSensor" unique_id=428972075]
+debug_color = Color(0.7, 0.35, 0, 0)
 
 [node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=4360643]
 unique_name_in_owner = true
@@ -370,5 +367,4 @@ script = ExtResource("5_jg2qq")
 metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
 
 [editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
-[editable path="VisualRoot/CombatVisualRoot2/CombatSprite/CombatHitbox"]
 [editable path="BodyHurtbox"]

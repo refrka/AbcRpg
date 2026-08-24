@@ -13,13 +13,13 @@ var effect_data: EffectData
 
 func _ready() -> void:
 
-	dummy._initialize()
+	for entity in Scenes.world_root.get_children():
 
-	dummy._activate()
+		if entity is EntityNode:
 
-	thief._initialize()
+			entity._initialize()
 
-	thief._activate()
+			entity._activate()
 
 
 

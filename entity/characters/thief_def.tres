@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://dbcds43ohrrxx" path="res://system/behavior/reaction_tag.gd" id="2_8bvsm"]
 [ext_resource type="Script" uid="uid://38c3jtlykn51" path="res://system/behavior/behavior_profile.gd" id="2_27bkw"]
 [ext_resource type="Script" uid="uid://b3bubacp38oh2" path="res://system/behavior/reaction_tags/received_damage_tag.gd" id="3_8bvsm"]
+[ext_resource type="Script" uid="uid://3afb8y37pgo7" path="res://item/item_data.gd" id="5_7fliu"]
+[ext_resource type="Script" uid="uid://bqc2bim6ivi0d" path="res://item/inventory.gd" id="6_5jo7f"]
 
 [sub_resource type="Curve" id="Curve_pccyj"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25293714, 0.7672956), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -38,10 +40,15 @@ attribute_remaps = Dictionary[int, ExtResource("1_qq5ly")]({
 reaction_tags = Array[ExtResource("2_8bvsm")]([SubResource("Resource_xjbxk")])
 metadata/_custom_type_script = "uid://38c3jtlykn51"
 
+[sub_resource type="Resource" id="Resource_pccyj"]
+script = ExtResource("6_5jo7f")
+metadata/_custom_type_script = "uid://bqc2bim6ivi0d"
+
 [resource]
 script = ExtResource("1_e7ny4")
 move_speed = 200.0
 behavior_profile = SubResource("Resource_e7ny4")
 entity_id = &"thief"
 display_name = &"Thief"
+initial_inventory = SubResource("Resource_pccyj")
 metadata/_custom_type_script = "uid://b2swvbk1sv4ar"

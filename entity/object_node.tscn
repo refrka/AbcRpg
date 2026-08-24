@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://f6riejhhke6a" path="res://entity/object_node.gd" id="1_24nlx"]
 [ext_resource type="PackedScene" uid="uid://c2i4mnyfkw22f" path="res://system/combat/hurtbox.tscn" id="2_4ptr2"]
+[ext_resource type="PackedScene" uid="uid://rvq8w2fbv0oa" path="res://system/combat/hitbox.tscn" id="2_s5vqo"]
 [ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="3_7x2mx"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ptr2"]
@@ -11,6 +12,180 @@ animations = [{
 "name": &"idle_down",
 "speed": 5.0
 }]
+
+[sub_resource type="Animation" id="Animation_8mhx1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CombatSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CombatSprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CombatSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../Center/CombatOrigin/CombatSpriteRemote:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CombatSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CombatSprite/CombatHitbox/CollisionShape2D:shape")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../BodyVisualRoot/BodySprite:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../BodyVisualRoot/BodySprite:offset:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../BodyVisualRoot/BodySprite:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ddap6"]
+resource_name = "flinch"
+length = 0.22
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BodyVisualRoot/BodySprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0017358895, 0.056878034, 0.10788197, 0.16246858, 0.21298464),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(2.454227, 2.454227, 2.454227, 1), Color(1.353256, 0, 0, 1), Color(2.454227, 2.454227, 2.454227, 1), Color(1.353256, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BodyVisualRoot/BodySprite:offset:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0017358895, 0.05533118, 0.10735372, 0.161191, 0.2132359),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 2.0, -2.0, 2.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_gqgbn"]
+resource_name = "restrain"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CombatSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.00036293315),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BodyVisualRoot/BodySprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_81hc7"]
+_data = {
+&"RESET": SubResource("Animation_8mhx1"),
+&"flinch": SubResource("Animation_ddap6"),
+&"restrain": SubResource("Animation_gqgbn")
+}
 
 [node name="ObjectNode" type="StaticBody2D" unique_id=1945380598 node_paths=PackedStringArray("body_sprite", "body_collision", "component_root", "state_machine", "body_hurtbox", "combat_origin")]
 y_sort_enabled = true
@@ -28,12 +203,21 @@ combat_origin = NodePath("Center/CombatOrigin")
 y_sort_enabled = true
 
 [node name="BodyVisualRoot" type="Node2D" parent="VisualRoot" unique_id=1008229108]
-y_sort_enabled = true
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="VisualRoot/BodyVisualRoot" unique_id=1588319379]
-unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_4ptr2")
 animation = &"idle_down"
+
+[node name="CombatVisualRoot" type="Node2D" parent="VisualRoot" unique_id=1656356015]
+
+[node name="CombatSprite" type="Sprite2D" parent="VisualRoot/CombatVisualRoot" unique_id=1766932561]
+visible = false
+position = Vector2(16, 0)
+
+[node name="CombatHitbox" parent="VisualRoot/CombatVisualRoot/CombatSprite" unique_id=1556507908 instance=ExtResource("2_s5vqo")]
+
+[node name="CombatAnimationPlayer" type="AnimationPlayer" parent="VisualRoot/CombatVisualRoot" unique_id=829461285]
+libraries/ = SubResource("AnimationLibrary_81hc7")
 
 [node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=2100948546]
 
@@ -54,4 +238,5 @@ metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
 position = Vector2(16, 0)
 remote_path = NodePath("../../../VisualRoot/CombatVisualRoot/CombatSprite")
 
+[editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
 [editable path="BodyHurtbox"]

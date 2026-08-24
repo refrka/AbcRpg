@@ -11,18 +11,6 @@ signal sensor_exited_sensor(sensor: Sensor)
 
 
 
-@export var editor_activate:= true:
-
-	set(value):
-
-		editor_activate = value
-
-		if active != editor_activate:
-
-			if editor_activate: _activate()
-
-			else: _deactivate()
-
 
 @export var collision_shape: CollisionShape2D
 
@@ -112,6 +100,9 @@ func _connect_signals() -> void:
 	area_entered.connect(_on_area_entered_sensor)
 
 	area_exited.connect(_on_area_exited_sensor)
+
+
+
 
 
 func _disconnect_signals() -> void:

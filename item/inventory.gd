@@ -9,7 +9,7 @@ class_name Inventory extends Resource
 
 @export var item_list: Array[ItemData]
 
-@export var weapon_data: EquipmentData
+@export var weapon_data:= EquipmentData.new()
 
 
 var initialized:= false
@@ -53,7 +53,17 @@ func add_items(item_def: ItemDef, count:= 1) -> int:
 
 	var item_data = _get_data_with(item_def, true)
 
+	if !item_data:
+
+		item_data = _get_first_empty_data()
+
 	while item_data and remaining > 0:
+
+		if item_data.is_empty():
+
+			item_data.set_data(item_def, 1)
+
+			remaining -= 1
 
 		remaining = item_data.add_amount(remaining)
 
@@ -64,12 +74,6 @@ func add_items(item_def: ItemDef, count:= 1) -> int:
 			if !item_data:
 
 				item_data = _get_first_empty_data()
-
-				if item_data:
-
-					item_data.set_data(item_def, 1)
-
-					remaining -= 1
 
 	return remaining
 
@@ -93,6 +97,18 @@ func remove_items(item_def: ItemDef, count:= 1) -> int:
 			item_data = _get_data_with(item_def)
 
 	return remaining
+
+
+
+
+
+func add_item_data(item_data: ItemData) -> void:
+
+	var item_def = item_data.item_def
+
+	var remaining = add_items(item_data.item_def, item_data.count)
+
+	item_data.set_data(item_def, remaining)
 
 
 

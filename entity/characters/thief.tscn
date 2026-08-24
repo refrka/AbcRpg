@@ -110,6 +110,13 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4v00m"]
 radius = 207.06038
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1uov0"]
+radius = 56.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8mhx1"]
+radius = 11.0
+height = 32.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aiwur"]
 radius = 4.0
 height = 18.0
@@ -136,17 +143,11 @@ metadata/_custom_type_script = "uid://ccsjcn37bphav"
 [node name="Thief" unique_id=1691891269 instance=ExtResource("1_15ir2")]
 entity_def = ExtResource("2_4f4y2")
 
-[node name="BodyVisualRoot" parent="VisualRoot" parent_id_path=PackedInt32Array(1685553084) index="0" unique_id=831679319]
-y_sort_enabled = false
-
-[node name="BodySprite" parent="VisualRoot/BodyVisualRoot" index="0" unique_id=16791793]
+[node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_bi0im")
 
-[node name="CombatVisualRoot" parent="VisualRoot" parent_id_path=PackedInt32Array(1685553084) index="1" unique_id=2053548299]
-y_sort_enabled = false
-
-[node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" index="0" unique_id=1921775663]
+[node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
 position = Vector2(16, -14)
 
 [node name="VisionSensor" parent="." index="2" unique_id=1534038726]
@@ -155,13 +156,28 @@ position = Vector2(0, -14)
 [node name="CollisionShape2D" parent="VisionSensor" index="0" unique_id=376879403]
 shape = SubResource("CircleShape2D_4v00m")
 
-[node name="BodyCollision" parent="." index="4" unique_id=4360643]
+[node name="InteractSensor" parent="." index="3" unique_id=1065023119]
+position = Vector2(0, -14)
+
+[node name="CollisionShape2D" parent="InteractSensor" index="0" unique_id=977891592]
+shape = SubResource("CircleShape2D_1uov0")
+
+[node name="PickUpSensor" parent="." index="4" unique_id=1125136771]
+position = Vector2(0, -14)
+
+[node name="CollisionShape2D" parent="PickUpSensor" index="0" unique_id=428972075]
+shape = SubResource("CapsuleShape2D_8mhx1")
+
+[node name="BodyCollision" parent="." index="5" unique_id=4360643]
 position = Vector2(0, -4)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_aiwur")
 
-[node name="Center" parent="." index="5" unique_id=893569566]
+[node name="Center" parent="." index="6" unique_id=893569566]
 position = Vector2(0, -14)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="7" unique_id=1045512078]
+target_desired_distance = 24.0
 
 [node name="NavigationComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="4" unique_id=653609944 node_paths=PackedStringArray("nav_agent")]
 script = ExtResource("3_7pkal")
@@ -172,10 +188,7 @@ script = ExtResource("5_wsw3u")
 behaviors = Array[ExtResource("7_g4cto")]([SubResource("Resource_aajxx"), SubResource("Resource_krhou"), SubResource("Resource_avvhb")])
 metadata/_custom_type_script = "uid://rvs7yxftyi2c"
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="7" unique_id=1045512078]
-target_desired_distance = 24.0
-
-[node name="StateMachine" parent="." index="8" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
+[node name="StateMachine" parent="." index="9" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
 initial_body_state = NodePath("BodyIdleState")
 initial_combat_state = NodePath("CombatIdleState")
 

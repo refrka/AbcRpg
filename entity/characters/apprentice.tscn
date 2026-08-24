@@ -32,7 +32,7 @@ entity_def = ExtResource("2_emmu0")
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_4e0hr")
 
-[node name="StateMachine" parent="." index="6" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
+[node name="StateMachine" parent="." index="7" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
 initial_body_state = NodePath("BodyIdleState")
 initial_combat_state = NodePath("CombatIdleState")
 
