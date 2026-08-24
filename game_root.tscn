@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://ckwu6qdd3vopy" path="res://system/effect/restrained_passive_effect.gd" id="2_krhou"]
 [ext_resource type="PackedScene" uid="uid://c74kocy3mpvrq" path="res://ui/main_menu.tscn" id="2_pjpa4"]
 [ext_resource type="PackedScene" uid="uid://bcm53htxb38iq" path="res://player/player.tscn" id="3_bxsma"]
+[ext_resource type="Texture2D" uid="uid://do7we2soafq6v" path="res://player/player_sprite_sheet.png" id="4_6t5o2"]
 [ext_resource type="PackedScene" uid="uid://ben0epy3fpbqf" path="res://ui/debug_main.tscn" id="4_lkrbl"]
 [ext_resource type="PackedScene" uid="uid://bb2bccbqcmnau" path="res://entity/characters/test_dummy.tscn" id="4_wd1uf"]
 [ext_resource type="PackedScene" uid="uid://bpw2tyr3j5wtx" path="res://entity/characters/thief.tscn" id="5_0o8ui"]
-[ext_resource type="SpriteFrames" uid="uid://calxxfw5ac2mc" path="res://player/player_sprite_frames.tres" id="5_8tlgu"]
 [ext_resource type="Script" uid="uid://lhkg7gcx3al7" path="res://system/game_camera.gd" id="7_8gxew"]
 [ext_resource type="PackedScene" uid="uid://bxdxtskhyss1g" path="res://ui/player_profile.tscn" id="8_krhou"]
 [ext_resource type="PackedScene" uid="uid://bohgwo8kry1tc" path="res://ui/game_menu.tscn" id="10_8tlgu"]
@@ -18,6 +18,176 @@ script = ExtResource("2_krhou")
 effect_type = 1
 effect_id = &"restrained_effect"
 display_name = "Restrained"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgyib"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hg6s5"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t03j"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ieo8"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yllr7"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb6p2"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wodsf"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32hag"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(144, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yw30f"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjkh3"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tlgu"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(288, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_soos4"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(336, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqije"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0c2jh"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtti7"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2h3v"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65viv"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7c3f"]
+atlas = ExtResource("4_6t5o2")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8tlgu"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_rgyib")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_hg6s5")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_8t03j")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_2ieo8")
+}],
+"loop": 0,
+"name": &"dodge_down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yllr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kb6p2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wodsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32hag")
+}],
+"loop": 0,
+"name": &"dodge_up",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yw30f")
+}],
+"loop": 1,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjkh3")
+}],
+"loop": 1,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_8tlgu")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_soos4")
+}],
+"loop": 1,
+"name": &"knocked_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_pqije")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_0c2jh")
+}],
+"loop": 1,
+"name": &"moving_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_vtti7")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_e2h3v")
+}],
+"loop": 1,
+"name": &"moving_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_65viv")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_x7c3f")
+}],
+"loop": 1,
+"name": &"restrained",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgyib"]
 size = Vector2(20, 32)
@@ -94,23 +264,46 @@ y_sort_enabled = true
 [node name="Player" parent="WorldCanvas/WorldRoot" unique_id=1691891269 instance=ExtResource("3_bxsma")]
 position = Vector2(-1, 0)
 collision_mask = 1
-motion_mode = 0
 
-[node name="BodySprite" parent="WorldCanvas/WorldRoot/Player/VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(1691891269, 831679319) index="0" unique_id=16791793]
-sprite_frames = ExtResource("5_8tlgu")
+[node name="BodyVisualRoot" parent="WorldCanvas/WorldRoot/Player/VisualRoot" parent_id_path=PackedInt32Array(1691891269, 1685553084) index="0" unique_id=831679319]
+y_sort_enabled = true
+
+[node name="BodySprite" parent="WorldCanvas/WorldRoot/Player/VisualRoot/BodyVisualRoot" index="0" unique_id=16791793]
+sprite_frames = SubResource("SpriteFrames_8tlgu")
+
+[node name="CombatVisualRoot" parent="WorldCanvas/WorldRoot/Player/VisualRoot" parent_id_path=PackedInt32Array(1691891269, 1685553084) index="1" unique_id=2053548299]
+y_sort_enabled = true
 
 [node name="TestDummy" parent="WorldCanvas/WorldRoot" unique_id=1560747210 instance=ExtResource("4_wd1uf")]
 position = Vector2(438, 148)
 collision_mask = 1
 motion_mode = 0
 
-[node name="CollisionShape2D" parent="WorldCanvas/WorldRoot/TestDummy/BodyHurtbox" parent_id_path=PackedInt32Array(1560747210, 511458273) index="0" unique_id=2017378462]
+[node name="BodyVisualRoot" parent="WorldCanvas/WorldRoot/TestDummy/VisualRoot" parent_id_path=PackedInt32Array(1560747210, 1685553084) index="0" unique_id=831679319]
+y_sort_enabled = true
+
+[node name="CombatVisualRoot" parent="WorldCanvas/WorldRoot/TestDummy/VisualRoot" parent_id_path=PackedInt32Array(1560747210, 1685553084) index="1" unique_id=2053548299]
+y_sort_enabled = true
+
+[node name="BodySprite" parent="WorldCanvas/WorldRoot/TestDummy/VisualRoot/BodyVisualRoot2" parent_id_path=PackedInt32Array(1560747210, 2067861218) index="0" unique_id=2095371008]
+position = Vector2(0, 0)
+
+[node name="BodyHurtbox" parent="WorldCanvas/WorldRoot/TestDummy" index="1" unique_id=511458273]
+position = Vector2(0, 0)
+
+[node name="CollisionShape2D" parent="WorldCanvas/WorldRoot/TestDummy/BodyHurtbox" index="0" unique_id=2017378462]
 position = Vector2(0, -16)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_rgyib")
 
 [node name="Thief" parent="WorldCanvas/WorldRoot" unique_id=418514344 instance=ExtResource("5_0o8ui")]
 position = Vector2(454, 258)
-motion_mode = 0
+
+[node name="BodyVisualRoot" parent="WorldCanvas/WorldRoot/Thief/VisualRoot" parent_id_path=PackedInt32Array(418514344, 1685553084) index="0" unique_id=831679319]
+y_sort_enabled = true
+
+[node name="CombatVisualRoot" parent="WorldCanvas/WorldRoot/Thief/VisualRoot" parent_id_path=PackedInt32Array(418514344, 1685553084) index="1" unique_id=2053548299]
+y_sort_enabled = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="WorldCanvas/WorldRoot" unique_id=37434313]
 navigation_polygon = SubResource("NavigationPolygon_8gxew")
@@ -197,11 +390,14 @@ libraries/ = SubResource("AnimationLibrary_ledqy")
 
 [editable path="WorldCanvas/WorldRoot/Player"]
 [editable path="WorldCanvas/WorldRoot/Player/VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
+[editable path="WorldCanvas/WorldRoot/Player/VisualRoot/CombatVisualRoot2/CombatSprite/CombatHitbox"]
 [editable path="WorldCanvas/WorldRoot/Player/BodyHurtbox"]
 [editable path="WorldCanvas/WorldRoot/TestDummy"]
 [editable path="WorldCanvas/WorldRoot/TestDummy/VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
+[editable path="WorldCanvas/WorldRoot/TestDummy/VisualRoot/CombatVisualRoot2/CombatSprite/CombatHitbox"]
 [editable path="WorldCanvas/WorldRoot/TestDummy/BodyHurtbox"]
 [editable path="WorldCanvas/WorldRoot/Thief"]
 [editable path="WorldCanvas/WorldRoot/Thief/VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
+[editable path="WorldCanvas/WorldRoot/Thief/VisualRoot/CombatVisualRoot2/CombatSprite/CombatHitbox"]
 [editable path="WorldCanvas/WorldRoot/Thief/BodyHurtbox"]
 [editable path="DebugCanvas/DebugRoot/DebugMain"]

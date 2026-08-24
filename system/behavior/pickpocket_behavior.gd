@@ -71,8 +71,6 @@ func _get_final_multiplier(baseline: float) -> float:
 
 
 func _get_fear_multiplier() -> float:
-
-	
 	
 	return super()
 
@@ -97,6 +95,54 @@ func _disconnect_signals() -> void:
 
 
 
+func _execute_pickpocket(restrained_state: BodyRestrainedState) -> void:
+
+	if !_can_pickpocket(): return
+
+	cooldown = 3.0
+
+	# pickpocket_complete = true
+
+	target_disposition.target_entity.state_machine.request_state(BodyIdleState)
+
+	restrained_state.break_free.disconnect(_on_entity_break_free)
+
+	evaluation_requested.emit()
+
+
+
+
+
+
+func _fail_pickpocket(restrained_state: BodyRestrainedState) -> void:
+
+	print("pickpocket failed")
+
+	cooldown = 3.0
+
+	target_disposition.target_entity.state_machine.request_state(BodyIdleState)
+
+	restrained_state.break_free.disconnect(_on_entity_break_free)
+
+	evaluation_requested.emit()
+
+
+
+
+
+func _can_pickpocket() -> bool:
+
+	if !target_disposition or !target_disposition.target_entity or pickpocket_complete or cooldown > 0.0: return false
+
+	return true
+
+
+	
+
+
+
+
+
 
 func receive_damage_package(damage_package: DamagePackage) -> void:
 
@@ -115,7 +161,7 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 func _on_navigation_completed() -> void:
 
-	if !target_disposition or !target_disposition.target_entity or pickpocket_complete or cooldown > 0.0: return
+	if !_can_pickpocket(): return
 
 	var target_entity = target_disposition.target_entity
 
@@ -133,11 +179,9 @@ func _on_navigation_completed() -> void:
 
 			restrained_state.break_free.connect(_on_entity_break_free.bind(restrained_state))
 
-		# await Game.get_tree().create_timer(1.5).timeout
+		await Game.get_tree().create_timer(1.5).timeout
 
-		# target_entity.state_machine.request_state(BodyIdleState)
-
-		# pickpocket_complete = true
+		_execute_pickpocket(restrained_state)
 
 
 
@@ -145,12 +189,6 @@ func _on_navigation_completed() -> void:
 
 func _on_entity_break_free(restrained_state: BodyRestrainedState) -> void:
 
-	restrained_state.break_free.disconnect(_on_entity_break_free)
-
-	cooldown = 3.0
-
-	target_disposition.target_entity.state_machine.request_state(BodyIdleState)
-
-	evaluation_requested.emit()
+	_fail_pickpocket(restrained_state)
 
 

@@ -34,9 +34,11 @@ func _exit() -> void:
 
 	super()
 
-	animation_component.set_body_dir(movement_component.face_dir, false)
+	break_free_count = 0.0
 
 	animation_component.body_anim_player.play("RESET")
+
+	entity.state_machine.request_state(CombatReadyState)
 
 
 
@@ -68,7 +70,7 @@ func _disconnect_signals() -> void:
 
 func _on_break_free_pressed() -> void:
 
-	break_free_count += 0.3
+	break_free_count += 0.35
 
 	if break_free_count >= 1.0:
 

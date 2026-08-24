@@ -432,4 +432,5 @@ metadata/_custom_type_script = "uid://dpiknhysfw02f"
 script = ExtResource("20_x7c3f")
 
 [editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
+[editable path="VisualRoot/CombatVisualRoot2/CombatSprite/CombatHitbox"]
 [editable path="BodyHurtbox"]

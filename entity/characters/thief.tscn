@@ -136,11 +136,17 @@ metadata/_custom_type_script = "uid://ccsjcn37bphav"
 [node name="Thief" unique_id=1691891269 instance=ExtResource("1_15ir2")]
 entity_def = ExtResource("2_4f4y2")
 
-[node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(831679319) index="0" unique_id=16791793]
+[node name="BodyVisualRoot" parent="VisualRoot" parent_id_path=PackedInt32Array(1685553084) index="0" unique_id=831679319]
+y_sort_enabled = false
+
+[node name="BodySprite" parent="VisualRoot/BodyVisualRoot" index="0" unique_id=16791793]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_bi0im")
 
-[node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
+[node name="CombatVisualRoot" parent="VisualRoot" parent_id_path=PackedInt32Array(1685553084) index="1" unique_id=2053548299]
+y_sort_enabled = false
+
+[node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" index="0" unique_id=1921775663]
 position = Vector2(16, -14)
 
 [node name="VisionSensor" parent="." index="2" unique_id=1534038726]
@@ -154,7 +160,7 @@ position = Vector2(0, -4)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_aiwur")
 
-[node name="CombatOrigin" parent="Center" parent_id_path=PackedInt32Array(893569566) index="0" unique_id=90271966]
+[node name="Center" parent="." index="5" unique_id=893569566]
 position = Vector2(0, -14)
 
 [node name="NavigationComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="4" unique_id=653609944 node_paths=PackedStringArray("nav_agent")]

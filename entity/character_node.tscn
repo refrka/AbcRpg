@@ -262,7 +262,6 @@ combat_origin = NodePath("Center/CombatOrigin")
 y_sort_enabled = true
 
 [node name="BodyVisualRoot" type="Node2D" parent="VisualRoot" unique_id=831679319]
-y_sort_enabled = true
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="VisualRoot/BodyVisualRoot" unique_id=16791793]
 unique_name_in_owner = true
@@ -273,7 +272,6 @@ animation = &"idle_down"
 libraries/ = SubResource("AnimationLibrary_8mhx1")
 
 [node name="CombatVisualRoot" type="Node2D" parent="VisualRoot" unique_id=2053548299]
-y_sort_enabled = true
 
 [node name="CombatSprite" type="Sprite2D" parent="VisualRoot/CombatVisualRoot" unique_id=1921775663]
 visible = false
@@ -282,6 +280,27 @@ position = Vector2(16, 0)
 [node name="CombatHitbox" parent="VisualRoot/CombatVisualRoot/CombatSprite" unique_id=1556507908 instance=ExtResource("2_udydy")]
 
 [node name="CombatAnimationPlayer" type="AnimationPlayer" parent="VisualRoot/CombatVisualRoot" unique_id=256507589]
+libraries/ = SubResource("AnimationLibrary_pgotb")
+
+[node name="BodyVisualRoot2" type="Node2D" parent="VisualRoot" unique_id=2067861218]
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="VisualRoot/BodyVisualRoot2" unique_id=2095371008]
+scale = Vector2(0.5, 1)
+sprite_frames = SubResource("SpriteFrames_yw30f")
+animation = &"idle_down"
+
+[node name="BodyAnimationPlayer" type="AnimationPlayer" parent="VisualRoot/BodyVisualRoot2/BodySprite" unique_id=414009973]
+libraries/ = SubResource("AnimationLibrary_8mhx1")
+
+[node name="CombatVisualRoot2" type="Node2D" parent="VisualRoot" unique_id=1994581889]
+
+[node name="CombatSprite" type="Sprite2D" parent="VisualRoot/CombatVisualRoot2" unique_id=1167363650]
+visible = false
+position = Vector2(16, 0)
+
+[node name="CombatHitbox" parent="VisualRoot/CombatVisualRoot2/CombatSprite" unique_id=678314027 instance=ExtResource("2_udydy")]
+
+[node name="CombatAnimationPlayer" type="AnimationPlayer" parent="VisualRoot/CombatVisualRoot2" unique_id=1525028417]
 libraries/ = SubResource("AnimationLibrary_pgotb")
 
 [node name="BodyHurtbox" parent="." unique_id=511458273 instance=ExtResource("3_me77t")]
@@ -351,4 +370,5 @@ script = ExtResource("5_jg2qq")
 metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
 
 [editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
+[editable path="VisualRoot/CombatVisualRoot2/CombatSprite/CombatHitbox"]
 [editable path="BodyHurtbox"]

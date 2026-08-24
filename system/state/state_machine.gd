@@ -115,6 +115,10 @@ func _change_body_state(state: BodyState) -> BodyState:
 
 		return null
 
+	if entity is Player:
+
+		print("new state: ", state.get_state_name())
+
 	if body_state:
 
 		_deactivate_state(body_state)
