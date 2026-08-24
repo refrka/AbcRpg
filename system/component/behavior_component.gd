@@ -136,7 +136,7 @@ func _choose_behavior(target_disposition: Disposition = null) -> void:
 
 	current_behavior = new_behavior
 
-	current_behavior._start()
+	current_behavior._start(target_disposition)
 
 
 

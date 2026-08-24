@@ -76,6 +76,7 @@ mouse_filter = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=582542053]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Debug Main"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=403139873]
@@ -104,6 +105,7 @@ mouse_filter = 2
 [node name="ActivatedCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=251736763]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Activate InputOverlay"
 
 [node name="DebugInputOverlay" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=982917335 node_paths=PackedStringArray("linked_panel")]
@@ -139,12 +141,14 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=7178383]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
 text = "InputOverlay active:"
 
 [node name="InputOverlayStateLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1375132297]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 12
 text = "false"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer" unique_id=408178811]
@@ -154,12 +158,14 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=976191674]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
 text = "Hover state:"
 
 [node name="HoverStateLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=819630422]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 12
 text = "false"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer" unique_id=2079632895]
@@ -168,12 +174,14 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1294978673]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
 text = "Selected state:"
 
 [node name="SelectedStateLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/DebugInputOverlay/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1602800037]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 12
 text = "false"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=94182475]
@@ -184,10 +192,13 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=716416317]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Player Info"
 
 [node name="PlayerHealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=48952699]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 script = ExtResource("3_y7p3h")
 
 [node name="PlayerInfoPanel" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1395177558]
@@ -220,11 +231,13 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1511250156]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 text = "Body State"
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=650212258]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 text = "Combat State"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer" unique_id=635872355]
@@ -256,12 +269,14 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/IdleStateRow/MarginContainer" unique_id=306308564]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = ">"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/IdleStateRow" unique_id=2013147738]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+theme_override_font_sizes/font_size = 12
 text = "Idle"
 
 [node name="MovingStateRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=589332671 node_paths=PackedStringArray("arrow_label", "state_label")]
@@ -280,12 +295,14 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/MovingStateRow/MarginContainer" unique_id=1243967072]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = ">"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/MovingStateRow" unique_id=1781073179]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+theme_override_font_sizes/font_size = 12
 text = "Moving"
 
 [node name="DodgeState" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=276704632 node_paths=PackedStringArray("arrow_label", "state_label")]
@@ -304,12 +321,14 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/DodgeState/MarginContainer" unique_id=1290601265]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = ">"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/DodgeState" unique_id=379913081]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+theme_override_font_sizes/font_size = 12
 text = "Dodge"
 
 [node name="FlinchState" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1716372514 node_paths=PackedStringArray("arrow_label", "state_label")]
@@ -328,12 +347,14 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/FlinchState/MarginContainer" unique_id=805559836]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = ">"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/FlinchState" unique_id=496228160]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+theme_override_font_sizes/font_size = 12
 text = "Flinch"
 
 [node name="RestrainedState" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=179473483 node_paths=PackedStringArray("arrow_label", "state_label")]
@@ -352,12 +373,14 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/RestrainedState/MarginContainer" unique_id=1124614334]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = ">"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/RestrainedState" unique_id=397636813]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+theme_override_font_sizes/font_size = 12
 text = "Restrained"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=568658340]
@@ -381,12 +404,14 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/IdleStateRow/MarginContainer" unique_id=808652075]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = ">"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/IdleStateRow" unique_id=396225035]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+theme_override_font_sizes/font_size = 12
 text = "Idle"
 
 [node name="ReadyState" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=68571266 node_paths=PackedStringArray("arrow_label", "state_label")]
@@ -405,12 +430,14 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/ReadyState/MarginContainer" unique_id=51484440]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = ">"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/ReadyState" unique_id=299809833]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+theme_override_font_sizes/font_size = 12
 text = "Ready"
 
 [node name="AttackingState" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=144218571 node_paths=PackedStringArray("arrow_label", "state_label")]
@@ -429,12 +456,14 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/AttackingState/MarginContainer" unique_id=989687054]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = ">"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/AttackingState" unique_id=345859215]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+theme_override_font_sizes/font_size = 12
 text = "Attacking"
 
 [node name="DodgeState" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=102591344 node_paths=PackedStringArray("arrow_label", "state_label")]
@@ -453,12 +482,14 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/DodgeState/MarginContainer" unique_id=795116849]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = ">"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/DodgeState" unique_id=2105934801]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+theme_override_font_sizes/font_size = 12
 text = "Dodge"
 
 [node name="FlinchState" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=1901037353 node_paths=PackedStringArray("arrow_label", "state_label")]
@@ -477,12 +508,14 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FlinchState/MarginContainer" unique_id=338476110]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = ">"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FlinchState" unique_id=1483274238]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+theme_override_font_sizes/font_size = 12
 text = "Flinch"
 
 [node name="RestrainedState" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=963510333 node_paths=PackedStringArray("arrow_label", "state_label")]
@@ -501,10 +534,12 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/RestrainedState/MarginContainer" unique_id=31381261]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = ">"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerInfoPanel/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/RestrainedState" unique_id=303950748]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.31076503, 0.310765, 0.310765, 1)
+theme_override_font_sizes/font_size = 12
 text = "Restrained"

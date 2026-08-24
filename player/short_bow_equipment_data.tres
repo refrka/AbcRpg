@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://cnnrosdt8e2lm"]
+
+[ext_resource type="Resource" uid="uid://ds1pe2xiao16c" path="res://item/equipment/ammunition/wood_arrow_def.tres" id="1_2ui1i"]
+[ext_resource type="Script" uid="uid://dji7pch2e6jjt" path="res://item/equipment_data.gd" id="2_cf136"]
+
+[resource]
+script = ExtResource("2_cf136")
+item_def = ExtResource("1_2ui1i")
+count = 15
+metadata/_custom_type_script = "uid://dji7pch2e6jjt"

@@ -43,3 +43,15 @@ func _on_item_data_updated() -> void:
 	if item_data.is_empty():
 
 		queue_free.call_deferred()
+
+
+
+
+
+static func create_new(_item_data: ItemData) -> ItemNode:
+
+	var item_node = load("res://entity/item_node.tscn").instantiate()
+
+	item_node.item_data = _item_data
+
+	return item_node

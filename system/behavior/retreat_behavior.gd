@@ -10,7 +10,7 @@ class_name RetreatBehavior extends Behavior
 
 
 
-func _evaluate(_target_disposition: Disposition) -> float:
+func _evaluate(_target_disposition: Disposition = null) -> float:
 
 	var baseline = super(_target_disposition)
 
@@ -32,11 +32,11 @@ func _evaluate(_target_disposition: Disposition) -> float:
 
 
 
-func _get_final_multiplier(baseline: float) -> float:
+func _get_final_multiplier(baseline: float, _target_disposition: Disposition = null) -> float:
 
 	var final_multiplier = baseline
 
-	var fear_multipler = _get_fear_multiplier()
+	var fear_multipler = _get_fear_multiplier(_target_disposition)
 
 	return final_multiplier * fear_multipler
 
@@ -47,7 +47,7 @@ func _get_final_multiplier(baseline: float) -> float:
 
 
 
-func _get_fear_multiplier() -> float:
+func _get_fear_multiplier(_target_disposition: Disposition = null) -> float:
 
 	var distance = entity.global_position.distance_to(target_disposition.target_entity.global_position)
 

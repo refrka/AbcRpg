@@ -31,6 +31,10 @@ var sensors: Array[Sensor]
 
 
 
+
+
+
+
 func _initialize(_entity: EntityNode) -> bool:
 
 	if initialized: return false

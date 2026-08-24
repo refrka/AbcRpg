@@ -132,6 +132,7 @@ script = ExtResource("9_raayb")
 target_defs = Array[ExtResource("10_avvhb")]([ExtResource("11_avvhb")])
 behavior_type = 1
 display_name = "Pickpocket"
+requires_disposition = true
 metadata/_custom_type_script = "uid://5p5asql3w7oh"
 
 [sub_resource type="Resource" id="Resource_avvhb"]

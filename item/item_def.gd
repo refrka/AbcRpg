@@ -14,4 +14,8 @@ class_name ItemDef extends Resource
 
 @export var sprite_frames: SpriteFrames
 
+@export var body_sprite_position: Vector2
+
 @export var item_sprite_position: Vector2
+
+@export var can_pickpocket:= true

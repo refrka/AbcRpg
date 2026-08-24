@@ -120,7 +120,17 @@ func has_items(item_def: ItemDef, count:= 1) -> bool:
 
 
 
+func get_non_empty_data() -> Array[ItemData]:
 
+	var data_list: Array[ItemData] = []
+
+	for item_data in item_list:
+
+		if !item_data.is_empty():
+
+			data_list.append(item_data)
+
+	return data_list
 
 
 

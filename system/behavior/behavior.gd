@@ -80,11 +80,9 @@ func _initialize(_entity: EntityNode) -> void:
 
 
 
-func _evaluate(_target_disposition: Disposition) -> float:
+func _evaluate(_target_disposition: Disposition = null) -> float:
 
-	target_disposition = _target_disposition
-
-	if target_disposition and entity_blacklist.has(target_disposition.target_entity.entity_def):
+	if _target_disposition and entity_blacklist.has(_target_disposition.target_entity.entity_def):
 
 		return 0.0
 
@@ -95,7 +93,7 @@ func _evaluate(_target_disposition: Disposition) -> float:
 
 
 
-func _start() -> void:
+func _start(_target_disposition: Disposition = null) -> void:
 
 	_activate()
 
@@ -126,9 +124,9 @@ func _get_curve_sample(curve: Curve, value: float, domain_min:= 0.0, domain_max:
 
 
 
-func _get_fear_multiplier() -> float:
+func _get_fear_multiplier(_target_disposition: Disposition = null) -> float:
 
-	var fear_score = _get_curve_sample(attribute_remap.fear_curve, target_disposition.fear)
+	var fear_score = _get_curve_sample(attribute_remap.fear_curve, _target_disposition.fear)
 
 	return fear_score
 

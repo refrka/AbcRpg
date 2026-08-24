@@ -30,7 +30,7 @@ func _on_body_entered_sensor(body: PhysicsBody2D) -> void:
 
 	super(body)
 
-	if body is ItemNode:
+	if body is ItemNode and body.active:
 
 		if entity.inventory:
 

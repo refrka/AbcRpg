@@ -5,9 +5,8 @@
 [ext_resource type="Script" uid="uid://b2swvbk1sv4ar" path="res://entity/character_def.gd" id="1_cujn1"]
 [ext_resource type="Resource" uid="uid://l58jvcoqwcpw" path="res://item/material/leather_def.tres" id="2_ss7w3"]
 [ext_resource type="Script" uid="uid://dji7pch2e6jjt" path="res://item/equipment_data.gd" id="3_3jfkr"]
-[ext_resource type="Resource" uid="uid://ds1pe2xiao16c" path="res://item/equipment/ammunition/wood_arrow_def.tres" id="3_k6jhg"]
 [ext_resource type="Resource" uid="uid://buxnei4447my6" path="res://item/consumable/food/apple_def.tres" id="3_vro3h"]
-[ext_resource type="Resource" uid="uid://c5fi6aliewfpd" path="res://item/equipment/weapons/ranged/short_bow_def.tres" id="5_ajxwt"]
+[ext_resource type="Resource" uid="uid://nc5cef2u54rl" path="res://item/equipment/weapons/melee/short_sword_def.tres" id="5_k6jhg"]
 
 [sub_resource type="Resource" id="Resource_m0q4r"]
 script = ExtResource("1_8fxaj")
@@ -21,16 +20,10 @@ item_def = ExtResource("3_vro3h")
 count = 98
 metadata/_custom_type_script = "uid://3afb8y37pgo7"
 
-[sub_resource type="Resource" id="Resource_3jfkr"]
-script = ExtResource("3_3jfkr")
-item_def = ExtResource("3_k6jhg")
-count = 15
-metadata/_custom_type_script = "uid://dji7pch2e6jjt"
-
 [sub_resource type="Resource" id="Resource_y8wuh"]
 script = ExtResource("3_3jfkr")
-ammunition_data = SubResource("Resource_3jfkr")
-item_def = ExtResource("5_ajxwt")
+item_def = ExtResource("5_k6jhg")
+count = 1
 metadata/_custom_type_script = "uid://dji7pch2e6jjt"
 
 [sub_resource type="Resource" id="Resource_65viv"]

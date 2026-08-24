@@ -30,7 +30,7 @@ func _exit() -> void:
 
 	animation_component.combat_anim_player.animation_finished.disconnect(_on_animation_finished)
 
-	animation_component.combat_anim_player.play("RESET")
+	animation_component.body_anim_player.stop()
 
 
 

@@ -53,7 +53,7 @@ func _initialize(_entity: EntityNode) -> bool:
 
 		if !weapon_data.is_empty():
 
-			_load_weapon_config(weapon_data.item_data.item_def)
+			_load_weapon_config(weapon_data.item_def)
 
 	return true
 
@@ -256,6 +256,12 @@ func _fire_projectile() -> void:
 
 	var weapon_data = _get_weapon_data()
 
+	var ammunition_data = weapon_data.ammunition_data
+
+	if ammunition_data.is_empty():
+
+		return
+
 	var ammunition_def = weapon_data.ammunition_data.item_def
 
 	var projectile_node = ProjectileNode.from_ammunition(ammunition_def)
@@ -276,6 +282,8 @@ func _fire_projectile() -> void:
 
 	projectile_node._activate()
 
+	weapon_data.ammunition_data.remove_amount(1)
+
 
 
 
@@ -285,9 +293,9 @@ func _get_weapon_data() -> EquipmentData:
 
 	var weapon_data: EquipmentData = null
 
-	if !entity.inventory.weapon_slot.is_empty():
+	if !entity.inventory.weapon_data.is_empty():
 
-		weapon_data = entity.inventory.weapon_slot.item_data
+		weapon_data = entity.inventory.weapon_data
 
 	return weapon_data
 
