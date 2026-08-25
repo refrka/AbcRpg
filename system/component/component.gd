@@ -25,11 +25,14 @@ func _initialize(_entity: EntityNode) -> bool:
 
 	if initialized: return false
 
+	print("_initing: ", get_component_name())
+
 	initialized = true
 
 	entity = _entity
 
 	return true
+
 
 
 
@@ -86,7 +89,7 @@ func _disconnect_signals() -> void:
 
 func _activate() -> bool:
 
-	if active: return false
+	if !initialized or active: return false
 
 	_connect_signals()
 

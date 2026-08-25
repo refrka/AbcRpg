@@ -13,9 +13,9 @@ var idle_timer:= 0.0
 
 
 
-func _evaluate(_disposition: Disposition = null) -> float:
+func _evaluate(_target_disposition: Disposition = null) -> float:
 
-	var score = super(_disposition)
+	var score = super(_target_disposition)
 
 	return score
 
@@ -38,15 +38,11 @@ func _start(target_disposition: Disposition = null) -> void:
 
 
 
-
-
 func _stop(_target_disposition: Disposition = null) -> void:
 
 	super(_target_disposition)
 
 	navigation_component.navigation_completed.disconnect(_on_navigation_completed)
-
-
 
 
 

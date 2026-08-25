@@ -35,7 +35,7 @@ var attack_stored:= false
 
 
 
-
+var opponents: Array[EntityNode]
 
 
 
@@ -241,11 +241,6 @@ func _exit_combat() -> void:
 
 
 
-
-
-
-
-
 func _enable_buffer() -> void:
 
 	buffer_enabled = true
@@ -325,9 +320,46 @@ func _load_weapon_config(weapon_def: WeaponDef) -> void:
 
 func receive_damage_package(damage_package: DamagePackage) -> void:
 
+	add_opponent(damage_package.source_entity)
+
 	if damage_package.get_total_damage() > 0.0:
 
 		entity.state_machine.request_state(CombatFlinchState)
+
+
+
+
+
+func add_opponent(entity_node: EntityNode) -> void:
+
+	if !opponents.has(entity_node):
+
+		opponents.append(entity_node)
+
+		var behavior_component = entity.get_component(BehaviorComponent)
+
+		if behavior_component:
+
+			var disposition = behavior_component.get_disposition(entity_node)
+
+			if disposition:
+
+				disposition.expired.connect(_on_opponent_disposition_expired.bind(entity_node), CONNECT_ONE_SHOT)
+
+
+
+
+
+
+
+func remove_opponent(entity_node: EntityNode) -> void:
+
+	if opponents.has(entity_node):
+
+		opponents.erase(entity_node)
+
+
+
 
 
 
@@ -504,6 +536,12 @@ func _on_combat_animation_finished(anim_name: StringName) -> void:
 func _on_dodge_pressed() -> void:
 
 	_handle_dodge()
+
+
+
+func _on_opponent_disposition_expired(entity_node: EntityNode) -> void:
+
+	remove_opponent(entity_node)
 
 
 

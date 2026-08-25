@@ -1,1 +1,1 @@
-class_name SocialBehavior extends Behavior
+@abstract class_name SocialBehavior extends Behavior

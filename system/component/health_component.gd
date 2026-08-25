@@ -88,7 +88,9 @@ func reduce_health(amount: float) -> void:
 
 
 
+func get_ratio() -> float:
 
+	return current_health / max_health
 
 
 

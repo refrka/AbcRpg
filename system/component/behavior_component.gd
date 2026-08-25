@@ -1,4 +1,4 @@
-class_name BehaviorComponentRedo extends Component
+class_name BehaviorComponent extends Component
 
 
 
@@ -16,6 +16,8 @@ var behavior_profile: BehaviorProfile
 var current_behavior: Behavior
 
 var evaluation_timer:= 0.0
+
+var evaluation_cooldown:= 0.0
 
 
 
@@ -35,8 +37,11 @@ var dispositions: Array[Disposition]
 
 
 
-
 func _initialize(_entity: EntityNode) -> bool:
+
+	if !_entity.entity_def.behavior_profile:
+
+		return false
 
 	if !super(_entity): return false
 
@@ -52,7 +57,7 @@ func _initialize(_entity: EntityNode) -> bool:
 
 		behaviors.append(_behavior)
 
-		_behavior._initialize(entity)
+		_behavior._initialize(entity, self)
 
 	return true
 
@@ -60,7 +65,31 @@ func _initialize(_entity: EntityNode) -> bool:
 
 
 
+
+
+
+func get_disposition(entity_node: EntityNode) -> Disposition:
+
+	for disposition in dispositions: 
+
+		if disposition.target_entity == entity_node:
+
+			return disposition
+
+	return _generate_disposition(entity_node)
+
+
+
+
+
+
+
+
 func _evaluate_all(target_disposition: Disposition = null) -> void:
+
+	if evaluation_cooldown > 0.0: return
+
+	evaluation_cooldown = 0.5
 
 	var best_behavior: Behavior = null
 
@@ -69,6 +98,8 @@ func _evaluate_all(target_disposition: Disposition = null) -> void:
 	var best_disposition: Disposition = null
 
 	for behavior in behaviors:
+
+		print("evaluating ", behavior.get_display_name())
 
 		var score:= 0.0
 
@@ -90,7 +121,15 @@ func _evaluate_all(target_disposition: Disposition = null) -> void:
 
 			score = behavior._evaluate(chosen_disposition)
 
-		print("behavior evaluation for %s: %s" % [behavior.display_name, score])
+			var attitude_multiplier = _get_attitude_multiplier(behavior)
+
+			var temperament_multiplier = _get_temperament_multiplier(behavior)
+
+			print("score before multiply: ", score)
+
+			score *= attitude_multiplier * temperament_multiplier
+
+			print("score after: ", score)
 
 		if score > best_score:
 
@@ -142,11 +181,11 @@ func _change_behavior(new_behavior: Behavior, target_disposition: Disposition = 
 
 func receive_damage_package(damage_package: DamagePackage) -> void:
 
-	if current_behavior and current_behavior.has_method("receive_damage_package"):
+	if current_behavior:
 
-		current_behavior.receive_damage_package(damage_package)
+		current_behavior._receive_damage_package(damage_package)
 
-	var disposition = _get_disposition(damage_package.source_entity)
+	var disposition = get_disposition(damage_package.source_entity)
 
 	if !disposition:
 
@@ -178,6 +217,17 @@ func _generate_disposition(target_entity: EntityNode) -> Disposition:
 
 
 
+func _add_disposition(disposition: Disposition) -> void:
+
+	if !dispositions.has(disposition):
+
+		dispositions.append(disposition)
+
+
+
+
+
+
 
 
 
@@ -189,11 +239,9 @@ func _apply_reaction_tag(reaction_tag: ReactionTag, disposition: Disposition = n
 
 	if disposition:
 
-		disposition.fear += reaction_tag.fear_delta
+		disposition.apply_reaction_tag(reaction_tag)
 
-		disposition.affection += reaction_tag.affection_delta
-
-		disposition.respect += reaction_tag.respect_delta
+	_evaluate_all()
 
 	
 
@@ -201,15 +249,20 @@ func _apply_reaction_tag(reaction_tag: ReactionTag, disposition: Disposition = n
 
 
 
-func _get_disposition(entity_node: EntityNode) -> Disposition:
+func _get_attitude_multiplier(behavior: Behavior) -> float:
 
-	for disposition in dispositions: 
+	return behavior._get_curve_sample(behavior.attribute_remap.attitude_curve, attitude)
 
-		if disposition.target_entity == entity_node:
 
-			return disposition
 
-	return null
+
+
+
+func _get_temperament_multiplier(behavior: Behavior) -> float:
+
+	return behavior._get_curve_sample(behavior.attribute_remap.temperament_curve, temperament)
+
+
 
 
 
@@ -246,7 +299,6 @@ func _disconnect_signals() -> void:
 
 
 	
-
 
 
 
@@ -289,7 +341,7 @@ func _deactivate() -> bool:
 
 func _on_entity_entered_vision_sensor(entity_node: EntityNode) -> void:
 
-	var disposition = _get_disposition(entity_node)
+	var disposition = get_disposition(entity_node)
 
 	if !disposition:
 
@@ -305,7 +357,7 @@ func _on_entity_entered_vision_sensor(entity_node: EntityNode) -> void:
 
 func _on_entity_exited_vision_sensor(entity_node: EntityNode) -> void:
 
-	var disposition = _get_disposition(entity_node)
+	var disposition = get_disposition(entity_node)
 
 	if disposition:
 
@@ -334,6 +386,10 @@ func _on_behavior_evaluation_requested(_behavior: Behavior) -> void:
 func _physics_process(delta: float) -> void:
 
 	if !active: return
+
+	if evaluation_cooldown > 0.0:
+
+		evaluation_cooldown -= delta
 
 	if current_behavior and current_behavior.active:
 

@@ -1,23 +1,8 @@
 [gd_resource type="Resource" script_class="CharacterDef" format=3 uid="uid://dciimcclu3grk"]
 
 [ext_resource type="Script" uid="uid://b2swvbk1sv4ar" path="res://entity/character_def.gd" id="1_e7ny4"]
-[ext_resource type="Script" uid="uid://fyybon8skto1" path="res://system/behavior/attribute_remap.gd" id="1_qq5ly"]
-[ext_resource type="Script" uid="uid://csp0uld1wv8wl" path="res://system/behavior/behavior.gd" id="2_7fliu"]
-[ext_resource type="Script" uid="uid://dbcds43ohrrxx" path="res://system/behavior/reaction_tag.gd" id="2_8bvsm"]
-[ext_resource type="Script" uid="uid://38c3jtlykn51" path="res://system/behavior/behavior_profile.gd" id="2_27bkw"]
-[ext_resource type="Script" uid="uid://dlw521bi63sxu" path="res://system/behavior/wander_ambient_behavior.gd" id="3_5jo7f"]
 [ext_resource type="Script" uid="uid://3afb8y37pgo7" path="res://item/item_data.gd" id="5_7fliu"]
 [ext_resource type="Script" uid="uid://bqc2bim6ivi0d" path="res://item/inventory.gd" id="6_5jo7f"]
-
-[sub_resource type="Resource" id="Resource_5jo7f"]
-script = ExtResource("3_5jo7f")
-display_name = "Wander"
-baseline_score = 0.15
-
-[sub_resource type="Resource" id="Resource_kvklg"]
-script = ExtResource("2_27bkw")
-behaviors = Array[ExtResource("2_7fliu")]([SubResource("Resource_5jo7f")])
-metadata/_custom_type_script = "uid://38c3jtlykn51"
 
 [sub_resource type="Resource" id="Resource_pccyj"]
 script = ExtResource("6_5jo7f")
@@ -26,7 +11,6 @@ metadata/_custom_type_script = "uid://bqc2bim6ivi0d"
 [resource]
 script = ExtResource("1_e7ny4")
 move_speed = 200.0
-behavior_profile = SubResource("Resource_kvklg")
 entity_id = &"thief"
 display_name = &"Thief"
 initial_inventory = SubResource("Resource_pccyj")

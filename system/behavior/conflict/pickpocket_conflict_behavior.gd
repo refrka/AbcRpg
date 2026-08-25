@@ -8,9 +8,9 @@ class_name PickpocketConflictBehavior extends ConflictBehavior
 
 
 
-func _evaluate(_disposition: Disposition = null) -> float:
+func _evaluate(_target_disposition: Disposition = null) -> float:
 
-	var score = super(_disposition)
+	var score = super(_target_disposition)
 
 	return score
 

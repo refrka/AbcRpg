@@ -102,7 +102,7 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 	for component in component_root.get_children():
 
-		if component.has_method("receive_damage_package"):
+		if component.active and component.has_method("receive_damage_package"):
 
 			component.receive_damage_package(damage_package)
 

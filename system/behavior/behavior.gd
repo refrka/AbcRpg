@@ -1,4 +1,4 @@
-class_name Behavior extends Resource
+@abstract class_name Behavior extends Resource
 
 
 @warning_ignore("unused_signal")
@@ -26,7 +26,7 @@ enum BehaviorType {
 
 @export var requires_disposition:= false
 
-@export var baseline_score:= 1.0
+@export var baseline_score:= 0.0
 
 @export var inertia_multiplier:= 1.0
 
@@ -36,6 +36,8 @@ enum BehaviorType {
 var active:= false
 
 var entity: EntityNode
+
+var behavior_component: BehaviorComponent
 
 var attribute_remap: AttributeRemap
 
@@ -49,9 +51,11 @@ var active_disposition: Disposition
 
 
 
-func _initialize(_entity: EntityNode) -> void:
+func _initialize(_entity: EntityNode, _behavior_component: BehaviorComponent) -> void:
 
 	entity = _entity
+
+	behavior_component = _behavior_component
 
 	navigation_component = entity.get_component(NavigationComponent)
 
@@ -60,11 +64,18 @@ func _initialize(_entity: EntityNode) -> void:
 
 
 
-func _evaluate(_disposition: Disposition = null) -> float:
+func _receive_damage_package(_damage_package: DamagePackage) -> void:
 
-	var attribute_miltiplier = _get_attribute_multiplier(_disposition)
+	pass
 
-	return baseline_score * attribute_miltiplier * inertia_multiplier
+
+
+
+func _evaluate(_target_disposition: Disposition = null) -> float:
+
+	var disposition_multiplier = 1.0
+
+	return baseline_score * disposition_multiplier * inertia_multiplier
 
 
 
@@ -88,78 +99,19 @@ func _stop(_target_disposition: Disposition = null) -> void:
 
 
 
-func _get_attribute_multiplier(disposition: Disposition = null) -> float:
-
-	return _get_fear_multiplier(disposition) * _get_affection_multiplier(disposition) * _get_respect_multiplier(disposition) * _get_attitude_multiplier() * _get_temperament_multiplier()
-
-
-
-func _get_fear_multiplier(target_disposition: Disposition = null) -> float:
-
-	var score:= 1.0
-
-	if target_disposition and attribute_remap:
-
-		score = _get_curve_sample(attribute_remap.fear_curve, target_disposition.fear)
-
-	return score
-
-
-
-func _get_affection_multiplier(target_disposition: Disposition = null) -> float:
-
-	var score:= 1.0
-
-	if target_disposition and attribute_remap:
-
-		score = _get_curve_sample(attribute_remap.affection_curve, target_disposition.fear)
-
-	return score
-
-
-
-func _get_respect_multiplier(target_disposition: Disposition = null) -> float:
-
-	var score:= 1.0
-
-	if target_disposition and attribute_remap:
-
-		score = _get_curve_sample(attribute_remap.respect_curve, target_disposition.fear)
-
-	return score
-
-
-func _get_attitude_multiplier(target_disposition: Disposition = null) -> float:
-
-	var score:= 1.0
-
-	if target_disposition and attribute_remap:
-
-		score = _get_curve_sample(attribute_remap.attitude_curve, target_disposition.fear)
-
-	return score
-
-
-func _get_temperament_multiplier(target_disposition: Disposition = null) -> float:
-
-	var score:= 1.0
-
-	if target_disposition and attribute_remap:
-
-		score = _get_curve_sample(attribute_remap.temperament_curve, target_disposition.fear)
-
-	return score
-
-
-
 func _get_curve_sample(curve: Curve, value: float, domain_min:= 0.0, domain_max:= 1.0) -> float:
 
 	if !curve: return 1.0
 
-	return curve.sample(clampf(value, domain_min, domain_max))
+	return curve.sample(value)
 
 
 
+
+
+func get_display_name() -> String:
+
+	return get_script().get_global_name().trim_suffix("Behavior")
 
 
 

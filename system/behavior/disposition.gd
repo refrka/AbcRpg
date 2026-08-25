@@ -4,6 +4,7 @@ class_name Disposition extends RefCounted
 
 signal expired
 
+signal attributes_updated
 
 
 
@@ -43,6 +44,20 @@ func stop_timer() -> void:
 	timer_active = false
 
 	expiration_timer = 0.0
+
+
+
+
+
+func apply_reaction_tag(reaction_tag: ReactionTag) -> void:
+
+	fear += reaction_tag.fear_delta
+
+	affection += reaction_tag.affection_delta
+
+	respect += reaction_tag.respect_delta
+
+	attributes_updated.emit()
 
 
 
