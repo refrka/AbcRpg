@@ -6,7 +6,7 @@ var charge_animation_name: StringName
 
 var current_attack_entry: AttackEntry
 
-var movement_modifier: VelocityModifier
+var movement_modifier: VelocityModifierOld
 
 
 
@@ -25,7 +25,7 @@ func _enter() -> void:
 
 	if current_attack_entry.movement_penalty > 0.0:
 
-		movement_modifier = VelocityModifier.new_buff(1.0 - current_attack_entry.movement_penalty, -1.0)
+		movement_modifier = VelocityModifierOld.new_buff(1.0 - current_attack_entry.movement_penalty, -1.0)
 
 		movement_component.add_modifier(movement_modifier)
 

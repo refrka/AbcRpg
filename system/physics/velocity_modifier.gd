@@ -1,4 +1,4 @@
-class_name VelocityModifier extends RefCounted
+class_name VelocityModifierOld extends RefCounted
 
 
 enum ModifierType {
@@ -55,9 +55,9 @@ func is_expired() -> bool:
 
 
 
-static func new_impulse(vel: Vector2, decay: float) -> VelocityModifier:
+static func new_impulse(vel: Vector2, decay: float) -> VelocityModifierOld:
 
-	var modifier = VelocityModifier.new()
+	var modifier = VelocityModifierOld.new()
 
 	modifier.modifier_type = ModifierType.CUMULATIVE
 
@@ -69,9 +69,9 @@ static func new_impulse(vel: Vector2, decay: float) -> VelocityModifier:
 
 
 
-static func new_buff(mult: float, dur: float) -> VelocityModifier:
+static func new_buff(mult: float, dur: float) -> VelocityModifierOld:
 
-	var modifier = VelocityModifier.new()
+	var modifier = VelocityModifierOld.new()
 
 	modifier.modifier_type = ModifierType.MULTIPLIER
 
@@ -83,9 +83,9 @@ static func new_buff(mult: float, dur: float) -> VelocityModifier:
 
 
 
-static func new_override(vel: Vector2) -> VelocityModifier:
+static func new_override(vel: Vector2) -> VelocityModifierOld:
 
-	var modifier = VelocityModifier.new()
+	var modifier = VelocityModifierOld.new()
 
 	modifier.modifier_type = ModifierType.OVERRIDE
 

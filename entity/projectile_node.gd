@@ -50,7 +50,7 @@ func set_projectile_owner(_owner: EntityNode) -> void:
 
 func set_trajectory(dir: Vector2) -> void:
 
-	var override = VelocityModifier.new_override(dir * ammunition_def.projectile_speed)
+	var override = VelocityModifierOld.new_override(dir * ammunition_def.projectile_speed)
 	
 	var movement_component = get_component(MovementComponent)
 

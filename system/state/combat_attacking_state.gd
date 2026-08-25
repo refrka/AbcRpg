@@ -18,7 +18,7 @@ func _enter() -> void:
 
 		var lunge_vector = combat_component.current_attack_dir * attack_entry.lunge_force
 
-		var modifier = VelocityModifier.new_impulse(lunge_vector, 40.0)
+		var modifier = VelocityModifierOld.new_impulse(lunge_vector, 40.0)
 
 		movement_component.add_modifier(modifier)
 

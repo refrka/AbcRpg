@@ -27,9 +27,9 @@ var face_dir:= Vector2.RIGHT
 
 var current_move_velocity: Vector2
 
-var velocity_override: VelocityModifier
+var velocity_override: VelocityModifierOld
 
-var modifiers: Array[VelocityModifier]
+var modifiers: Array[VelocityModifierOld]
 
 
 
@@ -57,9 +57,9 @@ func halt() -> void:
 
 
 
-func add_modifier(modifier: VelocityModifier) -> void:
+func add_modifier(modifier: VelocityModifierOld) -> void:
 
-	if modifier.modifier_type == VelocityModifier.ModifierType.OVERRIDE:
+	if modifier.modifier_type == VelocityModifierOld.ModifierType.OVERRIDE:
 
 		velocity_override = modifier
 
@@ -69,7 +69,7 @@ func add_modifier(modifier: VelocityModifier) -> void:
 
 
 
-func remove_modifier(modifier: VelocityModifier) -> void:
+func remove_modifier(modifier: VelocityModifierOld) -> void:
 
 	if modifiers.has(modifier):
 
@@ -175,7 +175,7 @@ func _get_impulse_velocity() -> Vector2:
 
 	for modifier in modifiers:
 
-		if modifier.modifier_type == VelocityModifier.ModifierType.CUMULATIVE:
+		if modifier.modifier_type == VelocityModifierOld.ModifierType.CUMULATIVE:
 
 			total += modifier.velocity
 
