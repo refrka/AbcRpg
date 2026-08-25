@@ -1,17 +1,21 @@
-class_name BehaviorComponent extends Component
+class_name BehaviorComponentRedo extends Component
 
 
 
-@export var initial_behavior: Behavior
 
-@export var behaviors: Array[Behavior]
+
+
+
+
+
 
 @export var evaluation_time:= 2.0
+
+var behavior_profile: BehaviorProfile
 
 var current_behavior: Behavior
 
 var evaluation_timer:= 0.0
-
 
 
 
@@ -21,8 +25,12 @@ var temperament: float
 
 
 
+var current_target_disposition: Disposition
+
+var behaviors: Array[Behavior]
 
 var dispositions: Array[Disposition]
+
 
 
 
@@ -32,19 +40,102 @@ func _initialize(_entity: EntityNode) -> bool:
 
 	if !super(_entity): return false
 
-	for behavior in behaviors:
-
-		behavior._initialize(entity)
-
-	if initial_behavior:
-
-		current_behavior = initial_behavior
+	behavior_profile = entity.entity_def.behavior_profile
 
 	attitude = entity.entity_def.baseline_attitude
 
 	temperament = entity.entity_def.baseline_temperament
 
+	for behavior in behavior_profile.behaviors:
+
+		var _behavior = behavior.duplicate(true)
+
+		behaviors.append(_behavior)
+
+		_behavior._initialize(entity)
+
 	return true
+
+
+
+
+
+func _evaluate_all(target_disposition: Disposition = null) -> void:
+
+	var best_behavior: Behavior = null
+
+	var best_score:= -INF
+
+	var best_disposition: Disposition = null
+
+	for behavior in behaviors:
+
+		var score:= 0.0
+
+		var chosen_disposition = target_disposition
+
+		if behavior.requires_disposition and !dispositions.is_empty():
+
+			for disposition in dispositions:
+
+				var disposition_score = behavior._evaluate(disposition)
+
+				if disposition_score > score:
+
+					score = disposition_score
+
+					chosen_disposition = disposition
+		
+		else:
+
+			score = behavior._evaluate(chosen_disposition)
+
+		print("behavior evaluation for %s: %s" % [behavior.display_name, score])
+
+		if score > best_score:
+
+			best_score = score
+
+			best_behavior = behavior
+
+			best_disposition = chosen_disposition
+
+	_change_behavior(best_behavior, best_disposition)
+
+	evaluation_timer = evaluation_time
+
+			
+
+
+
+
+func _change_behavior(new_behavior: Behavior, target_disposition: Disposition = null) -> void:
+
+	if new_behavior == current_behavior:
+
+		return
+
+	if current_behavior:
+		
+		current_behavior._stop(target_disposition)
+
+	current_behavior = new_behavior
+
+	current_behavior._start(target_disposition)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -67,6 +158,26 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 
 		_apply_reaction_tag(reaction_tag, disposition)
 
+	_evaluate_all(disposition)
+
+
+
+
+
+
+func _generate_disposition(target_entity: EntityNode) -> Disposition:
+
+	var disposition = Disposition.create_new(target_entity)
+
+	disposition.expired.connect(_on_disposition_expired.bind(disposition))
+
+	dispositions.append(disposition)
+
+	return disposition
+
+
+
+
 
 
 
@@ -85,6 +196,23 @@ func _apply_reaction_tag(reaction_tag: ReactionTag, disposition: Disposition = n
 		disposition.respect += reaction_tag.respect_delta
 
 	
+
+
+
+
+
+func _get_disposition(entity_node: EntityNode) -> Disposition:
+
+	for disposition in dispositions: 
+
+		if disposition.target_entity == entity_node:
+
+			return disposition
+
+	return null
+
+
+
 
 
 
@@ -117,89 +245,7 @@ func _disconnect_signals() -> void:
 
 
 
-
-func _choose_behavior(target_disposition: Disposition = null) -> void:
-
-	if !target_disposition and current_behavior:
-
-		target_disposition = current_behavior.target_disposition
-
-	var new_behavior = _evaluate_behaviors(target_disposition)
-
-	if new_behavior == current_behavior:
-
-		return
-
-	if current_behavior:
-		
-		current_behavior._stop()
-
-	current_behavior = new_behavior
-
-	current_behavior._start(target_disposition)
-
-
-
-
-
-func _evaluate_behaviors(target_disposition: Disposition = null) -> Behavior:
-
-	evaluation_timer = 0.0
-
-	var chosen_behavior: Behavior = null
-
-	var highest_evaluation:= -INF
-
-	for behavior in behaviors:
-
-		var evaluation = behavior._evaluate(target_disposition)
-
-		if !chosen_behavior or evaluation > highest_evaluation:
-
-			chosen_behavior = behavior
-
-			highest_evaluation = evaluation
-
-	return chosen_behavior
-
-
-
-
-
-
-func _generate_disposition(target_entity: EntityNode) -> Disposition:
-
-	var disposition = Disposition.create_new(target_entity)
-
-	disposition.expired.connect(_on_disposition_expired.bind(disposition))
-
-	dispositions.append(disposition)
-
-	return disposition
-
-
-
-
-
-
-
-
-
-func _get_disposition(target_entity: EntityNode) -> Disposition:
-
-	for disposition in dispositions:
-
-		if disposition.target_entity == target_entity:
-
-			return disposition
-
-	return null
-
-
-
-
-
-
+	
 
 
 
@@ -212,9 +258,11 @@ func _activate() -> bool:
 
 	if !current_behavior:
 
-		_choose_behavior()
+		_evaluate_all()
 
-	current_behavior._start()
+	if current_behavior:
+
+		current_behavior._activate()
 
 	return true
 
@@ -227,9 +275,11 @@ func _deactivate() -> bool:
 
 	if current_behavior:
 
-		current_behavior._end()
+		current_behavior._deactivate()
 
 	return true
+
+
 
 
 
@@ -249,7 +299,7 @@ func _on_entity_entered_vision_sensor(entity_node: EntityNode) -> void:
 
 		disposition.stop_timer()
 
-	_choose_behavior(disposition)
+	_evaluate_all(disposition)
 
 
 
@@ -261,7 +311,7 @@ func _on_entity_exited_vision_sensor(entity_node: EntityNode) -> void:
 
 		disposition.start_timer()
 
-	_evaluate_behaviors(disposition)
+	_evaluate_all(disposition)
 
 
 
@@ -275,7 +325,7 @@ func _on_disposition_expired(disposition: Disposition) -> void:
 
 func _on_behavior_evaluation_requested(_behavior: Behavior) -> void:
 
-	_choose_behavior()
+	_evaluate_all()
 
 
 
@@ -293,10 +343,10 @@ func _physics_process(delta: float) -> void:
 
 		disposition.tick(delta)
 
-	if evaluation_timer < evaluation_time:
+	if evaluation_timer > 0.0:
 
-		evaluation_timer += delta
+		evaluation_timer -= delta
 
-		if evaluation_timer >= evaluation_time:
+		if evaluation_timer <= 0.0:
 
-			_choose_behavior()
+			_evaluate_all()

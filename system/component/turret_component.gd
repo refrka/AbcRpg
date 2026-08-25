@@ -6,7 +6,7 @@ class_name TurretComponent extends Component
 
 @export var turret_config: TurretConfig
 
-@export var ammunition_slot: EquipmentSlot
+@export var ammunition_data: EquipmentData
 
 @export var attack_entry: AttackEntry
 
@@ -29,8 +29,6 @@ var current_target: EntityNode
 
 func _fire() -> void:
 
-	var ammunition_data = ammunition_slot.item_data
-
 	var ammunition_def = ammunition_data.item_def
 
 	var projectile_node = ProjectileNode.from_ammunition(ammunition_def)
@@ -43,7 +41,7 @@ func _fire() -> void:
 
 	projectile_node.global_position = entity.combat_origin.global_position
 
-	projectile_node.damage_package = DamagePackage.from_attack_entry(attack_entry)
+	projectile_node.damage_package = DamagePackage.from_attack_entry(attack_entry, entity)
 
 	projectile_node.set_projectile_owner(entity)
 
@@ -89,9 +87,9 @@ func _on_entity_entered_vision_sensor(entity_node: EntityNode) -> void:
 
 	firing_timer = turret_config.fire_rate
 
-	# firing_timer_active = true
+	firing_timer_active = true
 
-	# _fire()
+	_fire()
 
 
 
@@ -125,6 +123,6 @@ func _process(delta: float) -> void:
 
 		if firing_timer <= 0.0:
 
-			# _fire()
+			_fire()
 
 			pass

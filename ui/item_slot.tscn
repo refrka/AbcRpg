@@ -2,6 +2,23 @@
 
 [ext_resource type="Script" uid="uid://hy0tpjr4hmo8" path="res://ui/item_slot.gd" id="1_m0q4r"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gpwhp"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.70007217, 0.7000722, 0.7000721, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0q4r"]
 content_margin_left = 0.0
 content_margin_top = 0.0
@@ -54,10 +71,11 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [node name="ItemSlot" type="MarginContainer" unique_id=1793815595 node_paths=PackedStringArray("item_icon", "item_count_label", "linked_panel")]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(48, 48)
 script = ExtResource("1_m0q4r")
 item_icon = NodePath("PanelContainer/MarginContainer/ItemIcon")
 item_count_label = NodePath("PanelContainer/MarginContainer/ItemCount")
+selected_stylebox = SubResource("StyleBoxFlat_gpwhp")
 linked_panel = NodePath("PanelContainer")
 default_stylebox = SubResource("StyleBoxFlat_m0q4r")
 hovered_stylebox = SubResource("StyleBoxFlat_lxngi")
@@ -85,5 +103,4 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 12
 text = "99"

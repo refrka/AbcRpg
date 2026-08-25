@@ -5,6 +5,8 @@ class_name BehaviorProfile extends Resource
 
 @export var reaction_tags: Array[ReactionTag]
 
+@export var behaviors: Array[Behavior]
+
 
 
 

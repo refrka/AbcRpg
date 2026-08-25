@@ -25,6 +25,8 @@ class_name EntityNode extends PhysicsBody2D
 
 @export var combat_origin: Node2D
 
+@export var on_screen_notifier: VisibleOnScreenNotifier2D
+
 
 
 

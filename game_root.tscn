@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://bpw2tyr3j5wtx" path="res://entity/characters/thief.tscn" id="5_0o8ui"]
 [ext_resource type="Script" uid="uid://c0s3d38vd56k5" path="res://system/physics/sensor.gd" id="6_q7c2t"]
 [ext_resource type="Script" uid="uid://lhkg7gcx3al7" path="res://system/game_camera.gd" id="7_8gxew"]
-[ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="8_1uov0"]
 [ext_resource type="PackedScene" uid="uid://bxdxtskhyss1g" path="res://ui/player_profile.tscn" id="8_krhou"]
 [ext_resource type="PackedScene" uid="uid://n03vdsdlo68k" path="res://entity/item_node.tscn" id="8_soos4"]
 [ext_resource type="Resource" uid="uid://buxnei4447my6" path="res://item/consumable/food/apple_def.tres" id="9_nknqk"]
@@ -96,7 +95,7 @@ region = Rect2(192, 48, 48, 48)
 atlas = ExtResource("4_6t5o2")
 region = Rect2(240, 48, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_q7c2t"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_lt8bm"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -194,38 +193,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgyib"]
-size = Vector2(20, 32)
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_8gxew"]
-vertices = PackedVector2Array(595.25, 42.882813, 602.71875, 324.70313, 55.289063, 309.25, 34.78125, 36.132813)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(24, 26, 46, 319, 613, 335, 605, 33)])
-
-[sub_resource type="Resource" id="Resource_nknqk"]
-script = ExtResource("10_lt8bm")
-item_def = ExtResource("9_nknqk")
-count = 50
-metadata/_custom_type_script = "uid://3afb8y37pgo7"
-
-[sub_resource type="Resource" id="Resource_q7c2t"]
-script = ExtResource("10_lt8bm")
-item_def = ExtResource("9_nknqk")
-count = 5
-metadata/_custom_type_script = "uid://3afb8y37pgo7"
-
-[sub_resource type="Resource" id="Resource_1uov0"]
-script = ExtResource("10_lt8bm")
-item_def = ExtResource("9_nknqk")
-count = 78
-metadata/_custom_type_script = "uid://3afb8y37pgo7"
-
-[sub_resource type="Resource" id="Resource_i2rhi"]
-script = ExtResource("10_lt8bm")
-item_def = ExtResource("9_nknqk")
-count = 78
-metadata/_custom_type_script = "uid://3afb8y37pgo7"
-
 [sub_resource type="Animation" id="Animation_0o8ui"]
 length = 0.001
 tracks/0/type = "value"
@@ -263,6 +230,35 @@ _data = {
 &"shake": SubResource("Animation_8gxew")
 }
 
+[sub_resource type="Resource" id="Resource_nknqk"]
+script = ExtResource("10_lt8bm")
+item_def = ExtResource("9_nknqk")
+count = 50
+metadata/_custom_type_script = "uid://3afb8y37pgo7"
+
+[sub_resource type="Resource" id="Resource_q7c2t"]
+script = ExtResource("10_lt8bm")
+item_def = ExtResource("9_nknqk")
+count = 5
+metadata/_custom_type_script = "uid://3afb8y37pgo7"
+
+[sub_resource type="Resource" id="Resource_1uov0"]
+script = ExtResource("10_lt8bm")
+item_def = ExtResource("9_nknqk")
+count = 78
+metadata/_custom_type_script = "uid://3afb8y37pgo7"
+
+[sub_resource type="Resource" id="Resource_i2rhi"]
+script = ExtResource("10_lt8bm")
+item_def = ExtResource("9_nknqk")
+count = 78
+metadata/_custom_type_script = "uid://3afb8y37pgo7"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_8gxew"]
+vertices = PackedVector2Array(947.8906, -178.70313, 787.3281, 609.52344, -172.57813, 346.21094, -220.10938, -248.32813)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-231, -259, -182, 354, 795, 622, 960, -188)])
+
 [node name="GameRoot" type="Node" unique_id=13881179 node_paths=PackedStringArray("dummy")]
 script = ExtResource("1_xj5yv")
 dummy = NodePath("WorldCanvas/WorldRoot/TestDummy")
@@ -292,31 +288,22 @@ y_sort_enabled = true
 [node name="Player" parent="WorldCanvas/WorldRoot" unique_id=1691891269 instance=ExtResource("3_bxsma")]
 
 [node name="BodySprite" parent="WorldCanvas/WorldRoot/Player/VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(1691891269, 831679319) index="0" unique_id=16791793]
-sprite_frames = SubResource("SpriteFrames_q7c2t")
+sprite_frames = SubResource("SpriteFrames_lt8bm")
+
+[node name="GameCamera" type="Camera2D" parent="WorldCanvas/WorldRoot/Player" unique_id=493776325 node_paths=PackedStringArray("anim_player") groups=["game_camera"]]
+script = ExtResource("7_8gxew")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WorldCanvas/WorldRoot/Player/GameCamera" unique_id=2103769497]
+libraries/ = SubResource("AnimationLibrary_ledqy")
 
 [node name="TestDummy" parent="WorldCanvas/WorldRoot" unique_id=1560747210 instance=ExtResource("4_wd1uf")]
 position = Vector2(438, 148)
-collision_mask = 1
-motion_mode = 0
-
-[node name="CollisionShape2D" parent="WorldCanvas/WorldRoot/TestDummy/BodyHurtbox" parent_id_path=PackedInt32Array(1560747210, 511458273) index="0" unique_id=2017378462]
-position = Vector2(0, -16)
-shape = SubResource("RectangleShape2D_rgyib")
 
 [node name="InteractSensor" parent="WorldCanvas/WorldRoot/TestDummy" index="3" unique_id=1065023119]
 collision_layer = 1
 collision_mask = 1
 script = ExtResource("6_q7c2t")
-
-[node name="CollisionShape2D" parent="WorldCanvas/WorldRoot/TestDummy/PickUpSensor" parent_id_path=PackedInt32Array(1560747210, 1125136771) index="0" unique_id=428972075]
-position = Vector2(0, 0)
-
-[node name="StateMachine" parent="WorldCanvas/WorldRoot/TestDummy" index="8" unique_id=438854359]
-script = ExtResource("8_1uov0")
-metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="WorldCanvas/WorldRoot" unique_id=37434313]
-navigation_polygon = SubResource("NavigationPolygon_8gxew")
 
 [node name="ItemNode" parent="WorldCanvas/WorldRoot" unique_id=1945380598 instance=ExtResource("8_soos4")]
 position = Vector2(384, 287)
@@ -333,6 +320,9 @@ item_data = SubResource("Resource_1uov0")
 [node name="ItemNode4" parent="WorldCanvas/WorldRoot" unique_id=1239029681 instance=ExtResource("8_soos4")]
 position = Vector2(542, 263)
 item_data = SubResource("Resource_i2rhi")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="WorldCanvas/WorldRoot" unique_id=37434313]
+navigation_polygon = SubResource("NavigationPolygon_8gxew")
 
 [node name="Thief" parent="WorldCanvas/WorldRoot" unique_id=1786989358 instance=ExtResource("5_0o8ui")]
 position = Vector2(454, 258)
@@ -409,16 +399,7 @@ mouse_filter = 2
 layout_mode = 1
 
 [node name="PlayerHealthBar" parent="DebugCanvas/DebugRoot/DebugMain/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(2076110897, 259377874) index="1" unique_id=48952699 node_paths=PackedStringArray("health_component")]
-size_flags_horizontal = 3
 health_component = NodePath("../../../../../../../../../WorldCanvas/WorldRoot/Player/ComponentRoot/HealthComponent")
-
-[node name="GameCamera" type="Camera2D" parent="." unique_id=493776325 node_paths=PackedStringArray("anim_player") groups=["game_camera"]]
-anchor_mode = 0
-script = ExtResource("7_8gxew")
-anim_player = NodePath("AnimationPlayer")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="GameCamera" unique_id=2103769497]
-libraries/ = SubResource("AnimationLibrary_ledqy")
 
 [editable path="WorldCanvas/WorldRoot/Player"]
 [editable path="WorldCanvas/WorldRoot/Player/VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]

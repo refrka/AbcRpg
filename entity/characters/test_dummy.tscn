@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://dji7pch2e6jjt" path="res://item/equipment_data.gd" id="8_cjd5d"]
 [ext_resource type="Script" uid="uid://ptxf5ubnyci4" path="res://system/state/combat_ready_state.gd" id="8_xdqbh"]
 [ext_resource type="Script" uid="uid://d4gj3xyu3q7q3" path="res://system/state/combat_charging_state.gd" id="9_6br6m"]
-[ext_resource type="Script" uid="uid://dg3op23rm8phy" path="res://item/equipment_slot.gd" id="9_sfdkq"]
 [ext_resource type="Script" uid="uid://3is2qc8lprj1" path="res://system/combat/attack_entry.gd" id="10_20wr5"]
 [ext_resource type="Script" uid="uid://b14ycfqds2c2w" path="res://system/state/body_idle_state.gd" id="15_ugsij"]
 [ext_resource type="Script" uid="uid://b4hnnosk686g1" path="res://system/state/combat_flinch_state.gd" id="16_ajbx4"]
@@ -33,14 +32,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i135f"]
-size = Vector2(12, 36)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aajxx"]
 size = Vector2(24, 4)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ugsij"]
 radius = 33.54102
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvklg"]
+size = Vector2(18, 6)
 
 [sub_resource type="Resource" id="Resource_t1wp5"]
 script = ExtResource("7_ajbx4")
@@ -48,16 +47,11 @@ allowed_ammunition = Array[ExtResource("5_ugsij")]([ExtResource("6_nfgpu")])
 turret_mode = 1
 metadata/_custom_type_script = "uid://bfcrp7d10cskf"
 
-[sub_resource type="Resource" id="Resource_8mhx1"]
+[sub_resource type="Resource" id="Resource_ugsij"]
 script = ExtResource("8_cjd5d")
 item_def = ExtResource("6_nfgpu")
+count = 15
 metadata/_custom_type_script = "uid://dji7pch2e6jjt"
-
-[sub_resource type="Resource" id="Resource_gqgbn"]
-script = ExtResource("9_sfdkq")
-equipment_type = 3
-item_data = SubResource("Resource_8mhx1")
-metadata/_custom_type_script = "uid://dg3op23rm8phy"
 
 [sub_resource type="Resource" id="Resource_22lai"]
 script = ExtResource("10_20wr5")
@@ -73,10 +67,6 @@ sprite_frames = SubResource("SpriteFrames_6e3ql")
 [node name="CombatSprite" parent="VisualRoot/CombatVisualRoot" parent_id_path=PackedInt32Array(2053548299) index="0" unique_id=1921775663]
 position = Vector2(16, -22)
 
-[node name="CollisionShape2D" parent="BodyHurtbox" parent_id_path=PackedInt32Array(511458273) index="0" unique_id=2017378462]
-position = Vector2(0, -18)
-shape = SubResource("RectangleShape2D_i135f")
-
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="BodyHurtbox" parent_id_path=PackedInt32Array(511458273) index="1" unique_id=1109998496]
 position = Vector2(0, -22)
 shape = SubResource("RectangleShape2D_aajxx")
@@ -85,17 +75,21 @@ debug_color = Color(0.7, 0, 0, 0.03137255)
 [node name="CollisionShape2D" parent="VisionSensor" parent_id_path=PackedInt32Array(1534038726) index="0" unique_id=376879403]
 shape = SubResource("CircleShape2D_ugsij")
 
+[node name="BodyCollision" parent="." index="5" unique_id=4360643]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_kvklg")
+
 [node name="CombatOrigin" parent="Center" parent_id_path=PackedInt32Array(893569566) index="0" unique_id=90271966]
 position = Vector2(0, -22)
 
 [node name="TurretComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="4" unique_id=1689442988]
 script = ExtResource("4_taeh0")
 turret_config = SubResource("Resource_t1wp5")
-ammunition_slot = SubResource("Resource_gqgbn")
+ammunition_data = SubResource("Resource_ugsij")
 attack_entry = SubResource("Resource_22lai")
 metadata/_custom_type_script = "uid://dxpsfyvmkctq"
 
-[node name="StateMachine" parent="." index="7" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
+[node name="StateMachine" parent="." index="8" unique_id=438854359 node_paths=PackedStringArray("initial_body_state", "initial_combat_state")]
 initial_body_state = NodePath("BodyIdleState")
 initial_combat_state = NodePath("CombatIdleState")
 

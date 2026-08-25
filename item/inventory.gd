@@ -118,6 +118,19 @@ func has_items(item_def: ItemDef, count:= 1) -> bool:
 	return true
 
 
+func is_empty() -> bool:
+
+	for item_data in item_list:
+
+		if !item_data.is_empty():
+
+			return false
+
+	return true
+
+
+
+
 
 
 func get_non_empty_data() -> Array[ItemData]:
@@ -169,6 +182,11 @@ func _get_first_empty_data() -> ItemData:
 			return item_data
 
 	return null
+
+
+
+
+
 
 
 

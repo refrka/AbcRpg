@@ -366,5 +366,7 @@ unique_name_in_owner = true
 script = ExtResource("5_jg2qq")
 metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1319603312]
+
 [editable path="VisualRoot/CombatVisualRoot/CombatSprite/CombatHitbox"]
 [editable path="BodyHurtbox"]

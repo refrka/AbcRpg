@@ -1,0 +1,1 @@
+class_name SocialBehavior extends Behavior
