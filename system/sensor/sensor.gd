@@ -16,7 +16,7 @@ var _initialized:= false
 
 var active:= false
 
-var _entity: EntityNode
+var entity: EntityNode
 
 
 var entities: Array[EntityNode]
@@ -24,7 +24,7 @@ var entities: Array[EntityNode]
 var sensors: Array[Sensor]
 
 
-func initialize(entity: EntityNode) -> void:
+func initialize(_entity: EntityNode = null) -> void:
 
 	if _initialized:
 
@@ -32,7 +32,7 @@ func initialize(entity: EntityNode) -> void:
 
 	_initialized = true
 
-	_entity = entity
+	entity = _entity
 
 
 
@@ -95,7 +95,7 @@ func _disconnect_signals() -> void:
 
 func _on_body_entered_sensor(body: PhysicsBody2D) -> void:
 
-	if body is EntityNode and body != _entity:
+	if body is EntityNode and body != entity:
 
 		entities.append(body)
 

@@ -25,13 +25,15 @@ func initialize(_entity: EntityNode) -> void:
 
 
 
-func connect_signals() -> void:
+func _connect_signals() -> void:
 
 	nav_agent.navigation_finished.connect(_on_navigation_finished)
 
 
 
+func _disconnect_signals() -> void:
 
+	nav_agent.navigation_finished.disconnect(_on_navigation_finished)
 
 
 

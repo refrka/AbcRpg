@@ -47,7 +47,7 @@ func activate() -> void:
 
 	active = true
 	
-	connect_signals()
+	_connect_signals()
 
 
 
@@ -59,7 +59,7 @@ func deactivate() -> void:
 
 		return
 	
-	disconnect_signals()
+	_disconnect_signals()
 
 	active = false
 
@@ -67,12 +67,12 @@ func deactivate() -> void:
 
 
 
-func connect_signals() -> void:
+func _connect_signals() -> void:
 
 	pass
 
 
 
-func disconnect_signals() -> void:
+func _disconnect_signals() -> void:
 
 	pass

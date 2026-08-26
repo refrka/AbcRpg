@@ -41,22 +41,41 @@ func _initialize(_entity: EntityNode, _state_machine: StateMachine) -> void:
 
 func _enter() -> void:
 
-	_update_visuals()
+	active = true
+	
+	_connect_signals()
 
 
 
 
 func _exit() -> void:
 
+	_disconnect_signals()
+
+	active = false
+
+
+
+
+
+func _transition_to(state_script: Script) -> void:
+
+	state_machine.request_state(state_script)
+
+
+
+
+
+func _connect_signals() -> void:
+
 	pass
 
 
 
 
-func _update_visuals() -> void:
+func _disconnect_signals() -> void:
 
 	pass
-
 
 
 
@@ -67,13 +86,13 @@ func _tick(_delta: float) -> void:
 
 
 
-func _activate() -> void:
+func activate() -> void:
 
 	active = true
 
 
 
-func _deactivate() -> void:
+func deactivate() -> void:
 
 	active = false
 

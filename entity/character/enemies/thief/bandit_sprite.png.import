@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8l18gyk8b67i"
-path="res://.godot/imported/player_sprite_sheet.png-4c6ad76f1c5eea7c7f2d566a52f67387.ctex"
+uid="uid://b3emer4e8v4k8"
+path="res://.godot/imported/bandit_sprite.png-8740ee6fd0f85d0a94ef8b5d4e48847b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://zjunk/player_sprite_sheet.png"
-dest_files=["res://.godot/imported/player_sprite_sheet.png-4c6ad76f1c5eea7c7f2d566a52f67387.ctex"]
+source_file="res://entity/character/enemies/thief/bandit_sprite.png"
+dest_files=["res://.godot/imported/bandit_sprite.png-8740ee6fd0f85d0a94ef8b5d4e48847b.ctex"]
 
 [params]
 

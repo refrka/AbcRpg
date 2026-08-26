@@ -17,3 +17,7 @@ enum Attribute {
 
 
 var attribute: Attribute
+
+
+
+var value: float

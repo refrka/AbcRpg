@@ -52,6 +52,13 @@ debug_passive={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="CharacterNode"
+2d_physics/layer_2="ObjectNode"
+2d_physics/layer_9="Hitbox"
+2d_physics/layer_10="Hurtbox"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

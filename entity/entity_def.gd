@@ -6,4 +6,6 @@ class_name EntityDef extends Resource
 
 @export var display_name: String
 
+@export var entity_groups: Array[EntityGroup]
+
 @export var body_sprite_texture: Texture2D

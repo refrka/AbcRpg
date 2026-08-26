@@ -1,18 +1,30 @@
 [gd_scene format=3 uid="uid://cso55dihtqjbh"]
 
 [ext_resource type="Script" uid="uid://q3oj6jf67v3m" path="res://game_root.gd" id="1_xj5yv"]
+[ext_resource type="Script" uid="uid://3is2qc8lprj1" path="res://system/combat/attack_entry.gd" id="2_0o8ui"]
 [ext_resource type="PackedScene" uid="uid://c74kocy3mpvrq" path="res://ui/main_menu.tscn" id="2_pjpa4"]
 [ext_resource type="PackedScene" uid="uid://c13m3lqabsxsi" path="res://entity/character/enemies/thief/thief.tscn" id="3_bxsma"]
+[ext_resource type="PackedScene" uid="uid://bcm53htxb38iq" path="res://player/player.tscn" id="3_lkrbl"]
+[ext_resource type="PackedScene" uid="uid://bus6ceinmq21u" path="res://system/sensor/hitbox.tscn" id="5_wd1uf"]
+
+[sub_resource type="Resource" id="Resource_wd1uf"]
+script = ExtResource("2_0o8ui")
+metadata/_custom_type_script = "uid://3is2qc8lprj1"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_aajxx"]
 vertices = PackedVector2Array(727.9531, 399.96875, -59.320313, 398.02344, -31.578125, -26.679688, 776.8594, -88.11719)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-41, -36, -70, 408, 737, 410, 788, -99)])
 
-[node name="GameRoot" type="Node" unique_id=13881179 node_paths=PackedStringArray("world_root", "thief")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_wd1uf"]
+radius = 15.033297
+
+[node name="GameRoot" type="Node" unique_id=13881179 node_paths=PackedStringArray("world_root", "thief", "hitbox")]
 script = ExtResource("1_xj5yv")
 world_root = NodePath("WorldCanvas/WorldRoot")
 thief = NodePath("WorldCanvas/WorldRoot/Thief")
+hitbox = NodePath("WorldCanvas/WorldRoot/Hitbox")
+attack_entry = SubResource("Resource_wd1uf")
 
 [node name="MainMenuCanvas" type="CanvasLayer" parent="." unique_id=528574511]
 visible = false
@@ -33,11 +45,24 @@ layout_mode = 1
 
 [node name="WorldRoot" type="Node2D" parent="WorldCanvas" unique_id=210974550]
 
-[node name="Thief" parent="WorldCanvas/WorldRoot" unique_id=1691891269 instance=ExtResource("3_bxsma")]
-position = Vector2(314, 183)
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="WorldCanvas/WorldRoot" unique_id=573777721]
 navigation_polygon = SubResource("NavigationPolygon_aajxx")
+
+[node name="Player" parent="WorldCanvas/WorldRoot" unique_id=1691891269 instance=ExtResource("3_lkrbl")]
+y_sort_enabled = false
+position = Vector2(243, 167)
+collision_mask = 1
+
+[node name="Thief" parent="WorldCanvas/WorldRoot" unique_id=564953944 instance=ExtResource("3_bxsma")]
+y_sort_enabled = false
+position = Vector2(330, 150)
+collision_mask = 1
+
+[node name="Hitbox" parent="WorldCanvas/WorldRoot" unique_id=989190462 instance=ExtResource("5_wd1uf")]
+position = Vector2(438, 164)
+
+[node name="CollisionShape2D" parent="WorldCanvas/WorldRoot/Hitbox" index="0" unique_id=1829564054]
+shape = SubResource("CircleShape2D_wd1uf")
 
 [node name="DebugCanvas" type="CanvasLayer" parent="." unique_id=545993034]
 
@@ -78,3 +103,5 @@ layout_mode = 2
 [node name="Label" type="Label" parent="DebugCanvas/DebugRoot/DebugMain/MarginContainer/VBoxContainer" unique_id=571374096]
 layout_mode = 2
 text = "Debug Main"
+
+[editable path="WorldCanvas/WorldRoot/Hitbox"]

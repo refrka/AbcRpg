@@ -5,6 +5,12 @@ class_name GameRoot extends Node
 
 @export var thief: CharacterNode
 
+@export var hitbox: Hitbox
+
+@export var attack_entry: AttackEntry
+
+
+
 var navigation_component: NavigationComponent
 
 
@@ -21,7 +27,24 @@ func _ready() -> void:
 
 	navigation_component = thief.get_component(NavigationComponent)
 
-	print(navigation_component)
+	hitbox.initialize()
+
+	hitbox.activate()
+
+	hitbox.hit_detected.connect(_on_hit_detected)
+
+
+
+
+
+
+func _on_hit_detected(entity_node: EntityNode) -> void:
+
+	var damage_package = DamagePackage.new()
+
+	damage_package.add_damage_entry(DamageEntry.from_attack_entry(attack_entry))
+
+	entity_node.receive_damage_package(damage_package)
 
 
 

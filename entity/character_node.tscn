@@ -1,12 +1,29 @@
 [gd_scene format=3 uid="uid://cxifm1i14plat"]
 
 [ext_resource type="Script" uid="uid://bs4o860d6immp" path="res://entity/character_node.gd" id="1_ufg3e"]
+[ext_resource type="Script" uid="uid://c58fcb5y76m05" path="res://system/component/movement_component.gd" id="2_0rdkl"]
+[ext_resource type="Script" uid="uid://gwap3yglqk06" path="res://system/sensor/sensor.gd" id="2_mbyps"]
+[ext_resource type="PackedScene" uid="uid://dsuffcajepuep" path="res://system/sensor/hurtbox.tscn" id="4_22lai"]
+[ext_resource type="Script" uid="uid://df6raydgqu31j" path="res://system/state/body_idle_state.gd" id="4_acwdd"]
+[ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="4_jg2qq"]
+[ext_resource type="Script" uid="uid://b0f0s37wf0d51" path="res://system/state/body_moving_state.gd" id="5_pgotb"]
+[ext_resource type="Script" uid="uid://bfqel43kpuxfk" path="res://system/state/combat_idle_state.gd" id="6_0hq70"]
+[ext_resource type="Script" uid="uid://ptxf5ubnyci4" path="res://system/state/combat_ready_state.gd" id="7_t1wp5"]
+[ext_resource type="Script" uid="uid://deeaulvxswqh0" path="res://system/state/combat_attacking_state.gd" id="10_8mhx1"]
+[ext_resource type="Script" uid="uid://m77415ly27lh" path="res://system/state/combat_flinching_state.gd" id="11_udydy"]
+[ext_resource type="Script" uid="uid://di8hr1lgxklov" path="res://system/state/combat_charging_state.gd" id="12_me77t"]
 
-[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("_component_root")]
+[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("component_root", "state_machine", "vision_sensor", "body_hurtbox")]
+y_sort_enabled = true
+collision_mask = 0
 script = ExtResource("1_ufg3e")
-_component_root = NodePath("ComponentRoot")
+component_root = NodePath("ComponentRoot")
+state_machine = NodePath("StateMachine")
+vision_sensor = NodePath("VisionSensor")
+body_hurtbox = NodePath("BodyHurtbox")
 
 [node name="VisualRoot" type="Node2D" parent="." unique_id=1860433986]
+y_sort_enabled = true
 
 [node name="BodyVisualRoot" type="Node2D" parent="VisualRoot" unique_id=634059231]
 
@@ -17,7 +34,59 @@ _component_root = NodePath("ComponentRoot")
 [node name="CombatVisualRoot" type="Node2D" parent="VisualRoot" unique_id=879016436]
 
 [node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=4360643]
+debug_color = Color(0.61, 0.376675, 0.091499984, 0.043137256)
+
+[node name="BodyHurtbox" parent="." unique_id=156696924 instance=ExtResource("4_22lai")]
+
+[node name="VisionSensor" type="Area2D" parent="." unique_id=195842731]
+collision_layer = 0
+script = ExtResource("2_mbyps")
+metadata/_custom_type_script = "uid://gwap3yglqk06"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionSensor" unique_id=657421125]
 
 [node name="ComponentRoot" type="Node" parent="." unique_id=977928894]
 
+[node name="MovementComponent" type="Node" parent="ComponentRoot" unique_id=532550476]
+script = ExtResource("2_0rdkl")
+metadata/_custom_type_script = "uid://c58fcb5y76m05"
+
+[node name="StateMachine" type="Node" parent="." unique_id=945722664 node_paths=PackedStringArray("initial_body_state", "initial_combat_state", "body_root", "combat_root")]
+script = ExtResource("4_jg2qq")
+initial_body_state = NodePath("Body/BodyIdleState")
+initial_combat_state = NodePath("Combat/CombatIdleState")
+body_root = NodePath("Body")
+combat_root = NodePath("Combat")
+metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
+
+[node name="Body" type="Node" parent="StateMachine" unique_id=1614251606]
+
+[node name="BodyIdleState" type="Node" parent="StateMachine/Body" unique_id=17828355]
+script = ExtResource("4_acwdd")
+metadata/_custom_type_script = "uid://df6raydgqu31j"
+
+[node name="BodyMovingState" type="Node" parent="StateMachine/Body" unique_id=1499401972]
+script = ExtResource("5_pgotb")
+metadata/_custom_type_script = "uid://b0f0s37wf0d51"
+
+[node name="Combat" type="Node" parent="StateMachine" unique_id=1282432219]
+
+[node name="CombatIdleState" type="Node" parent="StateMachine/Combat" unique_id=393367528]
+script = ExtResource("6_0hq70")
+
+[node name="CombatReadyState" type="Node" parent="StateMachine/Combat" unique_id=209696353]
+script = ExtResource("7_t1wp5")
+
+[node name="CombatAttackingState" type="Node" parent="StateMachine/Combat" unique_id=655112954]
+script = ExtResource("10_8mhx1")
+
+[node name="CombatFlinchingState" type="Node" parent="StateMachine/Combat" unique_id=1269880093]
+script = ExtResource("11_udydy")
+body_state_override = true
+
+[node name="CombatChargingState" type="Node" parent="StateMachine/Combat" unique_id=1423860723]
+script = ExtResource("12_me77t")
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=714780742]
+
+[editable path="BodyHurtbox"]

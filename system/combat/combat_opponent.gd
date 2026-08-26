@@ -1,0 +1,1 @@
+class_name CombatOpponent extends RefCounted

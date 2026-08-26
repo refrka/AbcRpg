@@ -2,10 +2,38 @@
 
 [ext_resource type="Script" uid="uid://1xe3vlkr6xxn" path="res://entity/character_def.gd" id="1_20xkh"]
 [ext_resource type="Script" uid="uid://b2b8oiplu1kce" path="res://system/behavior/behavior.gd" id="1_vrend"]
+[ext_resource type="Script" uid="uid://cbhffuw61unas" path="res://system/behavior/attribute_map.gd" id="2_76lag"]
+[ext_resource type="Script" uid="uid://cj2mjblxa8uow" path="res://system/behavior/ambient/wander_ambient_behavior.gd" id="2_e7kxp"]
 [ext_resource type="Script" uid="uid://b5xtqlmt4a7wt" path="res://system/behavior/behavior_profile.gd" id="2_ggopq"]
+[ext_resource type="Script" uid="uid://crucsprqnynog" path="res://system/behavior/conflict/pickpocket_conflict_behavior.gd" id="3_76lag"]
+[ext_resource type="Script" uid="uid://cmj842gw8ubg7" path="res://system/behavior/preservation/retreat_preservation_behavior.gd" id="5_c7yhl"]
+[ext_resource type="Script" uid="uid://urxn6wck32hg" path="res://entity/entity_group.gd" id="5_fiy8a"]
+
+[sub_resource type="Resource" id="Resource_c7yhl"]
+script = ExtResource("2_76lag")
+metadata/_custom_type_script = "uid://cbhffuw61unas"
+
+[sub_resource type="Resource" id="Resource_ts2hc"]
+script = ExtResource("2_e7kxp")
+attribute_map = SubResource("Resource_c7yhl")
+metadata/_custom_type_script = "uid://cj2mjblxa8uow"
+
+[sub_resource type="Resource" id="Resource_1biv0"]
+script = ExtResource("2_76lag")
+metadata/_custom_type_script = "uid://cbhffuw61unas"
+
+[sub_resource type="Resource" id="Resource_106at"]
+script = ExtResource("3_76lag")
+attribute_map = SubResource("Resource_1biv0")
+metadata/_custom_type_script = "uid://crucsprqnynog"
+
+[sub_resource type="Resource" id="Resource_jnww2"]
+script = ExtResource("5_c7yhl")
+metadata/_custom_type_script = "uid://cmj842gw8ubg7"
 
 [sub_resource type="Resource" id="Resource_0uxbs"]
 script = ExtResource("2_ggopq")
+behaviors = Array[ExtResource("1_vrend")]([SubResource("Resource_ts2hc"), SubResource("Resource_106at"), SubResource("Resource_jnww2")])
 
 [resource]
 script = ExtResource("1_20xkh")
