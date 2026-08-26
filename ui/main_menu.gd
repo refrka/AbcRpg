@@ -2,9 +2,9 @@ class_name MainMenu extends UIElement
 
 
 
-@onready var start_button:= %StartButton
+@export var start_button: Button
 
-@onready var reset_button:= %ResetButton
+@export var reset_button: Button
 
 
 

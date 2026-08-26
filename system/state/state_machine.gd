@@ -2,14 +2,16 @@ class_name StateMachine extends Node
 
 
 
+@export var initial_state: State
 
 
+var _initialized:= false
 
-var active:= true
+var active:= false
 
 var current_state: State
 
-var entity: EntityNode
+var _entity: EntityNode
 
 
 
@@ -17,43 +19,79 @@ var entity: EntityNode
 
 
 
-func _initialize(_entity: EntityNode) -> void:
+func initialize(entity: EntityNode) -> void:
 
-	entity = _entity
+	if _initialized: 
+		
+		return
 
-	current_state = get_child(0) as State
+	_initialized	= true
 
+	_entity = entity
 
+	if initial_state:
 
-
-func _activate_state(state: State) -> void:
-
-	state._activate()
-
-	state._enter()
-
+		current_state = initial_state
 
 
 
-func _activate() -> void:
+
+
+
+
+
+func activate() -> void:
 
 	active = true
 
 	if current_state:
 
-		_activate_state(current_state)
+		current_state._activate()
 
 
 
-
-
-func _deactivate() -> void:
+func deactivate() -> void:
 
 	active = false
 
 	if current_state:
 
 		current_state._deactivate()
+
+
+
+
+
+
+
+
+
+
+
+
+func _change_state(new_state: State) -> void:
+
+	if new_state == current_state:
+
+		if current_state.allow_reenter:
+
+			current_state._enter()
+
+		return
+
+	if current_state:
+
+		current_state._exit()
+
+	current_state = new_state
+
+	current_state._enter()
+
+
+
+
+
+
 
 
 

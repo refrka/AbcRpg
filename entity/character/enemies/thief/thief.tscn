@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c13m3lqabsxsi"]
+
+[ext_resource type="PackedScene" uid="uid://cxifm1i14plat" path="res://entity/character_node.tscn" id="1_wqnc8"]
+[ext_resource type="Texture2D" uid="uid://b3emer4e8v4k8" path="res://zjunk/bandit_sprite.png" id="2_0uxbs"]
+[ext_resource type="Resource" uid="uid://b7iqqlbq3v5re" path="res://entity/character/enemies/thief/thief_def.tres" id="2_a8q8j"]
+[ext_resource type="Script" uid="uid://c58fcb5y76m05" path="res://system/component/movement_component.gd" id="4_ts2hc"]
+[ext_resource type="Script" uid="uid://crcpqla1i8mmf" path="res://system/component/navigation_component.gd" id="5_106at"]
+
+[node name="Thief" unique_id=1691891269 instance=ExtResource("1_wqnc8")]
+entity_def = ExtResource("2_a8q8j")
+
+[node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(634059231) index="1" unique_id=1617730945]
+position = Vector2(0, -16)
+texture = ExtResource("2_0uxbs")
+hframes = 4
+vframes = 2
+
+[node name="MovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="0" unique_id=1510462904]
+script = ExtResource("4_ts2hc")
+metadata/_custom_type_script = "uid://c58fcb5y76m05"
+
+[node name="NavigationComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="1" unique_id=671605919 node_paths=PackedStringArray("nav_agent")]
+script = ExtResource("5_106at")
+nav_agent = NodePath("../../NavigationAgent2D")

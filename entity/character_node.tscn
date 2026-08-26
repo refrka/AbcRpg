@@ -2,10 +2,22 @@
 
 [ext_resource type="Script" uid="uid://bs4o860d6immp" path="res://entity/character_node.gd" id="1_ufg3e"]
 
-[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269]
+[node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("_component_root")]
 script = ExtResource("1_ufg3e")
+_component_root = NodePath("ComponentRoot")
+
+[node name="VisualRoot" type="Node2D" parent="." unique_id=1860433986]
+
+[node name="BodyVisualRoot" type="Node2D" parent="VisualRoot" unique_id=634059231]
+
+[node name="BodyAnimatedSprite" type="AnimatedSprite2D" parent="VisualRoot/BodyVisualRoot" unique_id=458188630]
+
+[node name="BodySprite" type="Sprite2D" parent="VisualRoot/BodyVisualRoot" unique_id=1617730945]
+
+[node name="CombatVisualRoot" type="Node2D" parent="VisualRoot" unique_id=879016436]
 
 [node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=4360643]
 
 [node name="ComponentRoot" type="Node" parent="." unique_id=977928894]
-unique_name_in_owner = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=714780742]

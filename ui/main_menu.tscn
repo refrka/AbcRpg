@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dgpavopfjau" path="res://ui/main_menu.gd" id="1_t7e0r"]
 
-[node name="MainMenu" type="Control" unique_id=452967481]
+[node name="MainMenu" type="Control" unique_id=452967481 node_paths=PackedStringArray("start_button", "reset_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_t7e0r")
+start_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/StartButton")
+reset_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ResetButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=459648461]
 layout_mode = 1
@@ -41,13 +43,11 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 
 [node name="StartButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=423121509]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Start"
 
 [node name="ResetButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1161009359]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Reset"

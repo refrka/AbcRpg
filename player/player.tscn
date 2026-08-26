@@ -1,5 +1,10 @@
 [gd_scene format=3 uid="uid://bcm53htxb38iq"]
 
 [ext_resource type="PackedScene" uid="uid://cxifm1i14plat" path="res://entity/character_node.tscn" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="2_rkbax"]
 
 [node name="Player" unique_id=1691891269 instance=ExtResource("1_oul6g")]
+
+[node name="StateMachine" type="Node" parent="." index="2" unique_id=1008317039]
+script = ExtResource("2_rkbax")
+metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
