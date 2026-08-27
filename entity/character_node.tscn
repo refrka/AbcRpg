@@ -7,11 +7,14 @@
 [ext_resource type="Script" uid="uid://df6raydgqu31j" path="res://system/state/body_idle_state.gd" id="4_acwdd"]
 [ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="4_jg2qq"]
 [ext_resource type="Script" uid="uid://b0f0s37wf0d51" path="res://system/state/body_moving_state.gd" id="5_pgotb"]
+[ext_resource type="Script" uid="uid://4fd7sfi031h8" path="res://system/component/health_component.gd" id="5_udydy"]
 [ext_resource type="Script" uid="uid://bfqel43kpuxfk" path="res://system/state/combat_idle_state.gd" id="6_0hq70"]
+[ext_resource type="Script" uid="uid://cpdla0ky0joa2" path="res://system/component/animation_component.gd" id="6_me77t"]
 [ext_resource type="Script" uid="uid://ptxf5ubnyci4" path="res://system/state/combat_ready_state.gd" id="7_t1wp5"]
 [ext_resource type="Script" uid="uid://deeaulvxswqh0" path="res://system/state/combat_attacking_state.gd" id="10_8mhx1"]
 [ext_resource type="Script" uid="uid://m77415ly27lh" path="res://system/state/combat_flinching_state.gd" id="11_udydy"]
 [ext_resource type="Script" uid="uid://di8hr1lgxklov" path="res://system/state/combat_charging_state.gd" id="12_me77t"]
+[ext_resource type="Script" uid="uid://b102xc6ebx8a7" path="res://system/state/combat_grappled_state.gd" id="15_bqwre"]
 
 [node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("component_root", "state_machine", "vision_sensor", "body_hurtbox")]
 y_sort_enabled = true
@@ -51,6 +54,13 @@ metadata/_custom_type_script = "uid://gwap3yglqk06"
 script = ExtResource("2_0rdkl")
 metadata/_custom_type_script = "uid://c58fcb5y76m05"
 
+[node name="HealthComponent" type="Node" parent="ComponentRoot" unique_id=895404955]
+script = ExtResource("5_udydy")
+
+[node name="AnimationComponent" type="Node" parent="ComponentRoot" unique_id=1518985954 node_paths=PackedStringArray("anim_player")]
+script = ExtResource("6_me77t")
+anim_player = NodePath("../../AnimationPlayer")
+
 [node name="StateMachine" type="Node" parent="." unique_id=945722664 node_paths=PackedStringArray("initial_body_state", "initial_combat_state", "body_root", "combat_root")]
 script = ExtResource("4_jg2qq")
 initial_body_state = NodePath("Body/BodyIdleState")
@@ -87,6 +97,12 @@ body_state_override = true
 [node name="CombatChargingState" type="Node" parent="StateMachine/Combat" unique_id=1423860723]
 script = ExtResource("12_me77t")
 
+[node name="CombatGrappledState" type="Node" parent="StateMachine/Combat" unique_id=656904712]
+script = ExtResource("15_bqwre")
+body_state_override = true
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=714780742]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2125419796]
 
 [editable path="BodyHurtbox"]

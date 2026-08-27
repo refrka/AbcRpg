@@ -13,6 +13,8 @@ class_name GameRoot extends Node
 
 var navigation_component: NavigationComponent
 
+var movement_component: MovementComponent
+
 
 
 func _ready() -> void:
@@ -26,6 +28,8 @@ func _ready() -> void:
 			child.activate()
 
 	navigation_component = thief.get_component(NavigationComponent)
+
+	movement_component = thief.get_component(MovementComponent)
 
 	hitbox.initialize()
 
@@ -56,4 +60,6 @@ func _input(event: InputEvent) -> void:
 
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == 1:
 
-		navigation_component.set_target_position(world_root.get_global_mouse_position())
+		var mouse_pos = world_root.get_global_mouse_position()
+
+		navigation_component.set_target_position(mouse_pos)

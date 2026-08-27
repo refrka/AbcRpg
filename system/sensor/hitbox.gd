@@ -32,8 +32,6 @@ func _start_timer() -> void:
 
 func _expire_hit() -> void:
 
-	print("expire hit")
-
 	clear_hit_list()
 
 	hit_timer = 0.0

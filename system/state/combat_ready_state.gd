@@ -51,9 +51,10 @@ func _tick(delta: float) -> void:
 		return
 
 	if ready_timer > 0.0:
-		
+
 		ready_timer -= delta
 
 		if ready_timer <= 0.0:
+
 
 			_expire_ready()

@@ -33,3 +33,5 @@ shape = SubResource("CapsuleShape2D_qjkh3")
 [node name="InputComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="1" unique_id=1000192021]
 script = ExtResource("6_boad6")
 metadata/_custom_type_script = "uid://dm4d5jbfjor4c"
+
+[editable path="BodyHurtbox"]

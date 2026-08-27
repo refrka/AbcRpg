@@ -109,7 +109,7 @@ func _on_body_exited_sensor(body: PhysicsBody2D) -> void:
 
 		entities.erase(body)
 
-		entity_exited_sensor.emit(StaticBody2D)
+		entity_exited_sensor.emit(body)
 
 
 

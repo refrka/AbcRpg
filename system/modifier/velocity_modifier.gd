@@ -24,10 +24,11 @@ static func new_impulse(velocity: Vector2, decay: float) -> VelocityModifier:
 
 	modifier.value = velocity
 
+	modifier.modifier_type = ModifierType.IMPULSE
+
 	modifier.decay_rate = decay
 
 	return modifier
-
 
 
 
