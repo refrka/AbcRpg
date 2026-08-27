@@ -37,6 +37,8 @@ func start_expiration_timer() -> void:
 
 	expiration_timer = 15.0
 
+	expiration_timer_active = true
+
 
 
 func stop_expiration_timer() -> void:

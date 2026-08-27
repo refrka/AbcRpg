@@ -21,6 +21,7 @@ Game="*uid://eqn4rf4glf01"
 UI="*uid://db0lxs7x7wt2w"
 Scenes="*uid://djp53nvil80s7"
 Debug="*uid://cpsg8mwou5t4c"
+Events="*uid://dcy1wggbj0sfj"
 
 [debug]
 

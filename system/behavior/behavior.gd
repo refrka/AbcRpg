@@ -16,6 +16,12 @@ var entity: EntityNode
 
 var behavior_component: BehaviorComponent
 
+var target_disposition: Disposition
+
+var last_evaluated_disposition: Disposition
+
+
+
 
 
 
@@ -30,7 +36,15 @@ func initialize(_entity: EntityNode, _behavior_component: BehaviorComponent) -> 
 
 
 
-func evaluate() -> float:
+func evaluate(disposition: Disposition = null) -> float:
+
+	if disposition and disposition != last_evaluated_disposition:
+
+		last_evaluated_disposition = disposition
+
+		last_evaluated_disposition.expired.connect(_on_last_evaluated_disposition_expired, CONNECT_ONE_SHOT)
+
+	print(last_evaluated_disposition, " last eval")
 
 	var attribute_multiplier = _get_attribute_multiplier()
 
@@ -105,6 +119,21 @@ func _get_temperament_multiplier() -> float:
 
 
 
+
+func _on_last_evaluated_disposition_expired() -> void:
+
+	print("its expired")
+
+	last_evaluated_disposition = null
+
+
+
+
+
 func tick(_delta: float) -> void:
 
 	pass
+
+
+
+

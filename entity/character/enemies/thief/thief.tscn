@@ -40,6 +40,7 @@ nav_agent = NodePath("../../NavigationAgent2D")
 
 [node name="BehaviorComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="2" unique_id=823692971]
 script = ExtResource("5_b80cd")
+evaluation_mode = 1
 metadata/_custom_type_script = "uid://rvs7yxftyi2c"
 
 [node name="CombatComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="3" unique_id=1021901606]

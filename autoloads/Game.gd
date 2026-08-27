@@ -14,7 +14,11 @@ var last_save_dict:= {}
 
 func _ready() -> void:
 
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 	_load()
+
+	
 
 
 

@@ -5,12 +5,26 @@ signal disposition_generated(disposition: Disposition)
 
 
 
+enum EvaluationMode {
+
+	SLOW,
+
+	NORMAL,
+
+	FAST,
+
+	NONE,
+
+}
+
+
+@export var evaluation_mode: EvaluationMode
+
+
+var behaviors: Array[Behavior]
 
 var current_behavior: Behavior
 
-var current_target_disposition: Disposition
-
-var current_evaluated_disposition: Disposition
 
 
 
@@ -26,6 +40,8 @@ var dispositions: Array[Disposition]
 
 var evaluation_timer:= 0.0
 
+var evaluation_mode_time:= 5.0
+
 var evaluation_cooldown:= 0.0
 
 
@@ -35,11 +51,17 @@ func initialize(_entity: EntityNode) -> void:
 
 	super(_entity)
 
-	for behavior in _get_behaviors():
+	for _behavior in entity.entity_def.behavior_profile.behaviors:
+
+		var behavior = _behavior.duplicate(true)
+
+		behaviors.append(behavior)
 
 		behavior.initialize(entity, self)
 
 		behavior.evaluation_requested.connect(_on_behavior_evaluation_requested.bind(behavior))
+
+	set_evaluation_mode(evaluation_mode)
 
 	
 
@@ -49,33 +71,49 @@ func initialize(_entity: EntityNode) -> void:
 
 func _evaluate_all(disposition: Disposition = null) -> void:
 
+	print("\nBehavior evaluation begin")
+
+	print("==============================")
+
+	if disposition:
+
+		print("Disposition: %s" % disposition.target_entity.get_display_name())
+
+	else:
+
+		print("(no disposition)")
+
+	print("==============================")
+
 	if evaluation_cooldown > 0.0:
 
 		return
 
 	evaluation_timer = 0.0
 
-	current_evaluated_disposition = disposition
-
 	var best_behavior: Behavior = null
 
 	var best_score:= -INF
 
-	var all_behaviors = _get_behaviors()
+	for behavior in behaviors:
 
-	for behavior in all_behaviors:
+		var score = behavior.evaluate(disposition)
 
-		var score = behavior.evaluate()
+		print("> %s (%s)" % [behavior.get_display_name(), score])
 
-		if !best_behavior or score < best_score:
+		if !best_behavior or score > best_score:
 
 			best_behavior = behavior
 
 			best_score = score
 
+	print("==============================")
+
+	print("Chosen behavior: ", best_behavior.get_display_name())
+
 	_change_behavior(best_behavior)
 	
-	evaluation_timer = 3.0
+	evaluation_timer = evaluation_mode_time
 
 
 
@@ -105,16 +143,19 @@ func get_behavior_profile() -> BehaviorProfile:
 
 
 
+func set_evaluation_mode(mode: EvaluationMode) -> void:
 
-func _get_behaviors() -> Array[Behavior]:
+	evaluation_mode = mode
 
-	var behavior_profile = get_behavior_profile()
+	match evaluation_mode:
 
-	if behavior_profile:
+		EvaluationMode.SLOW: evaluation_mode_time = 5.0
 
-		return behavior_profile.behaviors
+		EvaluationMode.NORMAL: evaluation_mode_time = 1.0
 
-	return []
+		EvaluationMode.FAST: evaluation_mode_time = 0.2
+
+		EvaluationMode.NONE: evaluation_mode_time = -1.0
 
 
 
@@ -158,7 +199,6 @@ func _generate_disposition(target_entity: EntityNode) -> Disposition:
 
 
 
-
 func _connect_signals() -> void:
 
 	entity.vision_sensor.entity_entered_sensor.connect(_on_entity_entered_sensor)
@@ -188,11 +228,11 @@ func _on_entity_entered_sensor(entity_node: EntityNode) -> void:
 
 		disposition = _generate_disposition(entity_node)
 
-		_evaluate_all(disposition)
-
 	else:
 
 		disposition.stop_expiration_timer()
+
+	_evaluate_all(disposition)
 
 
 
@@ -227,17 +267,19 @@ func _process(delta: float) -> void:
 
 		return
 
-	if evaluation_timer > 0.0:
+	if not evaluation_mode == EvaluationMode.NONE:
 
-		evaluation_timer -= delta
+		if evaluation_timer > 0.0:
 
-		if evaluation_timer <= 0.0:
+			evaluation_timer -= delta
 
-			_evaluate_all()
+			if evaluation_timer <= 0.0:
 
-	if evaluation_cooldown > 0.0:
+				_evaluate_all()
 
-		evaluation_cooldown -= delta
+		if evaluation_cooldown > 0.0:
+
+			evaluation_cooldown -= delta
 
 	for disposition in dispositions:
 

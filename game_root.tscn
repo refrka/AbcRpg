@@ -43,6 +43,7 @@ mouse_filter = 2
 layout_mode = 1
 
 [node name="WorldCanvas" type="CanvasLayer" parent="." unique_id=254509576]
+follow_viewport_enabled = true
 
 [node name="WorldRoot" type="Node2D" parent="WorldCanvas" unique_id=210974550]
 
@@ -58,6 +59,8 @@ collision_mask = 1
 y_sort_enabled = false
 position = Vector2(330, 150)
 collision_mask = 1
+
+[node name="Camera2D" type="Camera2D" parent="WorldCanvas/WorldRoot/Thief" unique_id=1687441928]
 
 [node name="Hitbox" parent="WorldCanvas/WorldRoot" unique_id=989190462 instance=ExtResource("5_wd1uf")]
 position = Vector2(438, 164)
