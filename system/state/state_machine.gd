@@ -61,8 +61,6 @@ func request_state(state_script: Script) -> void:
 
 	var state = get_state(state_script)
 
-	print(state.get_state_name())
-
 	if state is BodyState:
 
 		_change_body_state(state)

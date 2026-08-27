@@ -7,12 +7,17 @@
 [ext_resource type="Script" uid="uid://rvs7yxftyi2c" path="res://system/component/behavior_component.gd" id="5_b80cd"]
 [ext_resource type="Script" uid="uid://dx5fqbdea873y" path="res://system/component/combat_component.gd" id="6_lxsrc"]
 [ext_resource type="Script" uid="uid://xlbsw4s4xni7" path="res://system/state/body_combat_override_state.gd" id="7_1biv0"]
+[ext_resource type="Script" uid="uid://cbhffuw61unas" path="res://system/behavior/attribute_map.gd" id="7_1pr6m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1biv0"]
 size = Vector2(18, 28)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lkrbl"]
 radius = 275.00726
+
+[sub_resource type="Resource" id="Resource_6whmy"]
+script = ExtResource("7_1pr6m")
+metadata/_custom_type_script = "uid://cbhffuw61unas"
 
 [node name="Thief" unique_id=1691891269 instance=ExtResource("1_wqnc8")]
 entity_def = ExtResource("2_a8q8j")
@@ -47,7 +52,13 @@ metadata/_custom_type_script = "uid://rvs7yxftyi2c"
 script = ExtResource("6_lxsrc")
 metadata/_custom_type_script = "uid://dx5fqbdea873y"
 
+[node name="HealthComponent" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="4" unique_id=895404955]
+attribute_map = SubResource("Resource_6whmy")
+
 [node name="BodyCombatOverrideState" type="Node" parent="StateMachine/Body" parent_id_path=PackedInt32Array(1614251606) index="0" unique_id=2034771406]
 script = ExtResource("7_1biv0")
+
+[node name="NavigationAgent2D" parent="." index="6" unique_id=714780742]
+debug_enabled = true
 
 [editable path="BodyHurtbox"]

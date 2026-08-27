@@ -71,19 +71,19 @@ func initialize(_entity: EntityNode) -> void:
 
 func _evaluate_all(disposition: Disposition = null) -> void:
 
-	print("\nBehavior evaluation begin")
+	# print("\nBehavior evaluation begin")
 
-	print("==============================")
+	# print("==============================")
 
-	if disposition:
+	# if disposition:
 
-		print("Disposition: %s" % disposition.target_entity.get_display_name())
+	# 	print("Disposition: %s" % disposition.target_entity.get_display_name())
 
-	else:
+	# else:
 
-		print("(no disposition)")
+	# 	print("(no disposition)")
 
-	print("==============================")
+	# print("==============================")
 
 	if evaluation_cooldown > 0.0:
 
@@ -99,7 +99,7 @@ func _evaluate_all(disposition: Disposition = null) -> void:
 
 		var score = behavior.evaluate(disposition)
 
-		print("> %s (%s)" % [behavior.get_display_name(), score])
+		# print("> %s (%s)" % [behavior.get_display_name(), score])
 
 		if !best_behavior or score > best_score:
 
@@ -107,9 +107,9 @@ func _evaluate_all(disposition: Disposition = null) -> void:
 
 			best_score = score
 
-	print("==============================")
+	# print("==============================")
 
-	print("Chosen behavior: ", best_behavior.get_display_name())
+	# print("Chosen behavior: ", best_behavior.get_display_name())
 
 	_change_behavior(best_behavior)
 	
@@ -137,9 +137,30 @@ func _change_behavior(new_behavior: Behavior) -> void:
 
 
 
+func receive_damage_package(damage_package: DamagePackage) -> void:
+
+	pass
+
+
+
+
 func get_behavior_profile() -> BehaviorProfile:
 
 	return entity.entity_def.behavior_profile
+
+
+
+
+func get_disposition(entity_node: EntityNode) -> Disposition:
+
+	for disposition in dispositions:
+
+		if disposition.target_entity == entity_node:
+
+			return disposition
+		
+	return null
+
 
 
 
@@ -156,20 +177,6 @@ func set_evaluation_mode(mode: EvaluationMode) -> void:
 		EvaluationMode.FAST: evaluation_mode_time = 0.2
 
 		EvaluationMode.NONE: evaluation_mode_time = -1.0
-
-
-
-
-func get_disposition(entity_node: EntityNode) -> Disposition:
-
-	for disposition in dispositions:
-
-		if disposition.target_entity == entity_node:
-
-			return disposition
-		
-	return null
-
 
 
 

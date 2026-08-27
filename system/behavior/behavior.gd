@@ -12,6 +12,7 @@ signal evaluation_requested
 
 @export var attribute_map: AttributeMap
 
+
 var entity: EntityNode
 
 var behavior_component: BehaviorComponent
@@ -20,6 +21,9 @@ var target_disposition: Disposition
 
 var last_evaluated_disposition: Disposition
 
+
+
+var navigation_component: NavigationComponent
 
 
 
@@ -32,6 +36,8 @@ func initialize(_entity: EntityNode, _behavior_component: BehaviorComponent) -> 
 
 	behavior_component = _behavior_component
 
+	navigation_component = entity.get_component(NavigationComponent)
+
 
 
 
@@ -40,11 +46,13 @@ func evaluate(disposition: Disposition = null) -> float:
 
 	if disposition and disposition != last_evaluated_disposition:
 
+		if last_evaluated_disposition and last_evaluated_disposition.expired.is_connected(_on_last_evaluated_disposition_expired):
+
+			last_evaluated_disposition.expired.disconnect(_on_last_evaluated_disposition_expired)
+
 		last_evaluated_disposition = disposition
 
 		last_evaluated_disposition.expired.connect(_on_last_evaluated_disposition_expired, CONNECT_ONE_SHOT)
-
-	print(last_evaluated_disposition, " last eval")
 
 	var attribute_multiplier = _get_attribute_multiplier()
 
@@ -93,6 +101,10 @@ func _get_attribute_multiplier() -> float:
 
 func _get_fear_multiplier() -> float:
 
+	if last_evaluated_disposition:
+
+		return attribute_map.get_fear_value(last_evaluated_disposition.fear)
+
 	return 1.0
 
 
@@ -122,9 +134,9 @@ func _get_temperament_multiplier() -> float:
 
 func _on_last_evaluated_disposition_expired() -> void:
 
-	print("its expired")
-
 	last_evaluated_disposition = null
+
+	evaluation_requested.emit()
 
 
 

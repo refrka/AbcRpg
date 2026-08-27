@@ -44,8 +44,6 @@ func add_modifier(modifier: Modifier) ->  void:
 
 	modifiers.append(modifier)
 
-	print("added")
-
 	modifier.expired.connect(_on_modifier_expired.bind(modifier))
 
 
@@ -108,8 +106,6 @@ func _tick_modifiers(delta: float) -> void:
 
 
 func _on_modifier_expired(modifier: Modifier) -> void:
-
-	print("expired")
 
 	modifiers.erase(modifier)
 

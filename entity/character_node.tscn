@@ -18,7 +18,7 @@
 
 [node name="CharacterNode" type="CharacterBody2D" unique_id=1691891269 node_paths=PackedStringArray("component_root", "state_machine", "vision_sensor", "body_hurtbox")]
 y_sort_enabled = true
-collision_mask = 0
+collision_mask = 1024
 script = ExtResource("1_ufg3e")
 component_root = NodePath("ComponentRoot")
 state_machine = NodePath("StateMachine")

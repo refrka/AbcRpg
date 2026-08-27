@@ -1,11 +1,12 @@
 class_name HealthComponent extends Component
 
 
+
+@export var attribute_map: AttributeMap
+
 var max_health: float
 
 var current_health: float
-
-
 
 
 
@@ -58,3 +59,10 @@ func receive_damage_package(damage_package: DamagePackage) -> void:
 	for damage_entry in damage_package.damage_entries:
 
 		reduce_health(damage_entry.amount)
+
+
+
+
+func get_ratio() -> float:
+
+	return current_health / max_health

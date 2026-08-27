@@ -30,10 +30,28 @@ func get_disposition_value(disposition: Disposition) -> float:
 
 func get_attitude_value(attitude: float) -> float:
 
+	if !attitude_curve:
+
+		return 1.0
+
 	return attitude_curve.sample(attitude)
 
 
 
 func get_temperament_value(temperament: float) -> float:
 
+	if !temperament_curve:
+
+		return 1.0
+
 	return temperament_curve.sample(temperament)
+
+
+
+func get_fear_value(fear: float) -> float:
+
+	if !fear_curve:
+
+		return 1.0
+
+	return fear_curve.sample(fear)

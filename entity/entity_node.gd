@@ -88,6 +88,17 @@ func get_display_name() -> String:
 
 
 
+func get_distance_to(target_entity: EntityNode) -> float:
+
+	return global_position.distance_to(target_entity.global_position)
+
+
+
+func get_direction_to(target_entity: EntityNode) -> Vector2:
+
+	return global_position.direction_to(target_entity.global_position)
+
+
 
 
 func activate() -> void:

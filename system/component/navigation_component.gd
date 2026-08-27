@@ -1,6 +1,8 @@
 class_name NavigationComponent extends Component
 
 
+signal navigation_finished
+
 
 @export var nav_agent: NavigationAgent2D
 
@@ -57,6 +59,8 @@ func set_target_position(target_position: Vector2) -> void:
 func _on_navigation_finished() -> void:
 
 	movement_component.halt()
+
+	navigation_finished.emit()
 
 
 
