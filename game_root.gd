@@ -17,6 +17,8 @@ var movement_component: MovementComponent
 
 
 
+
+
 func _ready() -> void:
 
 	for child in world_root.get_children():

@@ -1,7 +1,7 @@
 class_name BehaviorComponent extends Component
 
 
-
+signal disposition_generated(disposition: Disposition)
 
 
 
@@ -148,6 +148,8 @@ func _generate_disposition(target_entity: EntityNode) -> Disposition:
 	var disposition = Disposition.create_new(target_entity)
 
 	dispositions.append(disposition)
+
+	disposition_generated.emit(disposition)
 
 	_evaluate_all()
 

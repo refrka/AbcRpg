@@ -4,6 +4,11 @@ class_name Disposition extends RefCounted
 
 signal expired
 
+signal fear_updated
+
+signal affection_updated
+
+signal respect_updated
 
 
 
@@ -37,6 +42,31 @@ func start_expiration_timer() -> void:
 func stop_expiration_timer() -> void:
 
 	expiration_timer_active = false
+
+
+
+
+func update_fear(amount: float) -> void:
+
+	fear += amount
+
+	fear_updated.emit()
+
+
+
+func update_affection(amount: float) -> void:
+
+	affection += amount
+
+	affection_updated.emit()
+
+
+
+func update_respect(amount: float) -> void:
+
+	respect += amount
+
+	respect_updated.emit()
 
 
 

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://ben0epy3fpbqf"]
+
+[ext_resource type="Script" uid="uid://ylm7q7btvjue" path="res://ui/debug_main.gd" id="1_t1sn1"]
+[ext_resource type="PackedScene" uid="uid://bfq40jrnxpaxu" path="res://ui/disposition_info_display.tscn" id="2_pl1qi"]
+
+[node name="DebugMain" type="Control" unique_id=1394819620 node_paths=PackedStringArray("disposition_info_display")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_t1sn1")
+disposition_info_display = NodePath("MarginContainer/VBoxContainer/DispositionInfoDisplay")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=350694487]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1846281297]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1079724076]
+layout_mode = 2
+text = "Debug Main"
+
+[node name="DispositionInfoDisplay" parent="MarginContainer/VBoxContainer" unique_id=319929988 instance=ExtResource("2_pl1qi")]
+layout_mode = 2
+size_flags_horizontal = 0

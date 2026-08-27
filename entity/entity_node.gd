@@ -82,6 +82,9 @@ func get_component(component_script: Script) -> Component:
 
 
 
+func get_display_name() -> String:
+
+	return entity_def.display_name
 
 
 
