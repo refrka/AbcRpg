@@ -1,11 +1,37 @@
 [gd_scene format=3 uid="uid://ch5dyx5bpfnf5"]
 
 [ext_resource type="Script" uid="uid://f6riejhhke6a" path="res://entity/object_node.gd" id="1_24nlx"]
+[ext_resource type="Script" uid="uid://c8kc6b4g6jeu" path="res://system/state/state_machine.gd" id="2_4ptr2"]
+[ext_resource type="Script" uid="uid://df6raydgqu31j" path="res://system/state/body_idle_state.gd" id="3_s5vqo"]
 
 [node name="ObjectNode" type="StaticBody2D" unique_id=1945380598]
 script = ExtResource("1_24nlx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2100948546]
+[node name="VisualRoot" type="Node2D" parent="." unique_id=1286599564]
+y_sort_enabled = true
+
+[node name="BodyVisualRoot" type="Node2D" parent="VisualRoot" unique_id=638987547]
+
+[node name="BodyAnimatedSprite" type="AnimatedSprite2D" parent="VisualRoot/BodyVisualRoot" unique_id=1722083253]
+
+[node name="BodySprite" type="Sprite2D" parent="VisualRoot/BodyVisualRoot" unique_id=1240194670]
+
+[node name="CombatVisualRoot" type="Node2D" parent="VisualRoot" unique_id=1547016978]
+
+[node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=531873117]
+debug_color = Color(0.61, 0.376675, 0.091499984, 0.043137256)
 
 [node name="ComponentRoot" type="Node" parent="." unique_id=217743212]
 unique_name_in_owner = true
+
+[node name="StateMachine" type="Node" parent="." unique_id=1694520437 node_paths=PackedStringArray("initial_body_state", "body_root")]
+script = ExtResource("2_4ptr2")
+initial_body_state = NodePath("Body/BodyIdleState")
+body_root = NodePath("Body")
+metadata/_custom_type_script = "uid://c8kc6b4g6jeu"
+
+[node name="Body" type="Node" parent="StateMachine" unique_id=1567342845]
+
+[node name="BodyIdleState" type="Node" parent="StateMachine/Body" unique_id=459887108]
+script = ExtResource("3_s5vqo")
+metadata/_custom_type_script = "uid://df6raydgqu31j"
