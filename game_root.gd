@@ -15,7 +15,7 @@ var navigation_component: NavigationComponent
 
 var movement_component: MovementComponent
 
-
+var inventory: Inventory
 
 
 
@@ -38,6 +38,11 @@ func _ready() -> void:
 	hitbox.activate()
 
 	hitbox.hit_detected.connect(_on_hit_detected)
+
+
+
+
+
 
 
 

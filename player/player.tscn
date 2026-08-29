@@ -5,13 +5,19 @@
 [ext_resource type="Script" uid="uid://c1moxr263fmhg" path="res://player/player.gd" id="2_g6k8r"]
 [ext_resource type="Script" uid="uid://urxn6wck32hg" path="res://entity/entity_group.gd" id="2_qjkh3"]
 [ext_resource type="Script" uid="uid://1xe3vlkr6xxn" path="res://entity/character_def.gd" id="3_g6k8r"]
+[ext_resource type="Script" uid="uid://bfh1v6ovpundw" path="res://item/item_data.gd" id="5_rgyib"]
 [ext_resource type="Script" uid="uid://dm4d5jbfjor4c" path="res://system/component/input_component.gd" id="6_boad6"]
+[ext_resource type="Script" uid="uid://dg8vtmpk0vqkm" path="res://system/inventory/inventory.gd" id="6_hg6s5"]
 
 [sub_resource type="Resource" id="Resource_cxnu7"]
 script = ExtResource("3_g6k8r")
 entity_id = &"player"
 display_name = "Player"
 metadata/_custom_type_script = "uid://1xe3vlkr6xxn"
+
+[sub_resource type="Resource" id="Resource_g6k8r"]
+script = ExtResource("6_hg6s5")
+metadata/_custom_type_script = "uid://dg8vtmpk0vqkm"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qjkh3"]
 radius = 6.0
@@ -20,6 +26,7 @@ height = 20.0
 [node name="Player" unique_id=1691891269 instance=ExtResource("1_oul6g")]
 script = ExtResource("2_g6k8r")
 entity_def = SubResource("Resource_cxnu7")
+inventory = SubResource("Resource_g6k8r")
 
 [node name="BodySprite" parent="VisualRoot/BodyVisualRoot" parent_id_path=PackedInt32Array(634059231) index="1" unique_id=1617730945]
 position = Vector2(0, -24)

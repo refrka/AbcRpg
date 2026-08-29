@@ -71,20 +71,6 @@ func initialize(_entity: EntityNode) -> void:
 
 func _evaluate_all(disposition: Disposition = null) -> void:
 
-	print("\nBehavior evaluation begin")
-
-	print("==============================")
-
-	if disposition:
-
-		print("Disposition: %s" % disposition.target_entity.get_display_name())
-
-	else:
-
-		print("(no disposition)")
-
-	print("==============================")
-
 	if evaluation_cooldown > 0.0:
 
 		return
@@ -99,17 +85,11 @@ func _evaluate_all(disposition: Disposition = null) -> void:
 
 		var score = behavior.evaluate(disposition)
 
-		print("> %s (%s)" % [behavior.get_display_name(), score])
-
 		if !best_behavior or score > best_score:
 
 			best_behavior = behavior
 
 			best_score = score
-
-	print("==============================")
-
-	print("Chosen behavior: ", best_behavior.get_display_name())
 
 	_change_behavior(best_behavior)
 	

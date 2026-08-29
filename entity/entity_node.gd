@@ -23,6 +23,10 @@ var active_entity_groups: Array[EntityGroup]
 
 
 
+@export var inventory: Inventory
+
+
+
 
 
 func initialize() -> void:
