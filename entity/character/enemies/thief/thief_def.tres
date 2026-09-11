@@ -15,6 +15,7 @@ metadata/_custom_type_script = "uid://cbhffuw61unas"
 
 [sub_resource type="Resource" id="Resource_ts2hc"]
 script = ExtResource("2_e7kxp")
+behavior_type = 1
 baseline_value = 0.15
 attribute_map = SubResource("Resource_c7yhl")
 metadata/_custom_type_script = "uid://cj2mjblxa8uow"
@@ -30,6 +31,7 @@ metadata/_custom_type_script = "uid://cbhffuw61unas"
 
 [sub_resource type="Resource" id="Resource_106at"]
 script = ExtResource("3_76lag")
+behavior_type = 2
 attribute_map = SubResource("Resource_1biv0")
 metadata/_custom_type_script = "uid://crucsprqnynog"
 
@@ -44,7 +46,7 @@ metadata/_custom_type_script = "uid://cbhffuw61unas"
 
 [sub_resource type="Resource" id="Resource_jnww2"]
 script = ExtResource("5_c7yhl")
-retreat_distance = 100.0
+behavior_type = 3
 attribute_map = SubResource("Resource_6whmy")
 metadata/_custom_type_script = "uid://cmj842gw8ubg7"
 

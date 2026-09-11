@@ -79,6 +79,48 @@ func remove_item_def(item_def: ItemDef, amount:= 1) -> int:
 
 
 
+
+func get_random_item_data() -> ItemData:
+
+	var i = randi_range(0, item_list.size() - 1)
+
+	var try_count:= 1
+
+	var item_data = item_list[i]
+
+	while item_data.is_empty():
+
+		i = randi_range(0, item_list.size() - 1)
+
+		item_data = item_list[i]
+
+		try_count += 1
+
+		if try_count > size:
+
+			break
+
+	return item_data
+
+
+
+
+
+
+func is_empty() -> bool:
+
+	for item_data in item_list:
+
+		if !item_data.is_empty():
+
+			return false
+
+	return true
+
+
+
+
+
 func _get_all_item_data_with(item_def: ItemDef, min_count:= 1) -> Array[ItemData]:
 
 	var valid_item_data: Array[ItemData] = []

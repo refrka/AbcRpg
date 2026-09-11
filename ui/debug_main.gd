@@ -10,11 +10,11 @@ class_name DebugMain extends Control
 
 
 
-func _ready() -> void:
+# func _ready() -> void:
 
-	var behavior_component = thief.get_component(BehaviorComponent)
+# 	var behavior_component = thief.get_component(BehaviorComponent)
 
-	behavior_component.disposition_generated.connect(_on_disposition_generated)
+# 	behavior_component.disposition_generated.connect(_on_disposition_generated)
 
 
 

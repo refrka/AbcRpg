@@ -2,12 +2,15 @@ class_name State extends Node
 
 
 
+@export var allow_reenter:= false
 
 var active:= false
 
 var entity: EntityNode
 
 var state_machine: StateMachine
+
+
 
 
 

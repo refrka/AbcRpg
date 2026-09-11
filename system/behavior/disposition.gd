@@ -4,23 +4,17 @@ class_name Disposition extends RefCounted
 
 signal expired
 
-signal fear_updated
-
-signal affection_updated
-
-signal respect_updated
-
 
 
 var target_entity: EntityNode
 
 
 
-var fear:= 0.0
+var fear: DispositionAttribute
 
-var affection:= 0.0
+var affection: DispositionAttribute
 
-var respect:= 0.0
+var respect: DispositionAttribute
 
 
 
@@ -33,9 +27,30 @@ var expiration_timer_active:= false
 
 
 
+
+func initialize(_target_entity: EntityNode) -> void:
+
+	target_entity = _target_entity
+
+	fear = DispositionAttribute.new()
+
+	fear.attribute = BehaviorAttribute.Attribute.FEAR
+
+	affection = DispositionAttribute.new()
+
+	affection.attribute = BehaviorAttribute.Attribute.AFFECTION
+
+	respect = DispositionAttribute.new()
+
+	respect.attribute = BehaviorAttribute.Attribute.RESPECT
+	
+
+
+
+
 func start_expiration_timer() -> void:
 
-	expiration_timer = 15.0
+	expiration_timer = 8.0
 
 	expiration_timer_active = true
 
@@ -44,31 +59,6 @@ func start_expiration_timer() -> void:
 func stop_expiration_timer() -> void:
 
 	expiration_timer_active = false
-
-
-
-
-func update_fear(amount: float) -> void:
-
-	fear += amount
-
-	fear_updated.emit()
-
-
-
-func update_affection(amount: float) -> void:
-
-	affection += amount
-
-	affection_updated.emit()
-
-
-
-func update_respect(amount: float) -> void:
-
-	respect += amount
-
-	respect_updated.emit()
 
 
 

@@ -1,12 +1,12 @@
-class_name CombatRestrainedState extends CombatState
+class_name CombatGrapplingState extends CombatState
+
+
 
 
 
 var movement_component: MovementComponent
 
 var speed_modifier: SpeedModifier
-
-
 
 
 
@@ -20,36 +20,19 @@ func _initialize(_entity: EntityNode, _state_machine: StateMachine) -> void:
 
 
 
-
-
 func _enter() -> void:
-
-	super()
 
 	speed_modifier = SpeedModifier.new_multiplier(0.0, -1.0)
 
 	movement_component.add_modifier(speed_modifier)
-	
-	
-	
-	
-	
+
+
+
 
 func _exit() -> void:
-
-	super()
 
 	if speed_modifier:
 
 		movement_component.remove_modifier(speed_modifier)
 
 		speed_modifier = null
-
-
-
-
-
-
-
-
-

@@ -57,7 +57,7 @@ func initialize(entity: EntityNode) -> void:
 
 
 
-func request_state(state_script: Script) -> void:
+func request_state(state_script: Script) -> State:
 
 	var state = get_state(state_script)
 
@@ -69,7 +69,7 @@ func request_state(state_script: Script) -> void:
 
 		_change_combat_state(state)
 
-
+	return state
 
 
 

@@ -70,3 +70,7 @@ func _input(event: InputEvent) -> void:
 		var mouse_pos = world_root.get_global_mouse_position()
 
 		navigation_component.set_target_position(mouse_pos)
+
+	if event.is_action_pressed("back"):
+
+		get_tree().paused = !get_tree().paused

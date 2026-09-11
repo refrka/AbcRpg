@@ -14,8 +14,6 @@ static func new_multiplier(_value: float, _duration: float) -> SpeedModifier:
 
 	modifier.value = _value
 
-	modifier.modifier_type = ModifierType.TIMED
-
 	modifier.duration = _duration
 
 	return modifier

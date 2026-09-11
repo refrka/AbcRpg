@@ -6,9 +6,9 @@ signal expired
 
 enum ModifierType {
 
-	TIMED,
+	MULTIPLIER,
 
-	IMPULSE,
+	CUMULATIVE,
 	
 }
 
@@ -31,25 +31,19 @@ var _time_alive:= 0.0
 
 func _is_expired() -> bool:
 
-	match modifier_type:
-		
-		ModifierType.TIMED:
+	if duration != -1.0 and _time_alive >= duration:
 
-			if duration != -1.0 and _time_alive >= duration:
+		return true
 
-				return true
+	if value is Vector2:
 
-		ModifierType.IMPULSE:
+		return value.length_squared() <= 1.0
 
-			if value is Vector2:
+	elif value is float:
 
-				return value.length_squared() <= 1.0
+		return value <= 0.001
 
-			elif value is float:
-
-				return value <= 0.001
-
-	return false
+	return true
 
 
 

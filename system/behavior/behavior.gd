@@ -8,6 +8,23 @@ signal evaluation_requested
 
 
 
+enum BehaviorType {
+
+	NONE,
+
+	AMBIENT,
+
+	CONFLICT,
+
+	PRESERVATION,
+
+	SOCIAL,
+
+}
+
+
+@export var behavior_type: BehaviorType
+
 @export var baseline_value:= 1.0
 
 @export var attribute_map: AttributeMap
@@ -103,7 +120,7 @@ func _get_fear_multiplier() -> float:
 
 	if last_evaluated_disposition:
 
-		return attribute_map.get_fear_value(last_evaluated_disposition.fear)
+		return attribute_map.get_fear_value(last_evaluated_disposition.fear.get_final_value())
 
 	return 1.0
 

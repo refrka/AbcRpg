@@ -61,6 +61,8 @@ func _wander() -> void:
 
 
 
+
+
 func _idle() -> void:
 
 	idle_timer = _get_idle_duration()

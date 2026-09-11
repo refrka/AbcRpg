@@ -1,0 +1,1 @@
+class_name DispositionAttribute extends BehaviorAttribute

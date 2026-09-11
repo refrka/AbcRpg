@@ -24,19 +24,23 @@ func evaluate(disposition: Disposition = null) -> float:
 
 	if !disposition and !last_evaluated_disposition:
 
+		print("returning 0 because no dispo")
+
 		return 0.0
 
 	var distance = entity.get_distance_to(last_evaluated_disposition.target_entity)
 
 	if distance > retreat_distance:
 
+		print("made it")
+
 		return 0.0
 
 	# If we have a current retreat target that is still valid, evaluate against that target instead
 
-	if is_instance_valid(retreat_from_target_entity):
+	if is_instance_valid(last_evaluated_disposition.target_entity):
 
-		var current_retreat_disposition = behavior_component.get_disposition(retreat_from_target_entity)
+		var current_retreat_disposition = behavior_component.get_disposition(last_evaluated_disposition.target_entity)
 
 		var current_retreat_score = super(current_retreat_disposition)
 
@@ -45,8 +49,6 @@ func evaluate(disposition: Disposition = null) -> float:
 			last_evaluated_disposition = current_retreat_disposition
 
 			return current_retreat_score
-
-	retreat_from_target_entity = last_evaluated_disposition.target_entity
 
 	return score
 
@@ -61,6 +63,8 @@ func evaluate(disposition: Disposition = null) -> float:
 func start() -> void:
 
 	super()
+
+	retreat_from_target_entity = last_evaluated_disposition.target_entity
 
 	retreat_active = true
 

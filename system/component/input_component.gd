@@ -1,6 +1,8 @@
 class_name InputComponent extends Component
 
 
+signal break_free_pressed
+
 
 var input_dir: Vector2
 
@@ -18,6 +20,20 @@ func initialize(_entity: EntityNode) -> void:
 
 
 
+
+
+
+
+
+func _unhandled_input(event: InputEvent) -> void:
+
+	if !active:
+
+		return
+
+	if event.is_action_pressed("break_free"):
+
+		break_free_pressed.emit()
 
 
 

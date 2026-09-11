@@ -20,11 +20,11 @@ class_name AttributeMap extends Resource
 
 func get_disposition_value(disposition: Disposition) -> float:
 
-	return fear_curve.sample(disposition.fear) \
+	return fear_curve.sample(disposition.fear.get_final_value()) \
 
-		* affection_curve.sample(disposition.affection) \
+		* affection_curve.sample(disposition.affection.get_final_value()) \
 
-		* respect_curve.sample(disposition.respect)
+		* respect_curve.sample(disposition.respect.get_final_value())
 
 
 

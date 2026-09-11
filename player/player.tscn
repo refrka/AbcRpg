@@ -6,8 +6,11 @@
 [ext_resource type="Script" uid="uid://urxn6wck32hg" path="res://entity/entity_group.gd" id="2_qjkh3"]
 [ext_resource type="Script" uid="uid://1xe3vlkr6xxn" path="res://entity/character_def.gd" id="3_g6k8r"]
 [ext_resource type="Script" uid="uid://bfh1v6ovpundw" path="res://item/item_data.gd" id="5_rgyib"]
+[ext_resource type="Resource" uid="uid://buxnei4447my6" path="res://item/consumable/food/apple_def.tres" id="6_2ieo8"]
 [ext_resource type="Script" uid="uid://dm4d5jbfjor4c" path="res://system/component/input_component.gd" id="6_boad6"]
 [ext_resource type="Script" uid="uid://dg8vtmpk0vqkm" path="res://system/inventory/inventory.gd" id="6_hg6s5"]
+[ext_resource type="Resource" uid="uid://bwvtd3mbr6tx2" path="res://item/consumable/food/berries_def.tres" id="7_ebec5"]
+[ext_resource type="Script" uid="uid://bq61120ubdkh6" path="res://system/state/combat_grappling_state.gd" id="9_hg6s5"]
 
 [sub_resource type="Resource" id="Resource_cxnu7"]
 script = ExtResource("3_g6k8r")
@@ -15,8 +18,21 @@ entity_id = &"player"
 display_name = "Player"
 metadata/_custom_type_script = "uid://1xe3vlkr6xxn"
 
+[sub_resource type="Resource" id="Resource_8t03j"]
+script = ExtResource("5_rgyib")
+item_def = ExtResource("6_2ieo8")
+count = 5
+metadata/_custom_type_script = "uid://bfh1v6ovpundw"
+
+[sub_resource type="Resource" id="Resource_c1y6r"]
+script = ExtResource("5_rgyib")
+item_def = ExtResource("7_ebec5")
+count = 12
+metadata/_custom_type_script = "uid://bfh1v6ovpundw"
+
 [sub_resource type="Resource" id="Resource_g6k8r"]
 script = ExtResource("6_hg6s5")
+item_list = Array[ExtResource("5_rgyib")]([SubResource("Resource_8t03j"), SubResource("Resource_c1y6r")])
 metadata/_custom_type_script = "uid://dg8vtmpk0vqkm"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qjkh3"]
@@ -42,5 +58,9 @@ shape = SubResource("CapsuleShape2D_qjkh3")
 [node name="InputComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(977928894) index="1" unique_id=1000192021]
 script = ExtResource("6_boad6")
 metadata/_custom_type_script = "uid://dm4d5jbfjor4c"
+
+[node name="CombatGrapplingState" type="Node" parent="StateMachine/Combat" parent_id_path=PackedInt32Array(1282432219) index="6" unique_id=1158395399]
+script = ExtResource("9_hg6s5")
+metadata/_custom_type_script = "uid://bq61120ubdkh6"
 
 [editable path="BodyHurtbox"]

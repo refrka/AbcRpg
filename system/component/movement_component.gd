@@ -49,6 +49,17 @@ func add_modifier(modifier: Modifier) ->  void:
 
 
 
+func remove_modifier(modifier: Modifier) -> void:
+
+	if modifier.expired.is_connected(_on_modifier_expired):
+
+		modifier.expired.disconnect(_on_modifier_expired)
+
+	modifiers.erase(modifier)
+
+
+
+
 
 
 
